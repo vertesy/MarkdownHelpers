@@ -187,7 +187,7 @@ llprint <- function(...) {
   argument_list <- c(...)
   LogEntry = print(paste(argument_list, collapse = " "))
   if (ww.variable.and.path.exists(path_of_report,
-                                  alt.message = "NOT LOGGED: Log path and filename is not defined in path_of_report") ) {
+                                  alt.message = "NOT LOGGED: Log path and filename is not defined in path_of_report.") ) {
     write(kollapse("\n", LogEntry, print = FALSE),
           path_of_report,
           append = TRUE)
@@ -208,8 +208,8 @@ llogit <- function(...) {
   argument_list <- c(...)
   LogEntry = paste(argument_list, collapse = " ")
   LogEntry = gsub("^ +| +$", "", LogEntry)
-  if (ww.variable.and.path.exists(path_of_report,
-                                  alt.message = "NOT LOGGED: Log path and filename is not defined in path_of_report")) {
+  if (ww.variable.and.path.exists(path_of_report = path_of_report,
+                                  alt.message = "NOT LOGGED: Log path and filename is not defined in path_of_report.")) {
     write(kollapse("\n", LogEntry, print = FALSE),
           path_of_report,
           append = TRUE)
@@ -962,24 +962,6 @@ ww.set.PlotName <- function() {
   print(NewPlotname)
 }
 
-
-#' ww.FnP_parser
-#'
-#' Internal Function. Parses the full path from the filename & location of the file.
-#' @param fname Name of the file
-#' @param ext_wo_dot File extension without separating dot.
-#' @export
-#' @examples ww.FnP_parser(fname = 'myplot', ext_wo_dot = "jpg")
-
-ww.FnP_parser <- function(fname, ext_wo_dot) {
-  path = ww.set.OutDir()
-  print(path)
-  FnP = if (methods::hasArg(ext_wo_dot)) {
-    kollapse (path, fname, ".", ext_wo_dot)
-  } else {
-    FnP = kollapse (path, fname)
-  }
-}
 
 #' ww.set.mdlink
 #'
