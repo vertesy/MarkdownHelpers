@@ -1067,17 +1067,24 @@ try.dev.off <- function() {
   try(dev.off(), silent = TRUE)
 }
 
-#' subscript_in_plots
-#'
-#' Returns a formatted string that you feed to main, xlab or ylab parameters of a plot
-#' Create an expression with subscript for axis labels.
-#' Parsed when provided to xlab or ylab of a function.
-#' @param prefix String before the subscript.
-#' @param subscr Subscripted text.
-#' @param quantity String in brackets after the subscript, eg.: log2(read count).
+
+#' @title jjpegA4
+#' @description Setup an A4 size jpeg
+#' @param filename PARAM_DESCRIPTION
+#' @param r PARAM_DESCRIPTION, Default: 225
+#' @param q PARAM_DESCRIPTION, Default: 90
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname jjpegA4
 #' @export
-#' @examples plot (1, 1, xlab = subscript_in_plots(subscr = 10, quantity = "read count"),
-#'  ylab = subscript_in_plots())
+jjpegA4 <- function(filename, r = 225, q = 90) { # Setup an A4 size jpeg
+  jpeg(file = filename,width = wA4, height = hA4, units = 'in', quality = q,res = r)
+}
+
 
 
 
