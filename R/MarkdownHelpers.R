@@ -208,7 +208,7 @@ llogit <- function(...) {
   argument_list <- c(...)
   LogEntry = paste(argument_list, collapse = " ")
   LogEntry = gsub("^ +| +$", "", LogEntry)
-  if (ww.variable.and.path.exists(path_of_report = path_of_report,
+  if (ww.variable.and.path.exists(path = path_of_report,
                                   alt.message = "NOT LOGGED: Log path and filename is not defined in path_of_report.")) {
     write(kollapse("\n", LogEntry, print = FALSE),
           path_of_report,
@@ -934,7 +934,7 @@ ww.set.OutDir <- function(dir = OutDir) {
 
 ww.set.path_of_report <- function() {
   new.path_of_report =
-    if (ww.variable.and.path.exists(path_of_report)) {
+    if (ww.variable.and.path.exists(path = path_of_report)) {
       path_of_report
     } else {
       Stringendo::iprint("path_of_report is not defined! Setting it to Analysis.md in the working directory:",
