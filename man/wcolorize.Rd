@@ -28,12 +28,6 @@ wcolorize(
 \item{set}{Color palette for base
 ("heat.colors", "terrain.colors", "topo.colors", "rainbow"),
 or "rich" for gplots::rich.colors, or  "matlab" for colorRamps::matlab.like.}
-
-\item{prefix}{String before the subscript.}
-
-\item{subscr}{Subscripted text.}
-
-\item{quantity}{String in brackets after the subscript, eg.: log2(read count).}
 }
 \description{
 Generate color palettes. Input: a vector with categories, can be numbers or strings.
@@ -42,15 +36,6 @@ Optionally it can ouput a list where an extra element lists the
 categories (simply using unique would remove the names). See example.
 Some color scale depend on packages "colorRamps", or "gplots".
 }
-\details{
-subscript_in_plots
-
-Returns a formatted string that you feed to main, xlab or ylab parameters of a plot
-Create an expression with subscript for axis labels.
-Parsed when provided to xlab or ylab of a function.
-}
 \examples{
-plot (1, 1, xlab = subscript_in_plots(subscr = 10, quantity = "read count"),
- ylab = subscript_in_plots())
 wcolorize (vector = c(1, 1, 1:6), ReturnCategoriesToo = TRUE, show = TRUE)
 }

@@ -1174,7 +1174,7 @@ color_check <- function(..., incrBottMarginBy = 0, savefile = FALSE ) {
   }   # Tune the margin
   Numbers = c(...)
   if (length(names(Numbers)) == length(Numbers)) {labelz = names(Numbers)} else {labelz = Numbers}
-  barplot (rep(10, length(Numbers)), col = Numbers, names.arg = labelz, las = 2 )
+  graphics::barplot (rep(10, length(Numbers)), col = Numbers, names.arg = labelz, las = 2 )
   if (incrBottMarginBy) { par("mar" = .ParMarDefault )}
 
   fname = substitute(...)
