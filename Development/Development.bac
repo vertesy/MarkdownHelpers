@@ -447,7 +447,7 @@ md.tableWriter.DF.w.dimnames <-
       }
       for (r in 1:nrows) {
         if (is.numeric(unlist(df[r, ]))) {
-          b = iround(df[r, ])
+          b = CodeAndRoll2 ::iround(df[r, ])
           if (percentify) {
             b = Stringendo::percentage_formatter(b)
           }
@@ -508,7 +508,7 @@ md.tableWriter.VEC.w.names <-
           print("This complex list cannot be parsed to a table.")
         }
         if (is.numeric(NamedVector)) {
-          NamedVector = iround(NamedVector)
+          NamedVector = CodeAndRoll2 ::iround(NamedVector)
         }
       }
       h = paste(names(NamedVector), collapse = " \t| ")
@@ -667,7 +667,7 @@ filter_HP <-
       " entries in ",
       substitute (numeric_vector),
       " fall above a threshold value of: ",
-      iround(threshold)
+      CodeAndRoll2 ::iround(threshold)
     )
     if (ww.variable.and.path.exists(path_of_report)) {
       llogit (conclusion)
@@ -733,7 +733,7 @@ filter_LP <-
     conclusion = kollapse(
       prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ",
       length(numeric_vector), " entries in ", substitute (numeric_vector),
-      " fall below a threshold value of: ", iround(threshold)
+      " fall below a threshold value of: ", CodeAndRoll2 ::iround(threshold)
     )
     if (ww.variable.and.path.exists(path_of_report, alt.message = "NOT LOGGED")) {
       llogit (conclusion)
@@ -807,8 +807,8 @@ filter_MidPass <-
     pc = Stringendo::percentage_formatter(sum(survivors, na.rm = na.rm) / length(survivors))
     conclusion = kollapse(prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ",
                           length(numeric_vector), " entries in ", substitute (numeric_vector),
-                          " fall ", keyword, " the thresholds: ", iround(HP_threshold), relation,
-                          iround(LP_threshold))
+                          " fall ", keyword, " the thresholds: ", CodeAndRoll2 ::iround(HP_threshold), relation,
+                          CodeAndRoll2 ::iround(LP_threshold))
     if (ww.variable.and.path.exists(path_of_report)) {
       llogit (conclusion)
     } else {
