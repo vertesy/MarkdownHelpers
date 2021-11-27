@@ -204,7 +204,7 @@ llprint <- function(...) {
 #' @export
 #' @examples MyFriends = c("Peter", "Bence"); llogit ("My friends are: ", MyFriends )
 
-llogit <- function(...) {
+llogit <- function(..., path_of_report = path_of_report) {
   argument_list <- c(...)
   LogEntry = paste(argument_list, collapse = " ")
   LogEntry = gsub("^ +| +$", "", LogEntry)

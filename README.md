@@ -62,12 +62,24 @@ source("https://raw.githubusercontent.com/vertesy/MarkdownHelpers/master/R/Markd
 require('Stringendo')
 require('ReadWriter')
 require('CodeAndRoll2')
+require('MarkdownReports')
+
 
 require('MarkdownHelpers')
-
+MarkdownReports::setup_MarkdownReports()
 # ------------------
 "Used by other packages mostly"
 ```
+
+
+
+##### Most  `MarkdownHelpers` function write into a markdown file.  
+
+##### That file is defined in `path_of_report`, by first calling `MarkdownReports::setup_MarkdownReports()`. 
+
+#####  `MarkdownReports` and `MarkdownHelpers` works with such _background variables_ defined by `setup_MarkdownReports()` in the global env .
+
+
 
 <br>
 
