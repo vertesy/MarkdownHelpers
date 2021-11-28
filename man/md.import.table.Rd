@@ -10,7 +10,7 @@ md.import.table(
   has.rownames = TRUE,
   has.colnames = TRUE,
   field.sep = "\\t",
-  to.file = path_of_report
+  to.file = ww.set.path_of_report()
 )
 }
 \arguments{

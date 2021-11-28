@@ -4,7 +4,13 @@
 \alias{md.write.as.list}
 \title{md.write.as.list}
 \usage{
-md.write.as.list(vector = 1:3, h = 4, numbered = FALSE, ...)
+md.write.as.list(
+  vector = 1:3,
+  h = 4,
+  numbered = FALSE,
+  path_of_report = ww.set.path_of_report(),
+  ...
+)
 }
 \arguments{
 \item{vector}{Vecot to be wirtten as a list}

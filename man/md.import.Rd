@@ -4,7 +4,7 @@
 \alias{md.import}
 \title{md.import}
 \usage{
-md.import(from.file, to.file = path_of_report)
+md.import(from.file, to.file = ww.set.path_of_report())
 }
 \arguments{
 \item{from.file}{File to be appended at the (current) last line of the report}

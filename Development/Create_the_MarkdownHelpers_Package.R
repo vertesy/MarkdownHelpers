@@ -35,7 +35,7 @@ DESCRIPTION <- list("Title" = "MarkdownHelpers"
     , "Authors@R" = 'person(given = "Abel", family = "Vertesy", email = "a.vertesy@imba.oeaw.ac.at", role =  c("aut", "cre") )'
     , "Description" = "MarkdownHelpers is a set of R functions to parse Markdown and other generic helpers."
     , "License" = "GPL-3 + file LICENSE"
-    , "Version" = "0.1.3"
+    , "Version" = "0.1.5"
     , "Packaged" =  Sys.time()
     , "Repository" =  "CRAN"
     , "Depends" =  "Stringendo"
