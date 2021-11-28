@@ -677,7 +677,7 @@ filter_HP <-
     }
     if (plot.hist) {
       plotname = substitute(numeric_vector)
-      whist(
+      MarkdownReports::whist(
         variable = numeric_vector,
         main = plotname,
         vline = threshold,
@@ -741,7 +741,7 @@ filter_LP <-
     }
     if (plot.hist) {
       plotname = substitute(numeric_vector)
-      whist(
+      MarkdownReports::whist(
         variable = numeric_vector,
         main = plotname,
         vline = threshold,
@@ -818,7 +818,7 @@ filter_MidPass <-
     }
     if (plot.hist) {
       plotname = substitute(numeric_vector)
-      whist(
+      MarkdownReports::whist(
         variable = numeric_vector,
         main = plotname,
         vline = c(HP_threshold, LP_threshold),
