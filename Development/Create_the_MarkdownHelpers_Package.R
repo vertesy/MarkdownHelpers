@@ -20,6 +20,7 @@ require('Stringendo')
 
 # Setup ------------------------
 PackageName = 	"MarkdownHelpers"
+package.version = "0.1.5"
 setwd("~/GitHub/Packages/")
 
 RepositoryDir = kollapse("~/GitHub/Packages/", PackageName, "/")
@@ -35,7 +36,7 @@ DESCRIPTION <- list("Title" = "MarkdownHelpers"
     , "Authors@R" = 'person(given = "Abel", family = "Vertesy", email = "a.vertesy@imba.oeaw.ac.at", role =  c("aut", "cre") )'
     , "Description" = "MarkdownHelpers is a set of R functions to parse Markdown and other generic helpers."
     , "License" = "GPL-3 + file LICENSE"
-    , "Version" = "0.1.5"
+    , "Version" = package.version
     , "Packaged" =  Sys.time()
     , "Repository" =  "CRAN"
     , "Depends" =  "Stringendo"
@@ -78,6 +79,13 @@ document()
 # Install your package ------------------------------------------------
 # # setwd(RepositoryDir)
 install(RepositoryDir, upgrade = F)
+
+{
+  "update cff version"
+  citpath <- paste0(RepositoryDir, 'CITATION.cff')
+  xfun::gsub_file(file = citpath, perl = T
+                  , "^version: v.+", paste0("version: v", package.version))
+}
 
 # require("MarkdownHelpers")
 # # remove.packages("MarkdownHelpers")
