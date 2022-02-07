@@ -73,6 +73,36 @@ unless.specified <- function(NameOfaVariable, def = TRUE) {
     def
 }
 
+# ______________________________________________________________________________________________________________________________
+#' TRUE.unless
+#'
+#' Return TRUE unless the variable is defined. If defined, it returns the value of the variable.
+#' @param NameOfaVariable Name of a possibly defined variable to be tested.
+#' @export
+#' @examples TRUE.unless("xsadasf32", 2); Num = 22; unless.specified("Num", 1); unless.specified("c", 333)
+
+TRUE.unless <- function(NameOfaVariable) {
+  if (exists(NameOfaVariable))
+    get(NameOfaVariable)
+  else
+    TRUE
+}
+
+# ______________________________________________________________________________________________________________________________
+#' FALSE.unless
+#'
+#' Return FALSE unless the variable is defined. If defined, it returns the value of the variable.
+#' @param NameOfaVariable Name of a possibly defined variable to be tested.
+#' @export
+#' @examples FALSE.unless("xsadasf32", 2); Num = 22; unless.specified("Num", 1); unless.specified("c", 333)
+
+FALSE.unless <- function(NameOfaVariable) {
+  if (exists(NameOfaVariable))
+    get(NameOfaVariable)
+  else
+    FALSE
+}
+
 
 # ______________________________________________________________________________________________________________________________
 #' @title lookup
