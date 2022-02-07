@@ -4,7 +4,7 @@
 \alias{FALSE.unless}
 \title{FALSE.unless}
 \usage{
-FALSE.unless(NameOfaVariable)
+FALSE.unless(NameOfaVariable = "VarName")
 }
 \arguments{
 \item{NameOfaVariable}{Name of a possibly defined variable to be tested.}

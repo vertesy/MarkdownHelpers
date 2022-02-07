@@ -17,6 +17,6 @@ Imports:
     usethis,
     utils
 Encoding: UTF-8
-Packaged: 2022-02-07 14:26:47
+Packaged: 2022-02-07 14:31:44
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2

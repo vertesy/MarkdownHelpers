@@ -81,10 +81,11 @@ unless.specified <- function(NameOfaVariable, def = TRUE) {
 #' @export
 #' @examples TRUE.unless("xsadasf32", 2); Num = 22; unless.specified("Num", 1); unless.specified("c", 333)
 
-TRUE.unless <- function(NameOfaVariable) {
+TRUE.unless <- function(NameOfaVariable = "VarName") {
   if (exists(NameOfaVariable))
     get(NameOfaVariable)
   else
+    iprint(NameOfaVariable, 'is not defined, returning FALSE')
     TRUE
 }
 
@@ -96,10 +97,11 @@ TRUE.unless <- function(NameOfaVariable) {
 #' @export
 #' @examples FALSE.unless("xsadasf32", 2); Num = 22; unless.specified("Num", 1); unless.specified("c", 333)
 
-FALSE.unless <- function(NameOfaVariable) {
+FALSE.unless <- function(NameOfaVariable = "VarName") {
   if (exists(NameOfaVariable))
     get(NameOfaVariable)
   else
+    iprint(NameOfaVariable, 'is not defined, returning FALSE')
     FALSE
 }
 
