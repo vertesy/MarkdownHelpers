@@ -20,7 +20,7 @@ require('Stringendo')
 
 # Setup ------------------------
 PackageName = 	"MarkdownHelpers"
-package.version = "0.1.6"
+package.version = "0.1.7"
 setwd("~/GitHub/Packages/")
 
 RepositoryDir = kollapse("~/GitHub/Packages/", PackageName, "/")
@@ -87,6 +87,7 @@ install(RepositoryDir, upgrade = F)
                   , "^version: v.+", paste0("version: v", package.version))
 }
 
+# unload("MarkdownHelpers")
 # require("MarkdownHelpers")
 # # remove.packages("MarkdownHelpers")
 # # Test your package ------------------------------------------------
