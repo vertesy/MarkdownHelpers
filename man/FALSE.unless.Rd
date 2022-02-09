@@ -13,5 +13,5 @@ FALSE.unless(NameOfaVariable = "VarName")
 Return FALSE unless the variable is defined. If defined, it returns the value of the variable.
 }
 \examples{
-FALSE.unless("xsadasf32", 2); Num = 22; unless.specified("Num", 1); unless.specified("c", 333)
+FALSE.unless("xsadasf32"); Num = 22; FALSE.unless("Num"); FALSE.unless("c")
 }
