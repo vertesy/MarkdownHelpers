@@ -1,6 +1,6 @@
 Package: MarkdownHelpers
 Title: MarkdownHelpers
-Version: 0.1.8
+Version: 0.1.9
 Authors@R: 
     person("Abel", "Vertesy", , "a.vertesy@imba.oeaw.ac.at", role = c("aut", "cre"))
 Author: Abel Vertesy <abel.vertesy@imba.oeaw.ac.at> [aut, cre]
@@ -17,6 +17,6 @@ Imports:
     usethis,
     utils
 Encoding: UTF-8
-Packaged: 2022-02-09 18:47:57
+Packaged: 2022-02-15 15:03:56
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2

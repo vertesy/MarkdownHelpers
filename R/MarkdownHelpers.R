@@ -1051,7 +1051,6 @@ ww.ttl_field <- function(plotname, creator = "MarkdownReports") {
 }
 
 
-
 #' ww.autoPlotName
 #'
 #' Internal function. Creates automatic plot and file-names.

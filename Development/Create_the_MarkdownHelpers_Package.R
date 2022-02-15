@@ -20,7 +20,7 @@ require('Stringendo')
 
 # Setup ------------------------
 PackageName = 	"MarkdownHelpers"
-package.version = "0.1.8"
+package.version = "0.1.9"
 setwd("~/GitHub/Packages/")
 
 RepositoryDir = kollapse("~/GitHub/Packages/", PackageName, "/")
@@ -75,17 +75,18 @@ setwd(RepositoryDir)
 getwd()
 document()
 
-
-# Install your package ------------------------------------------------
-# # setwd(RepositoryDir)
-install(RepositoryDir, upgrade = F)
-
 {
   "update cff version"
   citpath <- paste0(RepositoryDir, 'CITATION.cff')
   xfun::gsub_file(file = citpath, perl = T
                   , "^version: v.+", paste0("version: v", package.version))
 }
+
+
+# Install your package ------------------------------------------------
+# # setwd(RepositoryDir)
+install(RepositoryDir, upgrade = F)
+
 
 # unload("MarkdownHelpers")
 # require("MarkdownHelpers")
