@@ -724,6 +724,8 @@ filter_HP <-
     }
     if (return_survival_ratio) {
       return (sum(survivors, na.rm = na.rm) / length(survivors))
+    } else if (return_conclusion) {
+      return(conclusion)
     } else if (!return_survival_ratio) {
       return (survivors)
     }
@@ -789,7 +791,7 @@ filter_LP <-
     if (return_survival_ratio) {
       return (sum(survivors, na.rm = na.rm) / length(survivors))
     } else if (return_conclusion) {
-      conclusion
+      return(conclusion)
     } else if (!return_survival_ratio) {
       return (survivors)
     }
@@ -865,6 +867,8 @@ filter_MidPass <-
     }
     if (return_survival_ratio) {
       return (sum(survivors, na.rm = na.rm) / length(survivors))
+    } else if (return_conclusion) {
+      return(conclusion)
     } else if (!return_survival_ratio) {
       return (survivors)
     }
