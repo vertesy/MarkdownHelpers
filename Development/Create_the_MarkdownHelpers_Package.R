@@ -20,7 +20,7 @@ require('Stringendo')
 
 # Setup ------------------------
 PackageName = 	"MarkdownHelpers"
-package.version = "0.2.0"
+package.version = "0.2.1"
 setwd("~/GitHub/Packages/")
 
 RepositoryDir = kollapse("~/GitHub/Packages/", PackageName, "/")

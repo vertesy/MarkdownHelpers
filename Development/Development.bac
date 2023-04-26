@@ -660,6 +660,7 @@ md.import.table <-
 #' filter_HP
 #'
 #' Filter values that fall between above high-pass-threshold (X >).
+#'
 #' @param numeric_vector Values to be filtered.
 #' @param threshold A numeric value above which "numeric_vector" passes.
 #' @param passequal Pass if a value is larger, or equal than the threshold. FALSE by default.
@@ -670,7 +671,9 @@ md.import.table <-
 #' @param plot.hist Plot the histogram of the input data
 #' @param saveplot Save the histogram as PDF, FALSE by defeault
 #' @param na.rm Remove NA-s? Default: TRUE
+#' @param verbose print output to console? Default: yes.
 #' @param ... Additional arguments for the histogram
+#'
 #' @export
 #' @examples filter_HP (numeric_vector = rnorm(1000, 6), threshold = 5,
 #'  prepend = "From all values ", return_survival_ratio = FALSE)
@@ -685,6 +688,7 @@ filter_HP <-
            na.rm = TRUE,
            plot.hist = TRUE,
            saveplot = FALSE,
+           verbose = TRUE,
            # path_of_report = ww.set.path_of_report(),
            ...) {
     survivors <-
@@ -695,22 +699,15 @@ filter_HP <-
       }
     pc = Stringendo::percentage_formatter(sum(survivors, na.rm = na.rm) / length(survivors))
     conclusion = kollapse(
-      prepend,
-      pc,
-      " or ",
-      sum(survivors, na.rm = na.rm),
-      " of ",
-      length(numeric_vector),
-      " entries in ",
-      substitute (numeric_vector),
-      " fall above a threshold value of: ",
+      prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ", length(numeric_vector),
+      " entries in ", substitute (numeric_vector), " fall above a threshold value of: ",
       CodeAndRoll2 ::iround(threshold)
-    )
-    if (ww.variable.and.path.exists(path_of_report)) {
+      , print = verbose)
+
+    if (ww.variable.and.path.exists(path_of_report, alt.message = "NOT LOGGED")) {
       llogit (conclusion)
-    } else {
-      print  ("NOT LOGGED")
     }
+
     if (plot.hist) {
       plotname = substitute(numeric_vector)
       MarkdownReports::whist(
@@ -746,6 +743,7 @@ filter_HP <-
 #' @param plot.hist Plot the histogram of the input data
 #' @param saveplot Save the histogram as PDF, FALSE by defeault
 #' @param na.rm Remove NA-s? Default: TRUE
+#' @param verbose print output to console? Default: yes.
 #' @param ... Additional arguments for the histogram
 #' @export
 #' @examples filter_LP (numeric_vector = rnorm(1000, 6), threshold = 5,
@@ -761,6 +759,7 @@ filter_LP <-
            na.rm = TRUE,
            plot.hist = TRUE,
            saveplot = FALSE,
+           verbose = TRUE,
            ...) {
     survivors <-
       if (passequal) {
@@ -773,10 +772,11 @@ filter_LP <-
       prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ",
       length(numeric_vector), " entries in ", substitute (numeric_vector),
       " fall below a threshold value of: ", CodeAndRoll2 ::iround(threshold)
-    )
+      , print = verbose)
     if (ww.variable.and.path.exists(path_of_report, alt.message = "NOT LOGGED")) {
       llogit (conclusion)
     }
+
     if (plot.hist) {
       plotname = substitute(numeric_vector)
       MarkdownReports::whist(
@@ -816,6 +816,7 @@ filter_LP <-
 #' @param plot.hist Plot the histogram of the input data
 #' @param saveplot Save the histogram as PDF, FALSE by defeault
 #' @param na.rm Remove NA-s? Default: TRUE
+#' @param verbose print output to console? Default: yes.
 #' @param ... Additional arguments for the histogram
 #' @export
 #' @examples filter_MidPass (numeric_vector = rnorm(1000, 6), HP_threshold = 4,
@@ -832,6 +833,7 @@ filter_MidPass <-
            na.rm = TRUE,
            plot.hist = TRUE,
            saveplot = FALSE,
+           verbose = TRUE,
            # path_of_report = ww.set.path_of_report(),
            ...) {
     survivors = (numeric_vector >= HP_threshold &     numeric_vector < LP_threshold)
@@ -847,13 +849,13 @@ filter_MidPass <-
     pc = Stringendo::percentage_formatter(sum(survivors, na.rm = na.rm) / length(survivors))
     conclusion = kollapse(prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ",
                           length(numeric_vector), " entries in ", substitute (numeric_vector),
-                          " fall ", keyword, " the thresholds: ", CodeAndRoll2 ::iround(HP_threshold), relation,
-                          CodeAndRoll2 ::iround(LP_threshold))
-    if (ww.variable.and.path.exists(path_of_report)) {
+                          " fall ", keyword, " the thresholds: ", CodeAndRoll2 ::iround(HP_threshold)
+                          , relation, CodeAndRoll2 ::iround(LP_threshold)
+                          , print = verbose)
+    if (ww.variable.and.path.exists(path_of_report, alt.message = "NOT LOGGED")) {
       llogit (conclusion)
-    } else {
-      print  ("NOT LOGGED")
     }
+
     if (plot.hist) {
       plotname = substitute(numeric_vector)
       MarkdownReports::whist(

@@ -14,6 +14,7 @@ filter_LP(
   na.rm = TRUE,
   plot.hist = TRUE,
   saveplot = FALSE,
+  verbose = TRUE,
   ...
 )
 }
@@ -36,6 +37,8 @@ or a logical index vector of the survivors (FALSE). return_conclusion must be FA
 \item{plot.hist}{Plot the histogram of the input data}
 
 \item{saveplot}{Save the histogram as PDF, FALSE by defeault}
+
+\item{verbose}{print output to console? Default: yes.}
 
 \item{...}{Additional arguments for the histogram}
 }
