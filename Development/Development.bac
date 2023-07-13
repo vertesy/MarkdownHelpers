@@ -112,11 +112,15 @@ FALSE.unless <- function(NameOfaVariable = "VarName") {
 
 # ______________________________________________________________________________________________________________________________
 #' @title lookup
+#'
 #' @description Awesome pattern matching for a set of values in another set of values. Returns a list with all kinds of results.
-#' @param needle PARAM_DESCRIPTION
-#' @param haystack PARAM_DESCRIPTION
-#' @param exact PARAM_DESCRIPTION, Default: TRUE
-#' @param report PARAM_DESCRIPTION, Default: FALSE
+#' @param needle A vector of values to look for.
+#' @param haystack A vector of values to search in.
+#' @param exact Logical. Whether to do an exact match or a partial match.
+#' @param report Logical. Whether to print a report of the results.
+#'
+#' @return A list with the results of the lookup.
+#'
 #' @export
 # #' @importFrom MarkdownReports llprint
 lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome pattern matching for a set of values in another set of values. Returns a list with all kinds of results.
@@ -143,10 +147,13 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome p
 
 # _________________________________________________________________________________________________
 #' @title combine.matrices.by.rowname.intersect
-#' @description Combine matrices by rownames intersect.
-#' @param matrix1 PARAM_DESCRIPTION
-#' @param matrix2 PARAM_DESCRIPTION
-#' @param k PARAM_DESCRIPTION, Default: 2
+#'
+#' @description Combine two matrices by their rownames intersect.
+#' @param matrix1 A matrix.
+#' @param matrix2 A matrix.
+#' @param k The number of rows to print from the matrices with the most missing values.
+#' @return A matrix with the rows of `matrix1` and `matrix2` that intersect.
+#'
 #' @export
 # # #' @importFrom MarkdownReports llprint
 combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # combine matrices by rownames intersect
@@ -1113,20 +1120,23 @@ try.dev.off <- function() {
 
 
 #' @title jjpegA4
-#' @description Setup an A4 size jpeg
-#' @param filename PARAM_DESCRIPTION
-#' @param r PARAM_DESCRIPTION, Default: 225
-#' @param q PARAM_DESCRIPTION, Default: 90
+#'
+#' @description Setup an A4 size jpeg.
+#' @param filename The filename of the jpeg file to create.
+#' @param r The resolution of the jpeg file.
+#' @param q The quality of the jpeg file.
+#' @param h Height
+#' @param w Width
 #' @examples
 #' \dontrun{
 #' if(interactive()){
-#'  #EXAMPLE1
+#'  jjpegA4(filename = "my_plot.jpeg", r = 225, q = 90)
 #'  }
 #' }
-#' @rdname jjpegA4
+#'
 #' @export
-jjpegA4 <- function(filename, r = 225, q = 90) { # Setup an A4 size jpeg
-  jpeg(file = filename,width = wA4, height = hA4, units = 'in', quality = q,res = r)
+jjpegA4 <- function(filename, r = 225, q = 90, w = 8.27, h = 11.69) { # Setup an A4 size jpeg
+  jpeg(file = filename, width = w, height = h, units = 'in', quality = q, res = r)
 }
 
 
@@ -1230,11 +1240,15 @@ color_check <- function(..., incrBottMarginBy = 0, savefile = FALSE ) {
 # ______________________________________________________________________________________________----
 # Less used functions ----
 # _________________________________________________________________________________________________
+
 #' @title filter_survival_length
+#'
 #' @description Parse a sentence reporting the % of filter survival.
-#' @param length_new PARAM_DESCRIPTION
-#' @param length_old PARAM_DESCRIPTION
-#' @param prepend PARAM_DESCRIPTION, Default: ''
+#' @param length_new The number of elements that survived the filter.
+#' @param length_old The total number of elements.
+#' @param prepend A string to prepend to the sentence.
+#' @return A string.
+#'
 #' @export
 filter_survival_length <- function(length_new, length_old, prepend = "") { # Parse a sentence reporting the % of filter survival.
   pc = Stringendo::percentage_formatter(length_new/length_old)

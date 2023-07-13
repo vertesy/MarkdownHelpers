@@ -7,13 +7,16 @@
 lookup(needle, haystack, exact = TRUE, report = FALSE)
 }
 \arguments{
-\item{needle}{PARAM_DESCRIPTION}
+\item{needle}{A vector of values to look for.}
 
-\item{haystack}{PARAM_DESCRIPTION}
+\item{haystack}{A vector of values to search in.}
 
-\item{exact}{PARAM_DESCRIPTION, Default: TRUE}
+\item{exact}{Logical. Whether to do an exact match or a partial match.}
 
-\item{report}{PARAM_DESCRIPTION, Default: FALSE}
+\item{report}{Logical. Whether to print a report of the results.}
+}
+\value{
+A list with the results of the lookup.
 }
 \description{
 Awesome pattern matching for a set of values in another set of values. Returns a list with all kinds of results.

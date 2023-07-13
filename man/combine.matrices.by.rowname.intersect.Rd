@@ -7,12 +7,15 @@
 combine.matrices.by.rowname.intersect(matrix1, matrix2, k = 2)
 }
 \arguments{
-\item{matrix1}{PARAM_DESCRIPTION}
+\item{matrix1}{A matrix.}
 
-\item{matrix2}{PARAM_DESCRIPTION}
+\item{matrix2}{A matrix.}
 
-\item{k}{PARAM_DESCRIPTION, Default: 2}
+\item{k}{The number of rows to print from the matrices with the most missing values.}
+}
+\value{
+A matrix with the rows of \code{matrix1} and \code{matrix2} that intersect.
 }
 \description{
-Combine matrices by rownames intersect.
+Combine two matrices by their rownames intersect.
 }

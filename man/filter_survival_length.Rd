@@ -7,11 +7,14 @@
 filter_survival_length(length_new, length_old, prepend = "")
 }
 \arguments{
-\item{length_new}{PARAM_DESCRIPTION}
+\item{length_new}{The number of elements that survived the filter.}
 
-\item{length_old}{PARAM_DESCRIPTION}
+\item{length_old}{The total number of elements.}
 
-\item{prepend}{PARAM_DESCRIPTION, Default: ''}
+\item{prepend}{A string to prepend to the sentence.}
+}
+\value{
+A string.
 }
 \description{
 Parse a sentence reporting the \% of filter survival.
