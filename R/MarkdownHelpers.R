@@ -31,35 +31,35 @@
 #' @param message print a message
 #' @export
 #' @examples a = 1; stopif (a!= 1, message = "A is 1")
-stopif <-
-  function(condition, message = "") {
-    if (condition) {
-      iprint (message)
-      stop()
-    }
+stopif <- function(condition, message = "") {
+  if (condition) {
+    iprint (message)
+    stop()
   }
+}
 
 # ______________________________________________________________________________________________________________________________
 #' @title irequire
+#'
 #' @description Load a package. If it does not exist, try to install it from CRAN.
 #' @param package Packagename to load
 #' @examples irequire(gtools)
 #' @export
 
 irequire <- function(package) { package_ = as.character(substitute(package)); print(package_); # Load a package. If it does not exist, try to install it from CRAN.
-  if (!require(package = package_,  character.only = TRUE)) {
-    print("Not Installed yet.");install.packages(pkgs = package_);
-    Sys.sleep(1)
-    print("Loading package:")
-    require(package = package_, character.only = TRUE)
-  }
+if (!require(package = package_,  character.only = TRUE)) {
+  print("Not Installed yet.");install.packages(pkgs = package_);
+  Sys.sleep(1)
+  print("Loading package:")
+  require(package = package_, character.only = TRUE)
+}
 }  # install package if cannot be loaded
 
 
 # ______________________________________________________________________________________________________________________________
-#' unless.specified
+#' @title unless.specified
 #'
-#' Return value X (TRUE by default) unless the variable is defined.
+#' @description Return value X (TRUE by default) unless the variable is defined.
 #' If defined, it returns the variable.
 #' @param NameOfaVariable Name of a possibly defined variable to be tested.
 #' @param def Default return value
@@ -74,9 +74,9 @@ unless.specified <- function(NameOfaVariable, def = TRUE) {
 }
 
 # ______________________________________________________________________________________________________________________________
-#' TRUE.unless
+#' @title TRUE.unless
 #'
-#' Return TRUE unless the variable is defined. If defined, it returns the value of the variable.
+#' @description Return TRUE unless the variable is defined. If defined, it returns the value of the variable.
 #' @param NameOfaVariable Name of a possibly defined variable to be tested.
 #' @export
 #' @examples TRUE.unless("xsadasf32"); Num = 22; TRUE.unless("Num"); TRUE.unless("c")
@@ -92,9 +92,9 @@ TRUE.unless <- function(NameOfaVariable = "VarName") {
 
 
 # ______________________________________________________________________________________________________________________________
-#' FALSE.unless
+#' @title FALSE.unless
 #'
-#' Return FALSE unless the variable is defined. If defined, it returns the value of the variable.
+#' @description Return FALSE unless the variable is defined. If defined, it returns the value of the variable.
 #' @param NameOfaVariable Name of a possibly defined variable to be tested.
 #' @export
 #' @examples FALSE.unless("xsadasf32"); Num = 22; FALSE.unless("Num"); FALSE.unless("c")
@@ -181,6 +181,7 @@ combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # c
 
 # ______________________________________________________________________________________________________________________________
 #' @title ww.variable.and.path.exists
+#'
 #' @description Check if a variable name is defined, and if so, does the path (to a file) stored in that
 #'  variable points to an existing directory?
 #' @param path A variable name that might not exist and might point to a non-existent direcotry.
@@ -217,9 +218,9 @@ ww.variable.and.path.exists <- function(path = path_of_report, alt.message = NUL
 
 
 # ______________________________________________________________________________________________________________________________
-#' llprint
+#' @title llprint
 #'
-#' Collapse by white spaces a sentence from any variable passed on to the function.
+#' @description Collapse by white spaces a sentence from any variable passed on to the function.
 #' Print the sentence to the screen and write it to your markdown report file,
 #' if the "path_of_report" variable is defined.
 #' @param ... Variables (strings, vectors) to be collapsed in consecutively.
@@ -238,9 +239,9 @@ llprint <- function(...) {
 }
 
 # ______________________________________________________________________________________________________________________________
-#' llogit
+#' @title llogit
 #'
-#' Collapse by white spaces a sentence from any variable passed on to the function.
+#' @description Collapse by white spaces a sentence from any variable passed on to the function.
 #' llogit() writes it to your markdown report file, if the "path_of_report" variable is defined.
 #' It does not print the sentence to the screen.
 #' @param ... Variables (strings, vectors) to be collapsed in consecutively.
@@ -260,9 +261,9 @@ llogit <- function(...) {
 }
 
 # ______________________________________________________________________________________________________________________________
-#' md.write.as.list
+#' @title md.write.as.list
 #'
-#' Writes a vector as a (numbered) list into the report file.
+#' @description Writes a vector as a (numbered) list into the report file.
 #' @param vector Vecot to be wirtten as a list
 #' @param h Level of header above tl list.
 #' @param numbered TRUE = Numbered list, FALSE = unordered list is written
@@ -270,30 +271,29 @@ llogit <- function(...) {
 #' @export
 #' @examples md.write.as.list()
 
-md.write.as.list <-
-  function(vector = 1:3,
-           h = 4,
-           numbered = FALSE,
-           path_of_report = ww.set.path_of_report(),
-           ...) {
-    LogEntry = kollapse(rep("#", h), " ", substitute(vector), print = FALSE)
-    write(kollapse("\n", LogEntry, print = FALSE),
-          path_of_report,
-          ...,
-          append = TRUE)
-    LV = length(vector)
-    LN = if (numbered)
-      paste0(" ", 1:LV, ". ", vector)
-    else
-      paste0(" - ", vector)
-    for (i in 1:LV)
-      write(LN[i], path_of_report, append = TRUE)
-  }
+md.write.as.list <- function(vector = 1:3,
+                             h = 4,
+                             numbered = FALSE,
+                             path_of_report = ww.set.path_of_report(),
+                             ...) {
+  LogEntry = kollapse(rep("#", h), " ", substitute(vector), print = FALSE)
+  write(kollapse("\n", LogEntry, print = FALSE),
+        path_of_report,
+        ...,
+        append = TRUE)
+  LV = length(vector)
+  LN = if (numbered)
+    paste0(" ", 1:LV, ". ", vector)
+  else
+    paste0(" - ", vector)
+  for (i in 1:LV)
+    write(LN[i], path_of_report, append = TRUE)
+}
 
 # ______________________________________________________________________________________________________________________________
-#' md.image.linker
+#' @title md.image.linker
 #'
-#' Format a markdown image reference (link) to a .pdf and .png versions of graph,
+#' @description Format a markdown image reference (link) to a .pdf and .png versions of graph,
 #' and insert both links to the markdown report, set by "path_of_report".
 #' If the "b.png4Github" variable is set, the .png-link is set up such,
 #' that you can upload the whole report with the .png image into your GitHub repo's wiki,
@@ -305,30 +305,29 @@ md.write.as.list <-
 #' @export
 #' @examples md.image.linker (fname_wo_ext = "MyPlot"  )
 
-md.image.linker <-
-  function(fname_wo_ext, OutDir_ = ww.set.OutDir()) {
-    splt = strsplit(fname_wo_ext, "/")
-    fn = splt[[1]][length(splt[[1]])]
-    if (unless.specified("b.usepng")) {
-      if (unless.specified("b.png4Github")) {
-        dirnm = strsplit(x = OutDir_, split = "/")[[1]]
-        dirnm = dirnm[length(dirnm)]
-        llogit(kollapse( "![]", "(Reports/", dirnm, "/", fname_wo_ext, ".png)", print = FALSE))
-      } else {
-        if (exists('b.Subdirname') && !b.Subdirname == FALSE) {
-          fname_wo_ext = paste0(b.Subdirname, "/", fname_wo_ext)
-        } # set only if b.Subdirname is defined, it is not FALSE.
-        llogit(kollapse("![", fn, "]", "(", fname_wo_ext, ".png)", print = FALSE))
-      }
+md.image.linker <- function(fname_wo_ext, OutDir_ = ww.set.OutDir()) {
+  splt = strsplit(fname_wo_ext, "/")
+  fn = splt[[1]][length(splt[[1]])]
+  if (unless.specified("b.usepng")) {
+    if (unless.specified("b.png4Github")) {
+      dirnm = strsplit(x = OutDir_, split = "/")[[1]]
+      dirnm = dirnm[length(dirnm)]
+      llogit(kollapse( "![]", "(Reports/", dirnm, "/", fname_wo_ext, ".png)", print = FALSE))
     } else {
-      llogit(kollapse("![", fn, "]", "(", fname_wo_ext, ".pdf)", print = FALSE))
-    } # if b.usepng
-  }
+      if (exists('b.Subdirname') && !b.Subdirname == FALSE) {
+        fname_wo_ext = paste0(b.Subdirname, "/", fname_wo_ext)
+      } # set only if b.Subdirname is defined, it is not FALSE.
+      llogit(kollapse("![", fn, "]", "(", fname_wo_ext, ".png)", print = FALSE))
+    }
+  } else {
+    llogit(kollapse("![", fn, "]", "(", fname_wo_ext, ".pdf)", print = FALSE))
+  } # if b.usepng
+}
 
 # ______________________________________________________________________________________________________________________________
-#' llwrite_list
+#' @title llwrite_list
 #'
-#' Print a list object from R, one element per line, into your markdown report
+#' @description Print a list object from R, one element per line, into your markdown report
 #' @param yourlist your list
 #' @param printName print header level 4: the name of the list or a custom string
 #' @export
@@ -360,9 +359,9 @@ llwrite_list <- function(yourlist, printName = "self") {
 
 
 # ______________________________________________________________________________________________________________________________
-#' md.import
+#' @title md.import
 #'
-#' Import and concatenated an external markdown or text file to the report
+#' @description Import and concatenated an external markdown or text file to the report
 #' @param from.file File to be appended at the (current) last line of the report
 #' @param to.file The report file. Defined as "path_of_report" by default,
 #' which is set by the "setup_MarkdownReports" function.
@@ -386,9 +385,9 @@ md.import <- function(from.file, to.file = ww.set.path_of_report()) {
 # Writing markdown tables --------------------------------------------------------------------------
 
 # ______________________________________________________________________________________________________________________________
-#' md.LogSettingsFromList
+#' @title md.LogSettingsFromList
 #'
-#' Log the parameters & settings used in the script and stored in a list, in a table format
+#' @description Log the parameters & settings used in the script and stored in a list, in a table format
 #'  in the report.
 #' @param parameterlist List of Paramters
 #' @param maxlen Maximum length of entries in a parameter list element
@@ -412,10 +411,10 @@ md.LogSettingsFromList <- function(parameterlist,
 
 # Writing markdown tables --------------------------------------------------------------------------
 
-#' md.List2Table
+#' @title md.List2Table
 #'
-#' Broader variant of md.LogSettingsFromList(). Log the values (col2) from a named (col1) list, in a table format
-#'  in the report.
+#' @description Broader variant of md.LogSettingsFromList(). Log the values (col2) from a
+#' named (col1) list, in a table format in the report.
 #' @param title Title of the table.
 #' @param colname2 Name of the 2nd column.
 #' @param parameterlist List of Paramters.
@@ -441,9 +440,9 @@ md.List2Table <- function(parameterlist,
 
 
 # ______________________________________________________________________________________________________________________________
-#' md.tableWriter.DF.w.dimnames
+#' @title md.tableWriter.DF.w.dimnames
 #'
-#' Take an R data frame with row- and column- names, parse a markdown table from it,
+#' @description Take an R data frame with row- and column- names, parse a markdown table from it,
 #' and write it to the markdown report, set by "path_of_report".
 #' @param df Input data frame to be plotted
 #' @param FullPath Full path to the file.
@@ -456,70 +455,69 @@ md.List2Table <- function(parameterlist,
 #' md.tableWriter.DF.w.dimnames (df, percentify = FALSE, title_of_table = NA)
 
 
-md.tableWriter.DF.w.dimnames <-
-  function(df,
-           FullPath = ww.set.path_of_report(),
-           percentify = FALSE,
-           title_of_table = NA,
-           print2screen = FALSE,
-           WriteOut = FALSE) {
-    if (is.na(title_of_table)) {
-      t = paste0(substitute(df), collapse = " ")
-    } else {
-      t = title_of_table
-    }
-
-    title_of_table = paste("\n#### ", t)
-    if (file.exists(FullPath)) {
-      write(title_of_table, FullPath, append = TRUE)
-
-      h = paste(colnames(df), collapse = " \t| ")
-      h = paste("\n| |", h, " |", collapse = "")
-      ncolz = dim(df)[2] + 1
-      nrows = dim(df)[1]
-      rn = rownames(df)
-      sep = kollapse(rep("| ---", ncolz), " |", print = FALSE)
-
-      write(h, FullPath, append = TRUE)
-      if (print2screen) {
-        cat(h, "\n")
-      }
-      write(sep, FullPath, append = TRUE)
-      if (print2screen) {
-        cat(sep, "\n")
-      }
-      for (r in 1:nrows) {
-        if (is.numeric(unlist(df[r, ]))) {
-          b = CodeAndRoll2 ::iround(df[r, ])
-          if (percentify) {
-            b = Stringendo::percentage_formatter(b)
-          }
-        } else {
-          b = df[r, ]
-        }
-        b = paste(b, collapse = " \t| ")
-        b = paste("|", rn[r], "\t|", b, " |", collapse = "")
-        write(b, FullPath, append = TRUE)
-        if (print2screen) {
-          cat(b, "\n")
-        }
-      }
-    } else {
-      print("NOT LOGGED: Log path and filename is not defined in FullPath")
-    }
-    if (WriteOut) {
-      ReadWriter::write.simple.tsv(df, ManualName = paste0(substitute(df), ".tsv"))
-    }
+md.tableWriter.DF.w.dimnames <- function(df,
+                                         FullPath = ww.set.path_of_report(),
+                                         percentify = FALSE,
+                                         title_of_table = NA,
+                                         print2screen = FALSE,
+                                         WriteOut = FALSE) {
+  if (is.na(title_of_table)) {
+    t = paste0(substitute(df), collapse = " ")
+  } else {
+    t = title_of_table
   }
+
+  title_of_table = paste("\n#### ", t)
+  if (file.exists(FullPath)) {
+    write(title_of_table, FullPath, append = TRUE)
+
+    h = paste(colnames(df), collapse = " \t| ")
+    h = paste("\n| |", h, " |", collapse = "")
+    ncolz = dim(df)[2] + 1
+    nrows = dim(df)[1]
+    rn = rownames(df)
+    sep = kollapse(rep("| ---", ncolz), " |", print = FALSE)
+
+    write(h, FullPath, append = TRUE)
+    if (print2screen) {
+      cat(h, "\n")
+    }
+    write(sep, FullPath, append = TRUE)
+    if (print2screen) {
+      cat(sep, "\n")
+    }
+    for (r in 1:nrows) {
+      if (is.numeric(unlist(df[r, ]))) {
+        b = CodeAndRoll2 ::iround(df[r, ])
+        if (percentify) {
+          b = Stringendo::percentage_formatter(b)
+        }
+      } else {
+        b = df[r, ]
+      }
+      b = paste(b, collapse = " \t| ")
+      b = paste("|", rn[r], "\t|", b, " |", collapse = "")
+      write(b, FullPath, append = TRUE)
+      if (print2screen) {
+        cat(b, "\n")
+      }
+    }
+  } else {
+    print("NOT LOGGED: Log path and filename is not defined in FullPath")
+  }
+  if (WriteOut) {
+    ReadWriter::write.simple.tsv(df, ManualName = paste0(substitute(df), ".tsv"))
+  }
+}
 # md.tableWriter.DF.w.dimnames(GeneCounts.per.sex, print2screen = TRUE)
 # ALIAS
 # MarkDown_Table_writer_DF_RowColNames = md.tableWriter.DF.w.dimnames
 
 
 # ______________________________________________________________________________________________________________________________
-#' md.tableWriter.VEC.w.names
+#' @title md.tableWriter.VEC.w.names
 #'
-#' Take an R vector with names, parse a markdown table from it, and write it to the markdown report,
+#' @description Take an R vector with names, parse a markdown table from it, and write it to the markdown report,
 #'  set by "path_of_report".
 #' @param NamedVector A vector for the table body, with names as table header.
 #' @param FullPath Full path to the file.
@@ -531,65 +529,64 @@ md.tableWriter.DF.w.dimnames <-
 #' @examples x = -1:2; names(x) = LETTERS[1:4]
 #' md.tableWriter.VEC.w.names (NamedVector = x, percentify = FALSE, title_of_table = NA)
 
-md.tableWriter.VEC.w.names <-
-  function(NamedVector,
-           FullPath = ww.set.path_of_report(),
-           percentify = FALSE,
-           title_of_table = NA,
-           print2screen = FALSE,
-           WriteOut = FALSE) {
-    if (is.na(title_of_table)) {
-      t = paste0(substitute(NamedVector), collapse = " ")
-    } else {
-      t = title_of_table
-    }
-    title_of_table = paste("\n#### ", t)
-    if (file.exists(FullPath)) {
-      write(title_of_table, FullPath, append = TRUE)
-      if (!is.table(NamedVector)) {
-        if (is.list(NamedVector) & any(lapply(NamedVector, length) > 1)) {
-          print("This complex list cannot be parsed to a table.")
-        }
-        if (is.numeric(NamedVector)) {
-          NamedVector = CodeAndRoll2 ::iround(NamedVector)
-        }
-      }
-      h = paste(names(NamedVector), collapse = " \t| ")
-      h = paste("\n| ", h, " |", collapse = "")
-      ncolz = length(NamedVector)
-      sep = kollapse(rep("| ---", ncolz), " |", print = FALSE)
-      write(h, FullPath, append = TRUE)
-      if (print2screen) {
-        cat(h, "\n")
-      }
-      write(sep, FullPath, append = TRUE)
-      if (print2screen) {
-        cat(sep, "\n")
-      }
-
-      if (percentify & is.numeric(NamedVector)) {
-        NamedVector = Stringendo::percentage_formatter(NamedVector)
-      }
-      b = paste(NamedVector, collapse = " \t| ")
-      b = paste("|", b, " |", collapse = "")
-      write(b, FullPath, append = TRUE)
-    } else {
-      print("NOT LOGGED: Log path and filename is not defined in FullPath")
-    }
-    if (WriteOut) {
-      ReadWriter::write.simple.tsv(NamedVector, ManualName = paste0(substitute(NamedVector), ".tsv") )
-    }
-    if (print2screen) {
-      cat(b, "\n")
-    }
+md.tableWriter.VEC.w.names <- function(NamedVector,
+                                       FullPath = ww.set.path_of_report(),
+                                       percentify = FALSE,
+                                       title_of_table = NA,
+                                       print2screen = FALSE,
+                                       WriteOut = FALSE) {
+  if (is.na(title_of_table)) {
+    t = paste0(substitute(NamedVector), collapse = " ")
+  } else {
+    t = title_of_table
   }
+  title_of_table = paste("\n#### ", t)
+  if (file.exists(FullPath)) {
+    write(title_of_table, FullPath, append = TRUE)
+    if (!is.table(NamedVector)) {
+      if (is.list(NamedVector) & any(lapply(NamedVector, length) > 1)) {
+        print("This complex list cannot be parsed to a table.")
+      }
+      if (is.numeric(NamedVector)) {
+        NamedVector = CodeAndRoll2 ::iround(NamedVector)
+      }
+    }
+    h = paste(names(NamedVector), collapse = " \t| ")
+    h = paste("\n| ", h, " |", collapse = "")
+    ncolz = length(NamedVector)
+    sep = kollapse(rep("| ---", ncolz), " |", print = FALSE)
+    write(h, FullPath, append = TRUE)
+    if (print2screen) {
+      cat(h, "\n")
+    }
+    write(sep, FullPath, append = TRUE)
+    if (print2screen) {
+      cat(sep, "\n")
+    }
+
+    if (percentify & is.numeric(NamedVector)) {
+      NamedVector = Stringendo::percentage_formatter(NamedVector)
+    }
+    b = paste(NamedVector, collapse = " \t| ")
+    b = paste("|", b, " |", collapse = "")
+    write(b, FullPath, append = TRUE)
+  } else {
+    print("NOT LOGGED: Log path and filename is not defined in FullPath")
+  }
+  if (WriteOut) {
+    ReadWriter::write.simple.tsv(NamedVector, ManualName = paste0(substitute(NamedVector), ".tsv") )
+  }
+  if (print2screen) {
+    cat(b, "\n")
+  }
+}
 
 
 
 # ______________________________________________________________________________________________________________________________
-#' md.LinkTable
+#' @title md.LinkTable
 #'
-#' Take a dataframe where every entry is a string containing an html link, parse and write out.
+#' @description Take a dataframe where every entry is a string containing an html link, parse and write out.
 #'  a properly formatted markdown table.
 #' @param tableOfLinkswRownames A dataframe where every entry is a string containing an html link.
 #' @export
@@ -610,9 +607,9 @@ md.LinkTable <- function(tableOfLinkswRownames) {
 
 
 # ______________________________________________________________________________________________________________________________
-#' md.import.table
+#' @title md.import.table
 #'
-#' Import a table (.csv, or tab seprated values, .tsv file) and write it
+#' @description Import a table (.csv, or tab seprated values, .tsv file) and write it
 #' in markdown format to the report.
 #' @param from.file.table  The *.tsv file to be appended  as table at
 #' the (current) last line of the report.
@@ -628,45 +625,44 @@ md.LinkTable <- function(tableOfLinkswRownames) {
 #' md.import.table("~/x.tsv")
 
 
-md.import.table <-
-  function(from.file.table,
-           title_of_table,
-           has.rownames = TRUE,
-           has.colnames = TRUE,
-           field.sep = "\t",
-           to.file = ww.set.path_of_report()) {
-    TTL = if (missing(title_of_table)){
-      basename(from.file.table)
-    } else { title_of_table}
-    importedtable = if (has.rownames) {
-      utils::read.table(
-        from.file.table,
-        stringsAsFactors = FALSE,
-        sep = "\t",
-        header = has.colnames,
-        row.names = 1
-      )
-    } else if (!has.rownames) {
-      utils::read.table(
-        from.file.table,
-        stringsAsFactors = FALSE,
-        sep = "\t",
-        header = has.colnames
-      )
-    }
-    md.tableWriter.DF.w.dimnames(importedtable, title_of_table = TTL)
-    Stringendo::iprint("The follwoing table is included in the markdown report:")
-    return(importedtable)
+md.import.table <- function(from.file.table,
+                            title_of_table,
+                            has.rownames = TRUE,
+                            has.colnames = TRUE,
+                            field.sep = "\t",
+                            to.file = ww.set.path_of_report()) {
+  TTL = if (missing(title_of_table)){
+    basename(from.file.table)
+  } else { title_of_table}
+  importedtable = if (has.rownames) {
+    utils::read.table(
+      from.file.table,
+      stringsAsFactors = FALSE,
+      sep = "\t",
+      header = has.colnames,
+      row.names = 1
+    )
+  } else if (!has.rownames) {
+    utils::read.table(
+      from.file.table,
+      stringsAsFactors = FALSE,
+      sep = "\t",
+      header = has.colnames
+    )
   }
+  md.tableWriter.DF.w.dimnames(importedtable, title_of_table = TTL)
+  Stringendo::iprint("The follwoing table is included in the markdown report:")
+  return(importedtable)
+}
 
 # ______________________________________________________________________________________________----
 # Filtering Data ----
 # _________________________________________________________________________________________________
 
 
-#' filter_HP
+#' @title filter_HP
 #'
-#' Filter values that fall between above high-pass-threshold (X >).
+#' @description Filter values that fall between above high-pass-threshold (X >).
 #'
 #' @param numeric_vector Values to be filtered.
 #' @param threshold A numeric value above which "numeric_vector" passes.
@@ -685,61 +681,60 @@ md.import.table <-
 #' @examples filter_HP (numeric_vector = rnorm(1000, 6), threshold = 5,
 #'  prepend = "From all values ", return_survival_ratio = FALSE)
 
-filter_HP <-
-  function(numeric_vector,
-           threshold,
-           passequal = FALSE,
-           prepend = "",
-           return_survival_ratio = FALSE,
-           return_conclusion = FALSE,
-           na.rm = TRUE,
-           plot.hist = TRUE,
-           saveplot = FALSE,
-           verbose = TRUE,
-           # path_of_report = ww.set.path_of_report(),
-           ...) {
-    survivors <-
-      if (passequal) {
-        numeric_vector >= threshold
-      } else {
-        numeric_vector > threshold
-      }
-    pc = Stringendo::percentage_formatter(sum(survivors, na.rm = na.rm) / length(survivors))
-    conclusion = kollapse(
-      prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ", length(numeric_vector),
-      " entries in ", substitute (numeric_vector), " fall above a threshold value of: ",
-      CodeAndRoll2 ::iround(threshold)
-      , print = verbose)
+filter_HP <- function(numeric_vector,
+                      threshold,
+                      passequal = FALSE,
+                      prepend = "",
+                      return_survival_ratio = FALSE,
+                      return_conclusion = FALSE,
+                      na.rm = TRUE,
+                      plot.hist = TRUE,
+                      saveplot = FALSE,
+                      verbose = TRUE,
+                      # path_of_report = ww.set.path_of_report(),
+                      ...) {
+  survivors <-
+    if (passequal) {
+      numeric_vector >= threshold
+    } else {
+      numeric_vector > threshold
+    }
+  pc = Stringendo::percentage_formatter(sum(survivors, na.rm = na.rm) / length(survivors))
+  conclusion = kollapse(
+    prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ", length(numeric_vector),
+    " entries in ", substitute (numeric_vector), " fall above a threshold value of: ",
+    CodeAndRoll2 ::iround(threshold)
+    , print = verbose)
 
-    if (ww.variable.and.path.exists(path_of_report, alt.message = "NOT LOGGED")) {
-      llogit (conclusion)
-    }
-
-    if (plot.hist) {
-      plotname = substitute(numeric_vector)
-      MarkdownReports::whist(
-        variable = numeric_vector,
-        main = plotname,
-        vline = threshold,
-        filtercol = 1,
-        savefile = saveplot,
-        ...
-      )
-    }
-    if (return_survival_ratio) {
-      return (sum(survivors, na.rm = na.rm) / length(survivors))
-    } else if (return_conclusion) {
-      return(conclusion)
-    } else if (!return_survival_ratio) {
-      return (survivors)
-    }
+  if (ww.variable.and.path.exists(path_of_report, alt.message = "NOT LOGGED")) {
+    llogit (conclusion)
   }
+
+  if (plot.hist) {
+    plotname = substitute(numeric_vector)
+    MarkdownReports::whist(
+      variable = numeric_vector,
+      main = plotname,
+      vline = threshold,
+      filtercol = 1,
+      savefile = saveplot,
+      ...
+    )
+  }
+  if (return_survival_ratio) {
+    return (sum(survivors, na.rm = na.rm) / length(survivors))
+  } else if (return_conclusion) {
+    return(conclusion)
+  } else if (!return_survival_ratio) {
+    return (survivors)
+  }
+}
 
 
 # ______________________________________________________________________________________________________________________________
-#' filter_LP
+#' @title filter_LP
 #'
-#' Filter values that fall below the low-pass threshold (X <).
+#' @description Filter values that fall below the low-pass threshold (X <).
 #' @param numeric_vector Values to be filtered.
 #' @param threshold A numeric value below which "numeric_vector" passes.
 #' @param passequal Pass if a value is smaller, or equal than the threshold. FALSE by default.
@@ -756,60 +751,59 @@ filter_HP <-
 #' @examples filter_LP (numeric_vector = rnorm(1000, 6), threshold = 5,
 #'  prepend = "From all values ", return_survival_ratio = FALSE)
 
-filter_LP <-
-  function(numeric_vector,
-           threshold,
-           passequal = FALSE,
-           prepend = "",
-           return_survival_ratio = FALSE,
-           return_conclusion = FALSE,
-           na.rm = TRUE,
-           plot.hist = TRUE,
-           saveplot = FALSE,
-           verbose = TRUE,
-           ...) {
-    survivors <-
-      if (passequal) {
-        numeric_vector <= threshold
-      } else {
-        numeric_vector < threshold
-      }
-    pc = Stringendo::percentage_formatter(sum(survivors, na.rm = na.rm) / length(survivors))
-    conclusion = kollapse(
-      prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ",
-      length(numeric_vector), " entries in ", substitute (numeric_vector),
-      " fall below a threshold value of: ", CodeAndRoll2 ::iround(threshold)
-      , print = verbose)
-    if (ww.variable.and.path.exists(path_of_report, alt.message = "NOT LOGGED")) {
-      llogit (conclusion)
+filter_LP <- function(numeric_vector,
+                      threshold,
+                      passequal = FALSE,
+                      prepend = "",
+                      return_survival_ratio = FALSE,
+                      return_conclusion = FALSE,
+                      na.rm = TRUE,
+                      plot.hist = TRUE,
+                      saveplot = FALSE,
+                      verbose = TRUE,
+                      ...) {
+  survivors <-
+    if (passequal) {
+      numeric_vector <= threshold
+    } else {
+      numeric_vector < threshold
     }
-
-    if (plot.hist) {
-      plotname = substitute(numeric_vector)
-      MarkdownReports::whist(
-        variable = numeric_vector,
-        main = plotname,
-        vline = threshold,
-        filtercol = -1,
-        savefile = saveplot,
-        ...
-      )
-    }
-    if (return_survival_ratio) {
-      return (sum(survivors, na.rm = na.rm) / length(survivors))
-    } else if (return_conclusion) {
-      return(conclusion)
-    } else if (!return_survival_ratio) {
-      return (survivors)
-    }
+  pc = Stringendo::percentage_formatter(sum(survivors, na.rm = na.rm) / length(survivors))
+  conclusion = kollapse(
+    prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ",
+    length(numeric_vector), " entries in ", substitute (numeric_vector),
+    " fall below a threshold value of: ", CodeAndRoll2 ::iround(threshold)
+    , print = verbose)
+  if (ww.variable.and.path.exists(path_of_report, alt.message = "NOT LOGGED")) {
+    llogit (conclusion)
   }
+
+  if (plot.hist) {
+    plotname = substitute(numeric_vector)
+    MarkdownReports::whist(
+      variable = numeric_vector,
+      main = plotname,
+      vline = threshold,
+      filtercol = -1,
+      savefile = saveplot,
+      ...
+    )
+  }
+  if (return_survival_ratio) {
+    return (sum(survivors, na.rm = na.rm) / length(survivors))
+  } else if (return_conclusion) {
+    return(conclusion)
+  } else if (!return_survival_ratio) {
+    return (survivors)
+  }
+}
 
 
 
 # ______________________________________________________________________________________________________________________________
-#' filter_MidPass
+#' @title filter_MidPass
 #'
-#' Filter values that fall above high-pass-threshold !(X >= )! and below
+#' @description Filter values that fall above high-pass-threshold !(X >= )! and below
 #' the low-pass threshold (X <).
 #' @param numeric_vector Values to be filtered.
 #' @param HP_threshold Lower threshold value. (>= )
@@ -829,59 +823,58 @@ filter_LP <-
 #' @examples filter_MidPass (numeric_vector = rnorm(1000, 6), HP_threshold = 4,
 #' LP_threshold = 8, prepend = "From all values ", return_survival_ratio = FALSE, EdgePass = TRUE)
 
-filter_MidPass <-
-  function(numeric_vector,
-           HP_threshold,
-           LP_threshold,
-           prepend = "",
-           return_survival_ratio = FALSE,
-           return_conclusion = FALSE,
-           EdgePass = FALSE,
-           na.rm = TRUE,
-           plot.hist = TRUE,
-           saveplot = FALSE,
-           verbose = TRUE,
-           # path_of_report = ww.set.path_of_report(),
-           ...) {
-    survivors = (numeric_vector >= HP_threshold &     numeric_vector < LP_threshold)
-    keyword = "between"
-    relation = " <= x < "
+filter_MidPass <- function(numeric_vector,
+                           HP_threshold,
+                           LP_threshold,
+                           prepend = "",
+                           return_survival_ratio = FALSE,
+                           return_conclusion = FALSE,
+                           EdgePass = FALSE,
+                           na.rm = TRUE,
+                           plot.hist = TRUE,
+                           saveplot = FALSE,
+                           verbose = TRUE,
+                           # path_of_report = ww.set.path_of_report(),
+                           ...) {
+  survivors = (numeric_vector >= HP_threshold &     numeric_vector < LP_threshold)
+  keyword = "between"
+  relation = " <= x < "
 
-    if (EdgePass) {
-      survivors = (numeric_vector < HP_threshold |
-                     numeric_vector >= LP_threshold)
-      keyword = "outside"
-      relation = " >= x OR x > "
-    }
-    pc = Stringendo::percentage_formatter(sum(survivors, na.rm = na.rm) / length(survivors))
-    conclusion = kollapse(prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ",
-                          length(numeric_vector), " entries in ", substitute (numeric_vector),
-                          " fall ", keyword, " the thresholds: ", CodeAndRoll2 ::iround(HP_threshold)
-                          , relation, CodeAndRoll2 ::iround(LP_threshold)
-                          , print = verbose)
-    if (ww.variable.and.path.exists(path_of_report, alt.message = "NOT LOGGED")) {
-      llogit (conclusion)
-    }
-
-    if (plot.hist) {
-      plotname = substitute(numeric_vector)
-      MarkdownReports::whist(
-        variable = numeric_vector,
-        main = plotname,
-        vline = c(HP_threshold, LP_threshold),
-        filtercol = if (EdgePass) - 1 else 1,
-        savefile = saveplot,
-        ...
-      )
-    }
-    if (return_survival_ratio) {
-      return (sum(survivors, na.rm = na.rm) / length(survivors))
-    } else if (return_conclusion) {
-      return(conclusion)
-    } else if (!return_survival_ratio) {
-      return (survivors)
-    }
+  if (EdgePass) {
+    survivors = (numeric_vector < HP_threshold |
+                   numeric_vector >= LP_threshold)
+    keyword = "outside"
+    relation = " >= x OR x > "
   }
+  pc = Stringendo::percentage_formatter(sum(survivors, na.rm = na.rm) / length(survivors))
+  conclusion = kollapse(prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ",
+                        length(numeric_vector), " entries in ", substitute (numeric_vector),
+                        " fall ", keyword, " the thresholds: ", CodeAndRoll2 ::iround(HP_threshold)
+                        , relation, CodeAndRoll2 ::iround(LP_threshold)
+                        , print = verbose)
+  if (ww.variable.and.path.exists(path_of_report, alt.message = "NOT LOGGED")) {
+    llogit (conclusion)
+  }
+
+  if (plot.hist) {
+    plotname = substitute(numeric_vector)
+    MarkdownReports::whist(
+      variable = numeric_vector,
+      main = plotname,
+      vline = c(HP_threshold, LP_threshold),
+      filtercol = if (EdgePass) - 1 else 1,
+      savefile = saveplot,
+      ...
+    )
+  }
+  if (return_survival_ratio) {
+    return (sum(survivors, na.rm = na.rm) / length(survivors))
+  } else if (return_conclusion) {
+    return(conclusion)
+  } else if (!return_survival_ratio) {
+    return (survivors)
+  }
+}
 
 
 
@@ -890,9 +883,9 @@ filter_MidPass <-
 # Internal functions (for Markdown parsing) ----
 # _________________________________________________________________________________________________
 
-#' ww.variable.and.path.exists
+#' @title ww.variable.and.path.exists
 #'
-#' Check if a variable name is defined, and if so, does the path (to a file) stored in that
+#' @description Check if a variable name is defined, and if so, does the path (to a file) stored in that
 #'  variable points to an existing directory?
 #' @param path A variable name that might not exist and might point to a non-existent direcotry.
 #' @param alt.message Alternative message if the variable + path does not exist. FALSE or string.
@@ -921,9 +914,9 @@ ww.variable.and.path.exists <- function(path = path_of_report, alt.message = NUL
 }
 
 
-#' ww.variable.exists.and.true
+#' @title ww.variable.exists.and.true
 #'
-#' Check if a variable name is defined, and if so, is it TRUE
+#' @description Check if a variable name is defined, and if so, is it TRUE
 #' @param var A variable
 #' @param alt.message Alternative message if the variable + path does not exist. FALSE or string.
 #' @export
@@ -956,9 +949,9 @@ ww.variable.exists.and.true <- function(var, alt.message = NULL) {
 
 
 
-#' ww.set.OutDir
+#' @title ww.set.OutDir
 #'
-#' Checks if global variable OutDir is defined. If not,
+#' @description Checks if global variable OutDir is defined. If not,
 #' it returns the current working directory
 #' @param dir OutDir to check and set.
 #' @export
@@ -975,16 +968,16 @@ ww.set.OutDir <- function(dir = OutDir) {
 }
 
 
-#' ww.set.path_of_report
+#' @title ww.set.path_of_report
 #'
-#' Checks if global variable path_of_report is defined. If not,
+#' @description Checks if global variable path_of_report is defined. If not,
 #' it defines it as Analysis.md in the current working directory
 #' @export
 #'
 #' @examples ww.set.path_of_report()
 
 ww.set.path_of_report <- function() {
-  new.path_of_report =
+  new.path_of_report  <-
     if (ww.variable.and.path.exists(path = path_of_report)) {
       path_of_report
     } else {
@@ -995,9 +988,9 @@ ww.set.path_of_report <- function() {
 }
 
 
-#' ww.set.PlotName
+#' @title ww.set.PlotName
 #'
-#' Generates a plotname (use if none is specified)
+#' @description Generates a plotname (use if none is specified)
 #' @export
 #'
 #' @examples ww.set.PlotName()
@@ -1014,9 +1007,9 @@ ww.set.PlotName <- function() {
 }
 
 
-#' ww.set.mdlink
+#' @title ww.set.mdlink
 #'
-#' Internal function. Sets inserting a markdown link to the image
+#' @description Internal function. Sets inserting a markdown link to the image
 #' (created by the wplot* function that calls this function) only if 'path_of_report' is defined
 #'  and 'b.mdlink' is defined as TRUE.
 #' @param NameOfaVariable Name of a possibly defined variable to be tested.
@@ -1033,9 +1026,9 @@ ww.set.mdlink <- function(NameOfaVariable = "b.mdlink",
 }
 
 
-#' ww.md.image.link.parser
+#' @title ww.md.image.link.parser
 #'
-#' Format a markdown image reference (link) from the file path to the file.
+#' @description Format a markdown image reference (link) from the file path to the file.
 #' It can parse the file path, if you pass it in separate variables and strings.
 #' E.g. ww.md.image.link.parser(Directory, "MyImage.png").
 #' @param ... Variables (strings, vectors) to be collapsed in consecutively.
@@ -1050,9 +1043,9 @@ ww.md.image.link.parser <- function(...) {
   kollapse("![", fn, "]", "(", FullPath, ")", print = FALSE)
 }
 
-#' ww.ttl_field
+#' @title ww.ttl_field
 #'
-#' Internal function. Creates the string written into the PDF files "Title' (metadata) field.
+#' @description Internal function. Creates the string written into the PDF files "Title' (metadata) field.
 #' @param plotname Name of the plot
 #' @param creator String X in: "plotblabla by X". Defaults: "MarkdownReports".
 #' @export
@@ -1064,9 +1057,9 @@ ww.ttl_field <- function(plotname, creator = "MarkdownReports") {
 }
 
 
-#' ww.autoPlotName
+#' @title ww.autoPlotName
 #'
-#' Internal function. Creates automatic plot and file-names.
+#' @description Internal function. Creates automatic plot and file-names.
 #' @param name Manually name your plot
 #' @export
 #' @examples ww.autoPlotName()
@@ -1085,9 +1078,9 @@ ww.autoPlotName <- function(name = NULL) {
 }
 
 
-#' ww.assign_to_global
+#' @title ww.assign_to_global
 #'
-#' A function loading results to the global environment.
+#' @description A function loading results to the global environment.
 #' Source: https://stackoverflow.com/questions/28180989/
 #' @param name Name of the global variabe to be assigned
 #' @param value Value of the global variabe to be assigned
@@ -1162,52 +1155,51 @@ jjpegA4 <- function(filename, r = 225, q = 90, w = 8.27, h = 11.69) { # Setup an
 #' @export
 #' @examples wcolorize (vector = c(1, 1, 1:6), ReturnCategoriesToo = TRUE, show = TRUE)
 
-wcolorize  <-
-  function(vector = c(1, 1, 1:6),
-           RColorBrewerSet = FALSE,
-           ReturnCategoriesToo = FALSE,
-           show = FALSE,
-           randomize = FALSE,
-           set = c(FALSE,
-                   "rich",
-                   "heat.colors",
-                   "terrain.colors",
-                   "topo.colors",
-                   "matlab",
-                   "rainbow")[1]) {
-    NrCol = length(unique(vector))
-    COLZ = as.factor.numeric(vector) # if basic numbers
-    if (randomize) {
-      COLZ = sample(COLZ)
-    } # if randomise
-    if (RColorBrewerSet != FALSE) {
-      COLZ = RColorBrewer::brewer.pal(NrCol, name = RColorBrewerSet)[as.factor.numeric(vector)]
-    } else {
-      COLZ = if (set == "rainbow") {
-        rainbow(NrCol)[COLZ]
-      } else if (set == "heat.colors") {
-        heat.colors(NrCol)[COLZ]
-      } else if (set == "terrain.colors") {
-        terrain.colors(NrCol)[COLZ]
-      } else if (set == "topo.colors") {
-        topo.colors(NrCol)[COLZ]
-      } else if (set == "matlab") {
-        colorRamps::matlab.like(NrCol)[COLZ]
-      } else if (set == "rich") {
-        gplots::rich.colors(NrCol)[COLZ]
-      } else
-        as.factor.numeric(vector) # if basic numbers
-    }#if
-    COLZ = as.vector(COLZ)
-    names(COLZ) = vector
-    CATEG = COLZ[!duplicated(COLZ)]
-    if (show)
-      color_check(CATEG)
-    if (ReturnCategoriesToo) {
-      COLZ = list("vec" = COLZ, "categ" = CATEG)
-    }
-    return(COLZ)
+wcolorize  <- function(vector = c(1, 1, 1:6),
+                       RColorBrewerSet = FALSE,
+                       ReturnCategoriesToo = FALSE,
+                       show = FALSE,
+                       randomize = FALSE,
+                       set = c(FALSE,
+                               "rich",
+                               "heat.colors",
+                               "terrain.colors",
+                               "topo.colors",
+                               "matlab",
+                               "rainbow")[1]) {
+  NrCol = length(unique(vector))
+  COLZ = as.factor.numeric(vector) # if basic numbers
+  if (randomize) {
+    COLZ = sample(COLZ)
+  } # if randomise
+  if (RColorBrewerSet != FALSE) {
+    COLZ = RColorBrewer::brewer.pal(NrCol, name = RColorBrewerSet)[as.factor.numeric(vector)]
+  } else {
+    COLZ = if (set == "rainbow") {
+      rainbow(NrCol)[COLZ]
+    } else if (set == "heat.colors") {
+      heat.colors(NrCol)[COLZ]
+    } else if (set == "terrain.colors") {
+      terrain.colors(NrCol)[COLZ]
+    } else if (set == "topo.colors") {
+      topo.colors(NrCol)[COLZ]
+    } else if (set == "matlab") {
+      colorRamps::matlab.like(NrCol)[COLZ]
+    } else if (set == "rich") {
+      gplots::rich.colors(NrCol)[COLZ]
+    } else
+      as.factor.numeric(vector) # if basic numbers
+  }#if
+  COLZ = as.vector(COLZ)
+  names(COLZ) = vector
+  CATEG = COLZ[!duplicated(COLZ)]
+  if (show)
+    color_check(CATEG)
+  if (ReturnCategoriesToo) {
+    COLZ = list("vec" = COLZ, "categ" = CATEG)
   }
+  return(COLZ)
+}
 
 
 
