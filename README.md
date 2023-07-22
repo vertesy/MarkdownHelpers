@@ -83,34 +83,156 @@ MarkdownReports::setup_MarkdownReports()
 
 <br>
 
-### List of Functions
+1. ## List of Functions
 
+   Updated: 2023/07/22 11:56
 
+   - #### 1 `stopif()`
 
-1. `stopif()`
-2. `irequire()`
-3. `unless.specified()`
-4. `lookup()`
-5. `combine.matrices.by.rowname.intersect()`
-6. `ww.variable.and.path.exists()`
-7. `llprint()`
-8. `llogit()`
-9. `llwrite_list()`
-10. `md.import()`
-11. `md.LogSettingsFromList()`
-12. `md.List2Table()`
-13. `md.LinkTable()`
-14. `ww.variable.and.path.exists()`
-15. `ww.variable.exists.and.true()`
-16. `ww.set.OutDir()`
-17. `ww.set.path_of_report()`
-18. `ww.set.PlotName()`
-19. `ww.set.mdlink()`
-20. `ww.md.image.link.parser()`
-21. `ww.ttl_field()`
-22. `ww.autoPlotName()`
-23. `ww.assign_to_global()`
-24. `try.dev.off()`
-25. `jjpegA4()`
-26. `color_check()`
-27. `filter_survival_length()`
+     Stop script if the condition is met, and print a message
+
+   - #### 2 `irequire()`
+
+     Load a package. If it does not exist, try to install it from CRAN.
+
+   - #### 3 `unless.specified()`
+
+     Return value X (TRUE by default) unless the variable is defined.  If defined, it returns the variable.
+
+   - #### 4 `TRUE.unless()`
+
+     Return TRUE unless the variable is defined. If defined, it returns the value of the variable.
+
+   - #### 5 `FALSE.unless()`
+
+     Return FALSE unless the variable is defined. If defined, it returns the value of the variable.
+
+   - #### 6 `lookup()`
+
+     Awesome pattern matching for a set of values in another set of values. Returns a list with all kinds of results.
+
+   - #### 7 `combine.matrices.by.rowname.intersect()`
+
+     Combine two matrices by their rownames intersect.
+
+   - #### 8 `ww.variable.and.path.exists()`
+
+     Check if a variable name is defined, and if so, does the path (to a file) stored in that   variable points to an existing directory?
+
+   - #### 9 `llprint()`
+
+     Collapse by white spaces a sentence from any variable passed on to the function.  Print the sentence to the screen and write it to your markdown report file,  if the "path_of_report" variable is defined.
+
+   - #### 10 `llogit()`
+
+     Collapse by white spaces a sentence from any variable passed on to the function.  llogit() writes it to your markdown report file, if the "path_of_report" variable is defined.  It does not print the sentence to the screen.
+
+   - #### 11 `md.write.as.list()`
+
+     Writes a vector as a (numbered) list into the report file.
+
+   - #### 12 `md.image.linker()`
+
+     Format a markdown image reference (link) to a .pdf and .png versions of graph,  and insert both links to the markdown report, set by "path_of_report".  If the "b.png4Github" variable is set, the .png-link is set up such,  that you can upload the whole report with the .png image into your GitHub repo's wiki,  under "Reports"/OutDir/ (Reports is a literal string, OutDir is the last/deepest  directory name in the "OutDir" variable. See create_set_OutDir() function.).  This function is called by the ~wplot functions.
+
+   - #### 13 `llwrite_list()`
+
+     Print a list object from R, one element per line, into your markdown report
+
+   - #### 14 `md.import()`
+
+     Import and concatenated an external markdown or text file to the report
+
+   - #### 15 `md.LogSettingsFromList()`
+
+     Log the parameters & settings used in the script and stored in a list, in a table format   in the report.
+
+   - #### 16 `md.List2Table()`
+
+     Broader variant of md.LogSettingsFromList(). Log the values (col2) from a  named (col1) list, in a table format in the report.
+
+   - #### 17 `md.tableWriter.DF.w.dimnames()`
+
+     Take an R data frame with row- and column- names, parse a markdown table from it,  and write it to the markdown report, set by "path_of_report".
+
+   - #### 18 `md.tableWriter.VEC.w.names()`
+
+     Take an R vector with names, parse a markdown table from it, and write it to the markdown report,   set by "path_of_report".
+
+   - #### 19 `md.LinkTable()`
+
+     Take a dataframe where every entry is a string containing an html link, parse and write out.   a properly formatted markdown table.
+
+   - #### 20 `md.import.table()`
+
+     Import a table (.csv, or tab seprated values, .tsv file) and write it  in markdown format to the report.
+
+   - #### 21 `filter_HP()`
+
+     Filter values that fall between above high-pass-threshold (X >). 
+
+   - #### 22 `filter_LP()`
+
+     Filter values that fall below the low-pass threshold (X <).
+
+   - #### 23 `filter_MidPass()`
+
+     Filter values that fall above high-pass-threshold !(X >= )! and below  the low-pass threshold (X <).
+
+   - #### 24 `ww.variable.and.path.exists()`
+
+     Check if a variable name is defined, and if so, does the path (to a file) stored in that   variable points to an existing directory?
+
+   - #### 25 `ww.variable.exists.and.true()`
+
+     Check if a variable name is defined, and if so, is it TRUE
+
+   - #### 26 `ww.set.OutDir()`
+
+     Checks if global variable OutDir is defined. If not,  it returns the current working directory
+
+   - #### 27 `ww.set.path_of_report()`
+
+     Checks if global variable path_of_report is defined. If not,  it defines it as Analysis.md in the current working directory  @export   @examples ww.set.path_of_report()
+
+   - #### 28 `ww.set.PlotName()`
+
+     Generates a plotname (use if none is specified)  @export   @examples ww.set.PlotName()
+
+   - #### 29 `ww.set.mdlink()`
+
+     Internal function. Sets inserting a markdown link to the image  (created by the wplot* function that calls this function) only if 'path_of_report' is defined   and 'b.mdlink' is defined as TRUE.
+
+   - #### 30 `ww.md.image.link.parser()`
+
+     Format a markdown image reference (link) from the file path to the file.  It can parse the file path, if you pass it in separate variables and strings.  E.g. ww.md.image.link.parser(Directory, "MyImage.png").
+
+   - #### 31 `ww.ttl_field()`
+
+     Internal function. Creates the string written into the PDF files "Title' (metadata) field.
+
+   - #### 32 `ww.autoPlotName()`
+
+     Internal function. Creates automatic plot and file-names.
+
+   - #### 33 `ww.assign_to_global()`
+
+     A function loading results to the global environment.  Source: https://stackoverflow.com/questions/28180989/
+
+   - #### 34 `try.dev.off()`
+
+     Tries to close R graphical devices without raising an error.  @export  @examples try.dev.off ()
+
+   - #### 35 `jjpegA4()`
+
+     Setup an A4 size jpeg.
+
+   - #### 36 `wcolorize()`
+
+     Generate color palettes. Input: a vector with categories, can be numbers or strings.  Handles repeating values. Output: color vector of equal length as input.  Optionally it can ouput a list where an extra element lists the  categories (simply using unique would remove the names). See example.  Some color scale depend on packages "colorRamps", or "gplots". 
+
+   - #### 37 `color_check()`
+
+     Display the colors encoded by the numbers / color-ID-s you pass on to this function
+
+   
