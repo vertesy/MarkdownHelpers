@@ -1,8 +1,12 @@
 # _________________________________________________________________________________________________
 # MarkdownHelpers.R ----
 # _________________________________________________________________________________________________
+# devtools::load_all("~/GitHub/Packages/MarkdownHelpers")
 # source('~/GitHub/Packages/MarkdownHelpers/R/MarkdownHelpers.R')
 # rm(list = ls(all.names = TRUE)); try(dev.off(), silent = T)
+
+"2023.01.12 14:55 version"
+
 
 # Functions
 # require(Stringendo); require(ReadWriter); require(CodeAndRoll2); require(ggExpress); require(MarkdownReports); require(Seurat.utils)
@@ -1078,22 +1082,6 @@ ww.autoPlotName <- function(name = NULL) {
 }
 
 
-
-#' @title ww.set.file.extension
-#'
-#' @description Internal function. Creates automatic plot and file-names.
-#' @param also.pdf Save plot in both png and pdf formats?
-#' @param def Default file extension: png
-#' @param global.setting global file extension setting stored in a global variable. Detault: 'b.def.ext'
-#' @export
-
-ww.set.file.extension <- function(also.pdf = also.pdf, def = 'png', global.setting = 'b.def.ext') {
-  if (also.pdf) 'png' else unless.specified(global.setting, def = def)
-}
-
-
-
-
 #' @title ww.assign_to_global
 #'
 #' @description A function loading results to the global environment.
@@ -1110,8 +1098,6 @@ ww.assign_to_global <- function(name, value,  pos = 1, max_print = 10, verbose =
   if (verbose) Stringendo::iprint(name, "defined as:", head(value, max_print)) # , "is a new global environment variable"
   assign(name, value, envir=as.environment(pos) )
 }
-
-
 
 
 
@@ -1264,3 +1250,25 @@ filter_survival_length <- function(length_new, length_old, prepend = "") { # Par
   pc = Stringendo::percentage_formatter(length_new/length_old)
   llprint(prepend, pc, " of ", length_old, " entries make through the filter")
 }
+
+
+
+
+
+
+#' @title ww.set.file.extension
+#'
+#' @description Internal function. Sets file extension for ggExpress plotting functions.
+#' @param global_setting global file extension setting stored in a global variable. Detault: 'b.def.ext'
+#' @param default Default file extension: png
+#' @param also_pdf Save plot in both png and pdf formats.
+#' @export
+
+ww.set.file.extension <- function(global_setting = 'b.def.ext', default = 'png', also_pdf) {
+  ext <- unless.specified(NameOfaVariable = global_setting, def = default)
+  if (isTRUE(also_pdf)) { ext <- "png"}
+  return(ext)
+}
+
+
+
