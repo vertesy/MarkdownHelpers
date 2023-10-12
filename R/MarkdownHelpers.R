@@ -1088,7 +1088,7 @@ ww.autoPlotName <- function(name = NULL) {
 #' @export
 
 ww.set.file.extension <- function(also.pdf = also.pdf, def = 'png', global.setting = 'b.def.ext') {
-  if (also.pdf) 'png' else MarkdownHelpers::unless.specified(global.setting, def = def)
+  if (also.pdf) 'png' else unless.specified(global.setting, def = def)
 }
 
 
