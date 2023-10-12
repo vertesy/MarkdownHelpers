@@ -1078,6 +1078,22 @@ ww.autoPlotName <- function(name = NULL) {
 }
 
 
+
+#' @title ww.set.file.extension
+#'
+#' @description Internal function. Creates automatic plot and file-names.
+#' @param also.pdf Save plot in both png and pdf formats?
+#' @param def Default file extension: png
+#' @param global.setting global file extension setting stored in a global variable. Detault: 'b.def.ext'
+#' @export
+
+ww.set.file.extension <- function(also.pdf = also.pdf, def = 'png', global.setting = 'b.def.ext') {
+  if (also.pdf) 'png' else MarkdownHelpers::unless.specified(global.setting, def = def)
+}
+
+
+
+
 #' @title ww.assign_to_global
 #'
 #' @description A function loading results to the global environment.
@@ -1094,6 +1110,8 @@ ww.assign_to_global <- function(name, value,  pos = 1, max_print = 10, verbose =
   if (verbose) Stringendo::iprint(name, "defined as:", head(value, max_print)) # , "is a new global environment variable"
   assign(name, value, envir=as.environment(pos) )
 }
+
+
 
 
 
