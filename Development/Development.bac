@@ -1,6 +1,7 @@
 # _________________________________________________________________________________________________
 # MarkdownHelpers.R ----
 # _________________________________________________________________________________________________
+# devtools::load_all("~/GitHub/Packages/MarkdownHelpers")
 # source('~/GitHub/Packages/MarkdownHelpers/R/MarkdownHelpers.R')
 # rm(list = ls(all.names = TRUE)); try(dev.off(), silent = T)
 
@@ -1258,13 +1259,16 @@ filter_survival_length <- function(length_new, length_old, prepend = "") { # Par
 #' @title ww.set.file.extension
 #'
 #' @description Internal function. Sets file extension for ggExpress plotting functions.
-#' @param also_pdf Save plot in both png and pdf formats.
-#' @param def Default file extension: png
 #' @param global_setting global file extension setting stored in a global variable. Detault: 'b.def.ext'
+#' @param default Default file extension: png
+#' @param also_pdf Save plot in both png and pdf formats.
 #' @export
 
-ww.set.file.extension <- function(also_pdf = also.pdf, def = 'png', global_setting = 'b.def.ext') {
-  if (also_pdf) 'png' else unless.specified(global_setting, def = def)
+ww.set.file.extension <- function(global_setting = 'b.def.ext', default = 'png', also_pdf) {
+  ext <- unless.specified(NameOfaVariable = global_setting, def = default)
+  if (isTRUE(also_pdf)) { ext <- "png"}
+  return(ext)
 }
+
 
 

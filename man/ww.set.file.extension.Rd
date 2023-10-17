@@ -4,18 +4,14 @@
 \alias{ww.set.file.extension}
 \title{ww.set.file.extension}
 \usage{
-ww.set.file.extension(
-  also_pdf = also.pdf,
-  def = "png",
-  global_setting = "b.def.ext"
-)
+ww.set.file.extension(global_setting = "b.def.ext", default = "png", also_pdf)
 }
 \arguments{
-\item{also_pdf}{Save plot in both png and pdf formats.}
-
-\item{def}{Default file extension: png}
-
 \item{global_setting}{global file extension setting stored in a global variable. Detault: 'b.def.ext'}
+
+\item{default}{Default file extension: png}
+
+\item{also_pdf}{Save plot in both png and pdf formats.}
 }
 \description{
 Internal function. Sets file extension for ggExpress plotting functions.
