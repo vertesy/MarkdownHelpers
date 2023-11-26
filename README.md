@@ -1,11 +1,7 @@
 # MarkdownHelpers
-Helper functions (control and parsing) for MarkdownReports and ggExpress
+Helper functions (control and parsing) for [`MarkdownReports`](https://github.com/vertesy/MarkdownReports) and [`ggExpress`](https://github.com/vertesy/ggExpress). 
 
 
-
-*In 2021, function libraries got reorganized as below:*
-
-<img width="1005" alt="R-package Tree" src="https://user-images.githubusercontent.com/5101911/143560128-065d8a49-0283-4a3a-9448-540fa424d0ef.png">
 
 # Installation
 
@@ -22,13 +18,10 @@ It depends on:
 - [Seurat.utils](https://github.com/vertesy/Seurat.utils)
 - [Seurat.pipeline](https://github.com/vertesy/Seurat.pipeline)
 
-
-
 You can install all of them directly from **GitHub** via **devtools** with one R command:
 
 ```R
 # install.packages("devtools"); # If you don't have it.
-require("devtools")
 
 # Install dependencies
 devtools::install_github(repo = "vertesy/Stringendo", upgrade = F)
@@ -238,3 +231,15 @@ Updated: 2023/11/24 16:40
 - #### 38 `filter_survival_length()`
 
   filter_survival_length. Parse a sentence reporting the % of filter survival.
+
+
+
+
+
+------
+
+*In 2021, function libraries got reorganized as below:*
+
+<img width="1005" alt="R-package Tree" src="https://user-images.githubusercontent.com/5101911/143560128-065d8a49-0283-4a3a-9448-540fa424d0ef.png">
+
+# 
