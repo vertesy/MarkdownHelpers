@@ -1200,7 +1200,6 @@ color_check <- function(..., incrBottMarginBy = 0, savefile = FALSE ) {
 
 
 
-
 #' @title wcolorize
 #'
 #' @description Generate color palettes. Input: a vector with categories, can be numbers or strings.
