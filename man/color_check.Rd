@@ -18,4 +18,5 @@ Display the colors encoded by the numbers / color-ID-s you pass on to this funct
 }
 \examples{
 color_check(1:3)
+
 }

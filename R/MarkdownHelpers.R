@@ -156,6 +156,7 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome p
 #' @param matrix2 A matrix.
 #' @param k The number of rows to print from the matrices with the most missing values.
 #' @return A matrix with the rows of `matrix1` and `matrix2` that intersect.
+#' @importFrom CodeAndRoll2 symdiff
 #'
 #' @export
 # # #' @importFrom MarkdownReports llprint
@@ -164,7 +165,7 @@ combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # c
   idx = intersect(rn1, rn2)
   llprint(length(idx), "out of", substitute(matrix1), length(rn1), "and", length(rn2), substitute(matrix2), "rownames are merged")
   merged = cbind(matrix1[idx, ], matrix2[idx, ])
-  diffz = symdiff(rn1, rn2)
+  diffz = CodeAndRoll2::symdiff(rn1, rn2)
   print("Missing Rows 1, 2")
   x1 = rowSums( matrix1[diffz[[1]], ] )
   x2 = rowSums( matrix2[diffz[[2]], ] ); print("")
@@ -900,11 +901,10 @@ filter_MidPass <- function(numeric_vector,
 #' @param fname Name of the file
 #' @param ext_wo_dot File extension without separating dot.
 #' @examples ww.FnP_parser(fname = 'myplot', ext_wo_dot = "jpg")
-# #' @importFrom MarkdownHelpers ww.set.OutDir # THIS IS A TEMP FIX to allow it to install.
 #'
 #' @export
 ww.FnP_parser <- function(fname, ext_wo_dot) {
-  path = if (exists('ww.set.OutDir')) MarkdownHelpers::ww.set.OutDir() else { (getwd()); "install or load vertesy/MarkdownHelpers for saving into OutDir!"}
+  path = if (exists('ww.set.OutDir')) ww.set.OutDir() else { (getwd()); "install or load vertesy/MarkdownHelpers for saving into OutDir!"}
 
   FnP = if (hasArg(ext_wo_dot)) {
     kollapse(path, fname, ".", ext_wo_dot)
@@ -1166,6 +1166,32 @@ jjpegA4 <- function(filename, r = 225, q = 90, w = 8.27, h = 11.69) { # Setup an
 }
 
 
+#' @title color_check
+#'
+#' @description Display the colors encoded by the numbers / color-ID-s you pass on to this function
+#' @param ... Additional parameters.
+#' @param incrBottMarginBy Increase the blank space at the bottom of the plot.
+#' @param savefile Save plot as pdf in OutDir, TRUE by default.
+#' @examples color_check(1:3)
+#'
+#' @export
+
+color_check <- function(..., incrBottMarginBy = 0, savefile = FALSE ) {
+  if (incrBottMarginBy) {
+    .ParMarDefault <- par("mar")
+    par(mar = c(par("mar")[1]+incrBottMarginBy, par("mar")[2:4]) )
+  }   # Tune the margin
+  Numbers = c(...)
+  if (length(names(Numbers)) == length(Numbers)) {labelz = names(Numbers)} else {labelz = Numbers}
+  barplot (rep(10, length(Numbers)), col = Numbers, names.arg = labelz, las = 2 )
+  if (incrBottMarginBy) { par("mar" = .ParMarDefault )}
+
+  fname = substitute(...)
+  if (savefile) { dev.copy2pdf(file = ww.FnP_parser(fname, "ColorCheck.pdf")) }
+}
+
+
+
 
 
 #' @title wcolorize
@@ -1209,7 +1235,7 @@ wcolorize  <- function(vector = c(1, 1, 1:6),
     COLZ = sample(COLZ)
   } # if randomise
   if (RColorBrewerSet != FALSE) {
-    COLZ = RColorBrewer::brewer.pal(NrCol, name = RColorBrewerSet)[as.factor.numeric(vector)]
+    COLZ = RColorBrewer::brewer.pal(NrCol, name = RColorBrewerSet)[CodeAndRoll2::as.factor.numeric(vector)]
   } else {
     COLZ = if (set == "rainbow") {
       rainbow(NrCol)[COLZ]
@@ -1237,31 +1263,6 @@ wcolorize  <- function(vector = c(1, 1, 1:6),
   return(COLZ)
 }
 
-
-
-#' @title color_check
-#'
-#' @description Display the colors encoded by the numbers / color-ID-s you pass on to this function
-#' @param ... Additional parameters.
-#' @param incrBottMarginBy Increase the blank space at the bottom of the plot.
-#' @param savefile Save plot as pdf in OutDir, TRUE by default.
-#' @export
-#'
-#' @examples color_check(1:3)
-
-color_check <- function(..., incrBottMarginBy = 0, savefile = FALSE ) {
-  if (incrBottMarginBy) {
-    .ParMarDefault <- par("mar")
-    par(mar = c(par("mar")[1]+incrBottMarginBy, par("mar")[2:4]) )
-  }   # Tune the margin
-  Numbers = c(...)
-  if (length(names(Numbers)) == length(Numbers)) {labelz = names(Numbers)} else {labelz = Numbers}
-  barplot (rep(10, length(Numbers)), col = Numbers, names.arg = labelz, las = 2 )
-  if (incrBottMarginBy) { par("mar" = .ParMarDefault )}
-
-  fname = substitute(...)
-  if (savefile) { dev.copy2pdf(file = ww.FnP_parser(fname, "ColorCheck.pdf")) }
-}
 
 
 
