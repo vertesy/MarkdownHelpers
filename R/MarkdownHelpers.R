@@ -125,7 +125,6 @@ FALSE.unless <- function(NameOfaVariable = "VarName") {
 #' @return A list with the results of the lookup.
 #'
 #' @export
-# #' @importFrom MarkdownReports llprint
 lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome pattern matching for a set of values in another set of values. Returns a list with all kinds of results.
   ls_out = as.list( c(ln_needle = length(needle), ln_haystack = length(haystack), ln_hits = "",  hit_poz = "", hits = "") )
   Findings = numeric(0)
@@ -159,7 +158,6 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome p
 #' @importFrom CodeAndRoll2 symdiff
 #'
 #' @export
-# # #' @importFrom MarkdownReports llprint
 combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # combine matrices by rownames intersect
   rn1 = rownames(matrix1); rn2 = rownames(matrix2);
   idx = intersect(rn1, rn2)
