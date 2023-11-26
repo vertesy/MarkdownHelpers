@@ -15,4 +15,5 @@ it returns the current working directory
 }
 \examples{
 ww.set.OutDir()
+
 }

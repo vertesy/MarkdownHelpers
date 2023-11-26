@@ -11,4 +11,5 @@ Generates a plotname (use if none is specified)
 }
 \examples{
 ww.set.PlotName()
+
 }

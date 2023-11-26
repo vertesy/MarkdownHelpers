@@ -12,4 +12,5 @@ it defines it as Analysis.md in the current working directory
 }
 \examples{
 ww.set.path_of_report()
+
 }
