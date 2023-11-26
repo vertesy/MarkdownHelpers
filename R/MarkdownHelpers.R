@@ -121,7 +121,7 @@ FALSE.unless <- function(NameOfaVariable = "VarName") {
 #' @param haystack A vector of values to search in.
 #' @param exact Logical. Whether to do an exact match or a partial match.
 #' @param report Logical. Whether to print a report of the results.
-#'
+#' @importFrom Stringendo percentage_formatter
 #' @return A list with the results of the lookup.
 #'
 #' @export
@@ -156,8 +156,10 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome p
 #' @param k The number of rows to print from the matrices with the most missing values.
 #' @return A matrix with the rows of `matrix1` and `matrix2` that intersect.
 #' @importFrom CodeAndRoll2 symdiff
+#' @importFrom Stringendo percentage_formatter
 #'
 #' @export
+
 combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # combine matrices by rownames intersect
   rn1 = rownames(matrix1); rn2 = rownames(matrix2);
   idx = intersect(rn1, rn2)
@@ -367,10 +369,10 @@ llwrite_list <- function(yourlist, printName = "self") {
 #' @param from.file File to be appended at the (current) last line of the report
 #' @param to.file The report file. Defined as "path_of_report" by default,
 #' which is set by the "setup_MarkdownReports" function.
-#' @export
 #' @examples path_of_report = ww.set.path_of_report(); llprint ("Hello"); # md.import(path_of_report)
-
-
+#' @importFrom Stringendo iprint
+#'
+#' @export
 md.import <- function(from.file, to.file = ww.set.path_of_report()) {
   linez = readLines(from.file)
   if (ww.variable.and.path.exists(to.file,
@@ -456,6 +458,7 @@ md.List2Table <- function(parameterlist,
 #' md.tableWriter.DF.w.dimnames (df, percentify = FALSE, title_of_table = NA)
 #' @importFrom ReadWriter write.simple.tsv
 #' @importFrom CodeAndRoll2 iround
+#' @importFrom Stringendo percentage_formatter
 #'
 #' @export
 
@@ -534,9 +537,9 @@ md.tableWriter.DF.w.dimnames <- function(df,
 #' md.tableWriter.VEC.w.names (NamedVector = x, percentify = FALSE, title_of_table = NA)
 #' @importFrom ReadWriter write.simple.tsv
 #' @importFrom CodeAndRoll2 iround
+#' @importFrom Stringendo percentage_formatter
 #'
 #' @export
-
 md.tableWriter.VEC.w.names <- function(NamedVector,
                                        FullPath = ww.set.path_of_report(),
                                        percentify = FALSE,
@@ -627,11 +630,11 @@ md.LinkTable <- function(tableOfLinkswRownames) {
 #' @param field.sep Field separator in table file. Tab's by default.
 #' @param to.file The report file. Defined as "path_of_report" by default,
 #'  which is set by the "setup_MarkdownReports" function.
-#' @export
-#'
+#' @importFrom Stringendo iprint
 #' @examples x = matrix(1:9,3); write.table(x, sep = "\t", file = "~/x.tsv");
 #' md.import.table("~/x.tsv")
-
+#'
+#' @export
 md.import.table <- function(from.file.table,
                             title_of_table,
                             has.rownames = TRUE,
@@ -686,9 +689,9 @@ md.import.table <- function(from.file.table,
 #' @examples filter_HP (numeric_vector = rnorm(1000, 6), threshold = 5,
 #'  prepend = "From all values ", return_survival_ratio = FALSE)
 #' @importFrom CodeAndRoll2 iround
+#' @importFrom Stringendo percentage_formatter
 #'
 #' @export
-
 filter_HP <- function(numeric_vector,
                       threshold,
                       passequal = FALSE,
@@ -756,6 +759,7 @@ filter_HP <- function(numeric_vector,
 #' @examples filter_LP (numeric_vector = rnorm(1000, 6), threshold = 5,
 #'  prepend = "From all values ", return_survival_ratio = FALSE)
 #' @importFrom CodeAndRoll2 iround
+#' @importFrom Stringendo percentage_formatter
 #'
 #' @export
 filter_LP <- function(numeric_vector,
@@ -828,10 +832,10 @@ filter_LP <- function(numeric_vector,
 #' @param ... Additional arguments for the histogram
 #' @examples filter_MidPass (numeric_vector = rnorm(1000, 6), HP_threshold = 4,
 #' LP_threshold = 8, prepend = "From all values ", return_survival_ratio = FALSE, EdgePass = TRUE)
+#' @importFrom Stringendo percentage_formatter
 #' @importFrom CodeAndRoll2 iround
 #'
 #' @export
-
 filter_MidPass <- function(numeric_vector,
                            HP_threshold,
                            LP_threshold,
@@ -920,6 +924,7 @@ ww.FnP_parser <- function(fname, ext_wo_dot) {
 #'  variable points to an existing directory?
 #' @param path A variable name that might not exist and might point to a non-existent direcotry.
 #' @param alt.message Alternative message if the variable + path does not exist. FALSE or string.
+#' @importFrom Stringendo iprint
 #' @export
 #' @examples ww.variable.and.path.exists(path = B, alt.message = "Hello, your path/var does not exist.")
 
@@ -950,6 +955,7 @@ ww.variable.and.path.exists <- function(path = path_of_report, alt.message = NUL
 #' @description Check if a variable name is defined, and if so, is it TRUE
 #' @param var A variable
 #' @param alt.message Alternative message if the variable + path does not exist. FALSE or string.
+#' @importFrom Stringendo iprint
 #' @export
 #' @examples ww.variable.and.path.exists(path = B, alt.message = "Hello, your path/var does not exist.")
 
@@ -985,9 +991,10 @@ ww.variable.exists.and.true <- function(var, alt.message = NULL) {
 #' @description Checks if global variable OutDir is defined. If not,
 #' it returns the current working directory
 #' @param dir OutDir to check and set.
-#' @export
-#'
+#' @importFrom Stringendo iprint
 #' @examples ww.set.OutDir()
+#'
+#' @export
 
 ww.set.OutDir <- function(dir = OutDir) {
   if (!exists("OutDir")) Stringendo::iprint("OutDir not defined !!! Saving in working directory."); dir = getwd();
@@ -1003,9 +1010,10 @@ ww.set.OutDir <- function(dir = OutDir) {
 #'
 #' @description Checks if global variable path_of_report is defined. If not,
 #' it defines it as Analysis.md in the current working directory
-#' @export
-#'
+#' @importFrom Stringendo iprint
 #' @examples ww.set.path_of_report()
+#'
+#' @export
 
 ww.set.path_of_report <- function() {
   new.path_of_report  <-
@@ -1022,9 +1030,10 @@ ww.set.path_of_report <- function() {
 #' @title ww.set.PlotName
 #'
 #' @description Generates a plotname (use if none is specified)
-#' @export
-#'
+#' @importFrom Stringendo iprint
 #' @examples ww.set.PlotName()
+#'
+#' @export
 
 ww.set.PlotName <- function() {
   NewPlotname =
@@ -1118,6 +1127,7 @@ ww.autoPlotName <- function(name = NULL) {
 #' @param verbose Print directory to screen? Default: TRUE
 #' @param max_print Print max this many elements, Default: 10
 #' @param pos defaults to 1 which equals an assingment to global environment
+#' @importFrom Stringendo iprint
 #'
 #' @export
 
@@ -1173,7 +1183,6 @@ jjpegA4 <- function(filename, r = 225, q = 90, w = 8.27, h = 11.69) { # Setup an
 #' @examples color_check(1:3)
 #'
 #' @export
-
 color_check <- function(..., incrBottMarginBy = 0, savefile = FALSE ) {
   if (incrBottMarginBy) {
     .ParMarDefault <- par("mar")
@@ -1274,6 +1283,7 @@ wcolorize  <- function(vector = c(1, 1, 1:6),
 #' @param length_new The number of elements that survived the filter.
 #' @param length_old The total number of elements.
 #' @param prepend A string to prepend to the sentence.
+#' @importFrom Stringendo percentage_formatter
 #' @return A string.
 #'
 #' @export
