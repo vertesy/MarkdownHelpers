@@ -5,7 +5,6 @@
 # source('~/GitHub/Packages/MarkdownHelpers/R/MarkdownHelpers.R')
 # rm(list = ls(all.names = TRUE)); try(dev.off(), silent = T)
 
-"2023.01.12 14:55 version"
 
 
 # Functions
@@ -454,9 +453,12 @@ md.List2Table <- function(parameterlist,
 #' @param title_of_table Title above the table (in the markdown report).
 #' @param print2screen Print the markdown formatted table to the sceen.
 #' @param WriteOut Write the table into a TSV file.
-#' @export
 #' @examples df = matrix(1:9,3); rownames(df) = 6:8;rownames(df) = 9:11;
 #' md.tableWriter.DF.w.dimnames (df, percentify = FALSE, title_of_table = NA)
+#' @importFrom ReadWriter write.simple.tsv
+#' @importFrom CodeAndRoll2 iround
+#'
+#' @export
 
 
 md.tableWriter.DF.w.dimnames <- function(df,
@@ -492,7 +494,7 @@ md.tableWriter.DF.w.dimnames <- function(df,
     }
     for (r in 1:nrows) {
       if (is.numeric(unlist(df[r, ]))) {
-        b = CodeAndRoll2 ::iround(df[r, ])
+        b = CodeAndRoll2::iround(df[r, ])
         if (percentify) {
           b = Stringendo::percentage_formatter(b)
         }
@@ -529,9 +531,12 @@ md.tableWriter.DF.w.dimnames <- function(df,
 #' @param title_of_table Title above the table (in the markdown report).
 #' @param print2screen Print the markdown formatted table to the sceen.
 #' @param WriteOut Write the table into a TSV file.
-#' @export
 #' @examples x = -1:2; names(x) = LETTERS[1:4]
 #' md.tableWriter.VEC.w.names (NamedVector = x, percentify = FALSE, title_of_table = NA)
+#' @importFrom ReadWriter write.simple.tsv
+#' @importFrom CodeAndRoll2 iround
+#'
+#' @export
 
 md.tableWriter.VEC.w.names <- function(NamedVector,
                                        FullPath = ww.set.path_of_report(),
@@ -552,7 +557,7 @@ md.tableWriter.VEC.w.names <- function(NamedVector,
         print("This complex list cannot be parsed to a table.")
       }
       if (is.numeric(NamedVector)) {
-        NamedVector = CodeAndRoll2 ::iround(NamedVector)
+        NamedVector = CodeAndRoll2::iround(NamedVector)
       }
     }
     h = paste(names(NamedVector), collapse = " \t| ")
@@ -625,9 +630,8 @@ md.LinkTable <- function(tableOfLinkswRownames) {
 #'  which is set by the "setup_MarkdownReports" function.
 #' @export
 #'
-#' @examples x = matrix(1:9,3); utils::write.table(x, sep = "\t", file = "~/x.tsv");
+#' @examples x = matrix(1:9,3); write.table(x, sep = "\t", file = "~/x.tsv");
 #' md.import.table("~/x.tsv")
-
 
 md.import.table <- function(from.file.table,
                             title_of_table,
@@ -639,7 +643,7 @@ md.import.table <- function(from.file.table,
     basename(from.file.table)
   } else { title_of_table}
   importedtable = if (has.rownames) {
-    utils::read.table(
+    read.table(
       from.file.table,
       stringsAsFactors = FALSE,
       sep = "\t",
@@ -647,7 +651,7 @@ md.import.table <- function(from.file.table,
       row.names = 1
     )
   } else if (!has.rownames) {
-    utils::read.table(
+    read.table(
       from.file.table,
       stringsAsFactors = FALSE,
       sep = "\t",
@@ -680,10 +684,11 @@ md.import.table <- function(from.file.table,
 #' @param na.rm Remove NA-s? Default: TRUE
 #' @param verbose print output to console? Default: yes.
 #' @param ... Additional arguments for the histogram
-#'
-#' @export
 #' @examples filter_HP (numeric_vector = rnorm(1000, 6), threshold = 5,
 #'  prepend = "From all values ", return_survival_ratio = FALSE)
+#' @importFrom CodeAndRoll2 iround
+#'
+#' @export
 
 filter_HP <- function(numeric_vector,
                       threshold,
@@ -695,7 +700,6 @@ filter_HP <- function(numeric_vector,
                       plot.hist = TRUE,
                       saveplot = FALSE,
                       verbose = TRUE,
-                      # path_of_report = ww.set.path_of_report(),
                       ...) {
   survivors <-
     if (passequal) {
@@ -707,14 +711,13 @@ filter_HP <- function(numeric_vector,
   conclusion = kollapse(
     prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ", length(numeric_vector),
     " entries in ", substitute (numeric_vector), " fall above a threshold value of: ",
-    CodeAndRoll2 ::iround(threshold)
-    , print = verbose)
+    CodeAndRoll2::iround(threshold), print = verbose)
 
   if (ww.variable.and.path.exists(path_of_report, alt.message = "NOT LOGGED")) {
     llogit (conclusion)
   }
 
-  if (plot.hist) {
+  if (plot.hist & require("MarkdownReports") ) {
     plotname = substitute(numeric_vector)
     MarkdownReports::whist(
       variable = numeric_vector,
@@ -751,10 +754,11 @@ filter_HP <- function(numeric_vector,
 #' @param na.rm Remove NA-s? Default: TRUE
 #' @param verbose print output to console? Default: yes.
 #' @param ... Additional arguments for the histogram
-#' @export
 #' @examples filter_LP (numeric_vector = rnorm(1000, 6), threshold = 5,
 #'  prepend = "From all values ", return_survival_ratio = FALSE)
-
+#' @importFrom CodeAndRoll2 iround
+#'
+#' @export
 filter_LP <- function(numeric_vector,
                       threshold,
                       passequal = FALSE,
@@ -776,13 +780,13 @@ filter_LP <- function(numeric_vector,
   conclusion = kollapse(
     prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ",
     length(numeric_vector), " entries in ", substitute (numeric_vector),
-    " fall below a threshold value of: ", CodeAndRoll2 ::iround(threshold)
+    " fall below a threshold value of: ", CodeAndRoll2::iround(threshold)
     , print = verbose)
   if (ww.variable.and.path.exists(path_of_report, alt.message = "NOT LOGGED")) {
     llogit (conclusion)
   }
 
-  if (plot.hist) {
+  if (plot.hist & require("MarkdownReports") ) {
     plotname = substitute(numeric_vector)
     MarkdownReports::whist(
       variable = numeric_vector,
@@ -823,9 +827,11 @@ filter_LP <- function(numeric_vector,
 #' @param na.rm Remove NA-s? Default: TRUE
 #' @param verbose print output to console? Default: yes.
 #' @param ... Additional arguments for the histogram
-#' @export
 #' @examples filter_MidPass (numeric_vector = rnorm(1000, 6), HP_threshold = 4,
 #' LP_threshold = 8, prepend = "From all values ", return_survival_ratio = FALSE, EdgePass = TRUE)
+#' @importFrom CodeAndRoll2 iround
+#'
+#' @export
 
 filter_MidPass <- function(numeric_vector,
                            HP_threshold,
@@ -838,7 +844,6 @@ filter_MidPass <- function(numeric_vector,
                            plot.hist = TRUE,
                            saveplot = FALSE,
                            verbose = TRUE,
-                           # path_of_report = ww.set.path_of_report(),
                            ...) {
   survivors = (numeric_vector >= HP_threshold &     numeric_vector < LP_threshold)
   keyword = "between"
@@ -853,14 +858,14 @@ filter_MidPass <- function(numeric_vector,
   pc = Stringendo::percentage_formatter(sum(survivors, na.rm = na.rm) / length(survivors))
   conclusion = kollapse(prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ",
                         length(numeric_vector), " entries in ", substitute (numeric_vector),
-                        " fall ", keyword, " the thresholds: ", CodeAndRoll2 ::iround(HP_threshold)
-                        , relation, CodeAndRoll2 ::iround(LP_threshold)
+                        " fall ", keyword, " the thresholds: ", CodeAndRoll2::iround(HP_threshold)
+                        , relation, CodeAndRoll2::iround(LP_threshold)
                         , print = verbose)
   if (ww.variable.and.path.exists(path_of_report, alt.message = "NOT LOGGED")) {
     llogit (conclusion)
   }
 
-  if (plot.hist) {
+  if (plot.hist & require("MarkdownReports") ) {
     plotname = substitute(numeric_vector)
     MarkdownReports::whist(
       variable = numeric_vector,
@@ -886,6 +891,30 @@ filter_MidPass <- function(numeric_vector,
 # ______________________________________________________________________________________________----
 # Internal functions (for Markdown parsing) ----
 # _________________________________________________________________________________________________
+
+
+
+#' @title ww.FnP_parser
+#'
+#' @description Internal Function. Parses the full path from the filename & location of the file.
+#' @param fname Name of the file
+#' @param ext_wo_dot File extension without separating dot.
+#' @examples ww.FnP_parser(fname = 'myplot', ext_wo_dot = "jpg")
+# #' @importFrom MarkdownHelpers ww.set.OutDir # THIS IS A TEMP FIX to allow it to install.
+#'
+#' @export
+ww.FnP_parser <- function(fname, ext_wo_dot) {
+  path = if (exists('ww.set.OutDir')) MarkdownHelpers::ww.set.OutDir() else { (getwd()); "install or load vertesy/MarkdownHelpers for saving into OutDir!"}
+
+  FnP = if (hasArg(ext_wo_dot)) {
+    kollapse(path, fname, ".", ext_wo_dot)
+  } else {
+    FnP = kollapse (path, fname)
+  }
+}
+
+
+
 
 #' @title ww.variable.and.path.exists
 #'
@@ -1155,10 +1184,13 @@ jjpegA4 <- function(filename, r = 225, q = 90, w = 8.27, h = 11.69) { # Setup an
 #' or "rich" for gplots::rich.colors, or  "matlab" for colorRamps::matlab.like.
 #' @param RColorBrewerSet Use one of the RColorBrewer color sets? Provide that name
 #' @param randomize Randomize colors
+#' @examples wcolorize (vector = c(1, 1, 1:6), ReturnCategoriesToo = TRUE, show = TRUE)
+#' @importFrom RColorBrewer brewer.pal
+#' @importFrom colorRamps matlab.like
+#' @importFrom gplots rich.colors
+#' @importFrom CodeAndRoll2 as.factor.numeric
 #'
 #' @export
-#' @examples wcolorize (vector = c(1, 1, 1:6), ReturnCategoriesToo = TRUE, show = TRUE)
-
 wcolorize  <- function(vector = c(1, 1, 1:6),
                        RColorBrewerSet = FALSE,
                        ReturnCategoriesToo = FALSE,
@@ -1172,7 +1204,7 @@ wcolorize  <- function(vector = c(1, 1, 1:6),
                                "matlab",
                                "rainbow")[1]) {
   NrCol = length(unique(vector))
-  COLZ = as.factor.numeric(vector) # if basic numbers
+  COLZ = CodeAndRoll2::as.factor.numeric(vector) # if basic numbers
   if (randomize) {
     COLZ = sample(COLZ)
   } # if randomise
@@ -1192,7 +1224,7 @@ wcolorize  <- function(vector = c(1, 1, 1:6),
     } else if (set == "rich") {
       gplots::rich.colors(NrCol)[COLZ]
     } else
-      as.factor.numeric(vector) # if basic numbers
+      CodeAndRoll2::as.factor.numeric(vector) # if basic numbers
   }#if
   COLZ = as.vector(COLZ)
   names(COLZ) = vector
@@ -1224,7 +1256,7 @@ color_check <- function(..., incrBottMarginBy = 0, savefile = FALSE ) {
   }   # Tune the margin
   Numbers = c(...)
   if (length(names(Numbers)) == length(Numbers)) {labelz = names(Numbers)} else {labelz = Numbers}
-  graphics::barplot (rep(10, length(Numbers)), col = Numbers, names.arg = labelz, las = 2 )
+  barplot (rep(10, length(Numbers)), col = Numbers, names.arg = labelz, las = 2 )
   if (incrBottMarginBy) { par("mar" = .ParMarDefault )}
 
   fname = substitute(...)

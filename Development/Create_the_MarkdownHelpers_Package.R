@@ -20,7 +20,7 @@ try(dev.off(), silent = TRUE)
 
 # Setup ------------------------
 package.name <- 	"MarkdownHelpers"
-package.version <- "0.2.8"
+package.version <- "1.0.0"
 setwd("~/GitHub/Packages/")
 
 RepositoryDir <- paste0("~/GitHub/Packages/", package.name, "/")
@@ -32,15 +32,16 @@ dir.create(BackupDir)
 
 # devtools::use_package("vioplot")
 DESCRIPTION <- list("Title" = "MarkdownHelpers"
-    , "Author" = person(given = "Abel", family = "Vertesy", email = "abel.vertesy@imba.oeaw.ac.at", role =  c("aut", "cre") )
-    , "Authors@R" = 'person(given = "Abel", family = "Vertesy", email = "a.vertesy@imba.oeaw.ac.at", role =  c("aut", "cre") )'
+    , "Author" = person(given = "Abel", family = "Vertesy", email = "av@imba.oeaw.ac.at", role =  c("aut", "cre") )
+    , "Authors@R" = 'person(given = "Abel", family = "Vertesy", email = "av@imba.oeaw.ac.at", role =  c("aut", "cre") )'
     , "Description" = "MarkdownHelpers is a set of R functions to parse Markdown and other generic helpers."
     , "License" = "GPL-3 + file LICENSE"
     , "Version" = package.version
     , "Packaged" =  Sys.time()
     # , "Repository" =  "CRAN"
     , "Depends" =  "Stringendo"
-    , "Imports" = "base, devtools, grDevices, usethis, utils"
+    , "Imports" = "ReadWriter, CodeAndRoll2, RColorBrewer, colorRamps, gplots"
+    , "Enhances" = "MarkdownReports"
     # , "Suggests" = ""
     , "BugReports"= "https://github.com/vertesy/MarkdownHelpers/issues"
 )

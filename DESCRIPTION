@@ -1,9 +1,9 @@
 Package: MarkdownHelpers
 Title: MarkdownHelpers
-Version: 0.2.8
+Version: 1.0.0
 Authors@R: 
-    person("Abel", "Vertesy", , "a.vertesy@imba.oeaw.ac.at", role = c("aut", "cre"))
-Author: Abel Vertesy <abel.vertesy@imba.oeaw.ac.at> [aut, cre]
+    person("Abel", "Vertesy", , "av@imba.oeaw.ac.at", role = c("aut", "cre"))
+Author: Abel Vertesy <av@imba.oeaw.ac.at> [aut, cre]
 Description: MarkdownHelpers is a set of R functions to parse Markdown and
     other generic helpers.
 License: GPL-3 + file LICENSE
@@ -11,12 +11,14 @@ BugReports: https://github.com/vertesy/MarkdownHelpers/issues
 Depends: 
     Stringendo
 Imports: 
-    base,
-    devtools,
-    grDevices,
-    usethis,
-    utils
+    CodeAndRoll2,
+    colorRamps,
+    gplots,
+    RColorBrewer,
+    ReadWriter
+Enhances: 
+    MarkdownReports
 Encoding: UTF-8
-Packaged: 2023-10-17 16:20:45.790639
+Packaged: 2023-11-26 01:23:31.409547
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3

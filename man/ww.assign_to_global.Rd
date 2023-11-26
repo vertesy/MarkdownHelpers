@@ -4,7 +4,7 @@
 \alias{ww.assign_to_global}
 \title{ww.assign_to_global}
 \usage{
-ww.assign_to_global(name, value, pos = 1, max_print = 10, verbose = TRUE)
+ww.assign_to_global(name, value, pos = 1, max_print = 5, verbose = TRUE)
 }
 \arguments{
 \item{name}{Name of the global variabe to be assigned}
