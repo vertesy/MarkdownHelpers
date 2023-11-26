@@ -309,7 +309,7 @@ llogit <- function(...) {
 #' @examples md.write.as.list()
 md.write.as.list <- function(vector = 1:3,
                              h = 4,
-                             numbered = FALSE,
+                             numbered = F,
                              path_of_report = ww.set.path_of_report(),
                              ...) {
   LogEntry <- kollapse(rep("#", h), " ", substitute(vector), print = FALSE)
@@ -352,7 +352,7 @@ md.image.linker <- function(fname_wo_ext, OutDir_ = ww.set.OutDir()) {
       dirnm <- dirnm[length(dirnm)]
       llogit(kollapse("![]", "(Reports/", dirnm, "/", fname_wo_ext, ".png)", print = FALSE))
     } else {
-      if (exists("b.Subdirname") && !b.Subdirname == FALSE) {
+      if (exists("b.Subdirname") && !b.Subdirname == F) {
         fname_wo_ext <- paste0(b.Subdirname, "/", fname_wo_ext)
       } # set only if b.Subdirname is defined, it is not FALSE.
       llogit(kollapse("![", fn, "]", "(", fname_wo_ext, ".png)", print = FALSE))
@@ -518,7 +518,7 @@ md.tableWriter.DF.w.dimnames <- function(df,
 
   title_of_table <- paste("\n#### ", t)
   if (file.exists(FullPath)) {
-    write(title_of_table, FullPath, append = TRUE)
+    write(title_of_table, FullPath, append = T)
 
     h <- paste(colnames(df), collapse = " \t| ")
     h <- paste("\n| |", h, " |", collapse = "")
