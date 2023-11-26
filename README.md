@@ -74,7 +74,51 @@ MarkdownReports::setup_MarkdownReports()
 
 
 
+----------------------------------------------------------------------------------------------------
+
+## Function relationships
+
+ > (of connected functions)
+
+ ```mermaid
+ flowchart LR 
+
+  ww.ttl_field(ww.ttl_field) --> unless.specified(unless.specified)
+  ww.set.path_of_report(ww.set.path_of_report) --> ww.variable.and.path.exists(ww.variable.and.path.exists)
+  ww.set.mdlink(ww.set.mdlink) --> ww.variable.and.path.exists(ww.variable.and.path.exists)
+  ww.set.file.extension(ww.set.file.extension) --> unless.specified(unless.specified)
+  ww.set.PlotName(ww.set.PlotName) --> ww.autoPlotName(ww.autoPlotName)
+  wcolorize(wcolorize) --> color_check(color_check)
+  md.import.table(md.import.table) --> md.tableWriter.DF.w.dimnames(md.tableWriter.DF.w.dimnames)
+  md.import(md.import) --> ww.variable.and.path.exists(ww.variable.and.path.exists)
+  md.image.linker(md.image.linker) --> unless.specified(unless.specified)
+  md.image.linker(md.image.linker) --> llogit(llogit)
+  md.LogSettingsFromList(md.LogSettingsFromList) --> md.tableWriter.DF.w.dimnames(md.tableWriter.DF.w.dimnames)
+  md.List2Table(md.List2Table) --> md.tableWriter.DF.w.dimnames(md.tableWriter.DF.w.dimnames)
+  md.LinkTable(md.LinkTable) --> md.tableWriter.DF.w.dimnames(md.tableWriter.DF.w.dimnames)
+  lookup(lookup) --> llprint(llprint)
+  llwrite_list(llwrite_list) --> llogit(llogit)
+  llwrite_list(llwrite_list) --> llprint(llprint)
+  filter_survival_length(filter_survival_length) --> llprint(llprint)
+  filter_MidPass(filter_MidPass) --> ww.variable.and.path.exists(ww.variable.and.path.exists)
+  filter_MidPass(filter_MidPass) --> llogit(llogit)
+  filter_LP(filter_LP) --> ww.variable.and.path.exists(ww.variable.and.path.exists)
+  filter_LP(filter_LP) --> llogit(llogit)
+  llogit(llogit) --> ww.variable.and.path.exists(ww.variable.and.path.exists)
+  filter_HP(filter_HP) --> ww.variable.and.path.exists(ww.variable.and.path.exists)
+  filter_HP(filter_HP) --> llogit(llogit)
+  llprint(llprint) --> ww.variable.and.path.exists(ww.variable.and.path.exists)
+  combine.matrices.by.rowname.intersect(combine.matrices.by.rowname.intersect) --> llprint(llprint)
+  ww.FnP_parser(ww.FnP_parser) --> ww.set.OutDir(ww.set.OutDir)
+  color_check(color_check) --> ww.FnP_parser(ww.FnP_parser)
+
+ ```
+
+ *created by `convert_igraph_to_mermaid()`*
+
 <br>
+
+----------------------------------------------------------------------------------------------------
 
 ## List of Functions (38) 
 
