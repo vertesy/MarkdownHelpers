@@ -1,8 +1,7 @@
 ######################################################################################################
 # Create_the_MarkdownHelpers_Package.R
-# 31 10 2021
 ######################################################################################################
-# source("/Users/abel.vertesy/GitHub/Packages/MarkdownHelpers/Development/Create_the_MarkdownHelpers_Package.R")
+# source("~/GitHub/Packages/MarkdownHelpers/Development/Create_the_MarkdownHelpers_Package.R")
 rm(list = ls(all.names = TRUE));
 try(dev.off(), silent = TRUE)
 
@@ -25,7 +24,7 @@ setwd("~/GitHub/Packages/")
 
 RepositoryDir <- paste0("~/GitHub/Packages/", package.name, "/")
 fname <-	paste0(package.name, ".R")
-Package_FnP <-		paste0(RepositoryDir, "R/", fname)
+package.FnP <-		paste0(RepositoryDir, "R/", fname)
 
 BackupDir <- "~/GitHub/Packages/MarkdownHelpers/Development/"
 dir.create(BackupDir)
@@ -57,19 +56,19 @@ if ( !dir.exists(RepositoryDir) ) { create(path = RepositoryDir, description = D
 
 
 # go and write fun's ------------------------------------------------------------------------
-# file.edit(Package_FnP)
+# file.edit(package.FnP)
 
 # Create Roxygen Skeletons ------------------------
-# RoxygenReady(Package_FnP)
+# RoxygenReady(package.FnP)
 
 # replace output files ------------------------------------------------
 BackupOldFile <-	(paste0(BackupDir, "Development", ".bac"))
 AnnotatedFile <-	(paste0(BackupDir, "Development", ".annot.R"))
-file.copy(from = Package_FnP, to = BackupOldFile, overwrite = TRUE)
-# file.copy(from = AnnotatedFile, to = Package_FnP, overwrite = TRUE)
+file.copy(from = package.FnP, to = BackupOldFile, overwrite = TRUE)
+# file.copy(from = AnnotatedFile, to = package.FnP, overwrite = TRUE)
 
 # Manual editing of descriptors ------------------------------------------------
-# file.edit(Package_FnP)
+# file.edit(package.FnP)
 
 # Compile a package ------------------------------------------------
 setwd(RepositoryDir)
@@ -86,44 +85,28 @@ warnings()
 
 
 # Install your package ------------------------------------------------
-# # setwd(RepositoryDir)
 devtools::install(RepositoryDir, upgrade = F)
 
-
+# Test if you can install from github ------------------------------------------------
+pak::pkg_install("vertesy/MarkdownHelpers")
 # unload("MarkdownHelpers")
 # require("MarkdownHelpers")
 # # remove.packages("MarkdownHelpers")
-# # Test your package ------------------------------------------------
-# help("wplot")
-# cat("\014")
-# devtools::run_examples()
 
 
-# Test if you can install from github ------------------------------------------------
-# devtools::install_github(repo = "vertesy/MarkdownHelpers")
-
-# require("MarkdownHelpers")
-
-# Clean up if not needed anymore ------------------------------------------------
-# View(installed.packages())
-# remove.packages("MarkdownHelpers")
-
+# Check CRAN ------------------------------------------------
 check(RepositoryDir, cran = TRUE)
 # as.package(RepositoryDir)
-#
-#
 # # source("https://install-github.me/r-lib/desc")
 # # library(desc)
 # # desc$set("MarkdownHelpers", "foo")
 # # desc$get(MarkdownHelpers)
-#
-#
 # system("cd ~/GitHub/MarkdownHelpers/; ls -a; open .Rbuildignore")
 
 # Check package dependencies ------------------------------------------------
 depFile = paste0(RepositoryDir, 'Development/Dependencies.R')
 
-(f.deps <- NCmisc::list.functions.in.file(filename = Package_FnP))
+(f.deps <- NCmisc::list.functions.in.file(filename = package.FnP))
 # clipr::write_clip(f.deps)
 
 sink(file = depFile); print(f.deps); sink()
@@ -133,4 +116,26 @@ p.dep.declared <- trimws(unlist(strsplit(DESCRIPTION$Imports, ",")))
 p.dep.new <- sort(union( p.deps, p.dep.declared))
 # clipr::write_clip(p.dep.new)
 
+# Package styling, and visualization ------------------------------------------------
+{
+  styler::style_pkg(RepositoryDir)
+
+  {
+    # Exploring the Structure and Dependencies of my R Package:
+    "works on an installed package!"
+    pkgnet_result <- pkgnet::CreatePackageReport(package.name)
+    fun_graph     <- pkgnet_result$FunctionReporter$pkg_graph$'igraph'
+
+    # devtools::load_all('~/GitHub/Packages/PackageTools/R/DependencyTools.R')
+    convert_igraph_to_mermaid(graph = fun_graph, openMermaid = T, copy_to_clipboard = T)
+  }
+
+  if (F) {
+    # Add @importFrom statements
+    (FNP <- package.FnP)
+    PackageTools::add_importFrom_statements(FNP, exclude_packages = "")
+    add_importFrom_statements(FNP, exclude_packages = "")
+  }
+
+}
 
