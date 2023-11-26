@@ -11,7 +11,7 @@ try(dev.off(), silent = TRUE)
 
 # Setup ------------------------
 package.name <- "MarkdownHelpers"
-package.version <- "1.0.2"
+package.version <- "1.0.3"
 setwd("~/GitHub/Packages/")
 
 RepositoryDir <- paste0("~/GitHub/Packages/", package.name, "/")

@@ -1221,7 +1221,7 @@ color_check <- function(..., incrBottMarginBy = 0, savefile = FALSE ) {
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom colorRamps matlab.like
 #' @importFrom gplots rich.colors
-#' @importFrom CodeAndRoll2 as.factor.numeric
+#' @importFrom CodeAndRoll2 as.numeric.wNames.factor
 #'
 #' @export
 wcolorize  <- function(vector = c(1, 1, 1:6),
@@ -1237,12 +1237,12 @@ wcolorize  <- function(vector = c(1, 1, 1:6),
                                "matlab",
                                "rainbow")[1]) {
   NrCol = length(unique(vector))
-  COLZ = CodeAndRoll2::as.factor.numeric(vector) # if basic numbers
+  COLZ = CodeAndRoll2::as.numeric.wNames.factor(vector) # if basic numbers
   if (randomize) {
     COLZ = sample(COLZ)
   } # if randomise
   if (RColorBrewerSet != FALSE) {
-    COLZ = RColorBrewer::brewer.pal(NrCol, name = RColorBrewerSet)[CodeAndRoll2::as.factor.numeric(vector)]
+    COLZ = RColorBrewer::brewer.pal(NrCol, name = RColorBrewerSet)[CodeAndRoll2::as.numeric.wNames.factor(vector)]
   } else {
     COLZ = if (set == "rainbow") {
       rainbow(NrCol)[COLZ]
@@ -1257,7 +1257,7 @@ wcolorize  <- function(vector = c(1, 1, 1:6),
     } else if (set == "rich") {
       gplots::rich.colors(NrCol)[COLZ]
     } else
-      CodeAndRoll2::as.factor.numeric(vector) # if basic numbers
+      CodeAndRoll2::as.numeric.wNames.factor(vector) # if basic numbers
   }#if
   COLZ = as.vector(COLZ)
   names(COLZ) = vector
