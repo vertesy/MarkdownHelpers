@@ -100,19 +100,21 @@ check(RepositoryDir, cran = TRUE)
 # system("cd ~/GitHub/MarkdownHelpers/; ls -a; open .Rbuildignore")
 
 # Check package dependencies ------------------------------------------------
-depFile <- paste0(RepositoryDir, "Development/Dependencies.R")
+{
+  depFile <- paste0(RepositoryDir, "Development/Dependencies.R")
 
-(f.deps <- NCmisc::list.functions.in.file(filename = package.FnP))
-# clipr::write_clip(f.deps)
+  (f.deps <- NCmisc::list.functions.in.file(filename = package.FnP))
+  # clipr::write_clip(f.deps)
 
-sink(file = depFile)
-print(f.deps)
-sink()
-p.deps <- gsub(x = names(f.deps), pattern = "package:", replacement = "")
-write(x = p.deps, file = depFile, append = T)
-p.dep.declared <- trimws(unlist(strsplit(DESCRIPTION$Imports, ",")))
-p.dep.new <- sort(union(p.deps, p.dep.declared))
-# clipr::write_clip(p.dep.new)
+  sink(file = depFile)
+  print(f.deps)
+  sink()
+  p.deps <- gsub(x = names(f.deps), pattern = "package:", replacement = "")
+  write(x = p.deps, file = depFile, append = T)
+  p.dep.declared <- trimws(unlist(strsplit(DESCRIPTION$Imports, ",")))
+  p.dep.new <- sort(union(p.deps, p.dep.declared))
+  # clipr::write_clip(p.dep.new)
+}
 
 # Package styling, and visualization ------------------------------------------------
 {
