@@ -10,5 +10,5 @@ try.dev.off()
 Tries to close R graphical devices without raising an error.
 }
 \examples{
-try.dev.off ()
+try.dev.off()
 }

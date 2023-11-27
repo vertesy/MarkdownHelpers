@@ -51,6 +51,8 @@ Filter values that fall above high-pass-threshold !(X >= )! and below
 the low-pass threshold (X <).
 }
 \examples{
-filter_MidPass (numeric_vector = rnorm(1000, 6), HP_threshold = 4,
-LP_threshold = 8, prepend = "From all values ", return_survival_ratio = FALSE, EdgePass = TRUE)
+filter_MidPass(
+  numeric_vector = rnorm(1000, 6), HP_threshold = 4,
+  LP_threshold = 8, prepend = "From all values ", return_survival_ratio = FALSE, EdgePass = TRUE
+)
 }

@@ -15,5 +15,6 @@ llogit() writes it to your markdown report file, if the "path_of_report" variabl
 It does not print the sentence to the screen.
 }
 \examples{
-MyFriends = c("Peter", "Bence"); llogit ("My friends are: ", MyFriends )
+MyFriends <- c("Peter", "Bence")
+llogit("My friends are: ", MyFriends)
 }

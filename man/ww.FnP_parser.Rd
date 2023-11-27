@@ -15,6 +15,6 @@ ww.FnP_parser(fname, ext_wo_dot)
 Internal Function. Parses the full path from the filename & location of the file.
 }
 \examples{
-ww.FnP_parser(fname = 'myplot', ext_wo_dot = "jpg")
+ww.FnP_parser(fname = "myplot", ext_wo_dot = "jpg")
 
 }

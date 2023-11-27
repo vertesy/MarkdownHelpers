@@ -46,6 +46,8 @@ or a logical index vector of the survivors (FALSE). return_conclusion must be FA
 Filter values that fall between above high-pass-threshold (X >).
 }
 \examples{
-filter_HP (numeric_vector = rnorm(1000, 6), threshold = 5,
- prepend = "From all values ", return_survival_ratio = FALSE)
+filter_HP(
+  numeric_vector = rnorm(1000, 6), threshold = 5,
+  prepend = "From all values ", return_survival_ratio = FALSE
+)
 }

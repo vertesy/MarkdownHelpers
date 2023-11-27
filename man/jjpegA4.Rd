@@ -22,9 +22,9 @@ Setup an A4 size jpeg.
 }
 \examples{
 \dontrun{
-if(interactive()){
- jjpegA4(filename = "my_plot.jpeg", r = 225, q = 90)
- }
+if (interactive()) {
+  jjpegA4(filename = "my_plot.jpeg", r = 225, q = 90)
+}
 }
 
 }

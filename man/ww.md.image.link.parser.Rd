@@ -15,6 +15,6 @@ It can parse the file path, if you pass it in separate variables and strings.
 E.g. ww.md.image.link.parser(Directory, "MyImage.png").
 }
 \examples{
-ww.md.image.link.parser ("/MyPlot.jpg"  )
-ww.md.image.link.parser (getwd(),"/MyPlot.jpg"  )
+ww.md.image.link.parser("/MyPlot.jpg")
+ww.md.image.link.parser(getwd(), "/MyPlot.jpg")
 }

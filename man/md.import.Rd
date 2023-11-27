@@ -16,5 +16,7 @@ which is set by the "setup_MarkdownReports" function.}
 Import and concatenated an external markdown or text file to the report
 }
 \examples{
-path_of_report = ww.set.path_of_report(); llprint ("Hello"); # md.import(path_of_report)
+path_of_report <- ww.set.path_of_report()
+llprint("Hello")
+# md.import(path_of_report)
 }

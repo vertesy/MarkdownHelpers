@@ -16,5 +16,8 @@ Return value X (TRUE by default) unless the variable is defined.
 If defined, it returns the variable.
 }
 \examples{
-unless.specified("xsadasf32", 2); Num = 22; unless.specified("Num", 1); unless.specified("c", 333)
+unless.specified("xsadasf32", 2)
+Num <- 22
+unless.specified("Num", 1)
+unless.specified("c", 333)
 }

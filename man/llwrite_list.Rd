@@ -15,5 +15,6 @@ llwrite_list(yourlist, printName = "self")
 Print a list object from R, one element per line, into your markdown report
 }
 \examples{
-your_list = list(letters[1:4], 5:9); llwrite_list(your_list)
+your_list <- list(letters[1:4], 5:9)
+llwrite_list(your_list)
 }

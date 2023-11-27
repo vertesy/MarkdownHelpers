@@ -37,5 +37,5 @@ categories (simply using unique would remove the names). See example.
 Some color scale depend on packages "colorRamps", or "gplots".
 }
 \examples{
-wcolorize (vector = c(1, 1, 1:6), ReturnCategoriesToo = TRUE, show = TRUE)
+wcolorize(vector = c(1, 1, 1:6), ReturnCategoriesToo = TRUE, show = TRUE)
 }

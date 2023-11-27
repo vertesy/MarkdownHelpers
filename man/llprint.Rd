@@ -15,5 +15,6 @@ Print the sentence to the screen and write it to your markdown report file,
 if the "path_of_report" variable is defined.
 }
 \examples{
-MyFriends = c("Peter", "Bence"); llprint ("My friends are: ", MyFriends )
+MyFriends <- c("Peter", "Bence")
+llprint("My friends are: ", MyFriends)
 }

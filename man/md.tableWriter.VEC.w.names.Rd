@@ -31,6 +31,7 @@ Take an R vector with names, parse a markdown table from it, and write it to the
 set by "path_of_report".
 }
 \examples{
-x = -1:2; names(x) = LETTERS[1:4]
-md.tableWriter.VEC.w.names (NamedVector = x, percentify = FALSE, title_of_table = NA)
+x <- -1:2
+names(x) <- LETTERS[1:4]
+md.tableWriter.VEC.w.names(NamedVector = x, percentify = FALSE, title_of_table = NA)
 }

@@ -15,5 +15,6 @@ stopif(condition, message = "")
 Stop script if the condition is met, and print a message
 }
 \examples{
-a = 1; stopif (a!= 1, message = "A is 1")
+a <- 1
+stopif(a != 1, message = "A is 1")
 }

@@ -21,5 +21,5 @@ directory name in the "OutDir" variable. See create_set_OutDir() function.).
 This function is called by the ~wplot functions.
 }
 \examples{
-md.image.linker (fname_wo_ext = "MyPlot"  )
+md.image.linker(fname_wo_ext = "MyPlot")
 }
