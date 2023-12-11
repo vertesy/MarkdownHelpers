@@ -2,17 +2,19 @@
 % Please edit documentation in R/MarkdownHelpers.R
 \name{stopif}
 \alias{stopif}
-\title{stopif}
+\title{Stop Execution If Condition is True}
 \usage{
-stopif(condition, message = "")
+stopif(condition, message = "Condition is TRUE.")
 }
 \arguments{
-\item{condition}{any condition check that gives TRUE or FALSE}
+\item{condition}{A logical condition to be tested. If TRUE, an error message is thrown and execution is stopped.}
 
-\item{message}{print a message}
+\item{message}{An optional error message to display if the condition is TRUE.}
 }
 \description{
-Stop script if the condition is met, and print a message
+This function stops the execution of the script if the provided condition evaluates to TRUE.
+It is the complement of the \code{stopifnot()} function and is used for asserting conditions where
+an error should be thrown if the condition is TRUE, rather than FALSE.
 }
 \examples{
 a <- 1
