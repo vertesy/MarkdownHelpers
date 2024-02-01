@@ -1030,8 +1030,8 @@ ww.variable.exists.and.true <- function(var, alt.message = NULL) {
 
 #' @title ww.set.OutDir
 #'
-#' @description Checks if global variable OutDir is defined. If not,
-#' it returns the current working directory
+#' @description Checks if global variable OutDir is defined. If not, it returns the current
+#' working directory
 #' @param dir OutDir to check and set.
 #' @importFrom Stringendo iprint
 #' @examples ww.set.OutDir()
@@ -1039,15 +1039,13 @@ ww.variable.exists.and.true <- function(var, alt.message = NULL) {
 #' @export
 
 ww.set.OutDir <- function(dir = OutDir) {
-  if (!exists("OutDir")) Stringendo::iprint("OutDir not defined !!! Saving in working directory.")
+  if (!exists("OutDir")) message("OutDir not defined !!! Saving in working directory.")
   dir <- getwd()
-  if (!dir.exists(dir)) Stringendo::iprint("OutDir defined, but folder does not exist!!! Saving in working directory.")
-  NewOutDir <-
-    if (exists("OutDir") & dir.exists(dir)) {
-      dir
-    } else {
-      paste0(getwd(), "/", collapse = "")
-    }
+  if (!dir.exists(dir)) message("OutDir defined, but folder does not exist!!! Saving in working directory.")
+
+  NewOutDir <- if (exists("OutDir") & dir.exists(dir))
+    dir else AddTrailingSlashfNonePresent(getwd())
+
   return(FixPath(NewOutDir))
 }
 
