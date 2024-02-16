@@ -1043,8 +1043,11 @@ ww.set.OutDir <- function(dir = OutDir) {
   dir <- getwd()
   if (!dir.exists(dir)) message("OutDir defined, but folder does not exist!!! Saving in working directory.")
 
-  NewOutDir <- if (exists("OutDir") & dir.exists(dir))
-    dir else AddTrailingSlashfNonePresent(getwd())
+  NewOutDir <- if (exists("OutDir") & dir.exists(dir)) {
+    dir
+  } else {
+    AddTrailingSlashfNonePresent(getwd())
+  }
 
   return(FixPath(NewOutDir))
 }
