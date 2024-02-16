@@ -10,8 +10,8 @@ ww.set.OutDir(dir = OutDir)
 \item{dir}{OutDir to check and set.}
 }
 \description{
-Checks if global variable OutDir is defined. If not,
-it returns the current working directory
+Checks if global variable OutDir is defined. If not, it returns the current
+working directory
 }
 \examples{
 ww.set.OutDir()
