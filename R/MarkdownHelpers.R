@@ -72,16 +72,16 @@ unless.specified <- function(NameOfaVariable, def = TRUE) {
 #'
 #' @description Return TRUE unless the variable is defined. If defined, it returns the value of the variable.
 #' @param NameOfaVariable Name of a possibly defined variable to be tested.
+#' @param v verbose
 #' @export
 #' @examples TRUE.unless("xsadasf32")
 #' Num <- 22
-#' TRUE.unless("Num")
-#' TRUE.unless("c")
-TRUE.unless <- function(NameOfaVariable = "VarName") {
+#' TRUE.unless("Num"); TRUE.unless("cx")
+TRUE.unless <- function(NameOfaVariable = "VarName", v = TRUE) {
   if (exists(substitute(NameOfaVariable))) {
     get(substitute(NameOfaVariable))
   } else {
-    iprint(NameOfaVariable, "is not defined, returning TRUE")
+    if (v) message(NameOfaVariable, " is not defined, returning TRUE")
     TRUE
   }
 }

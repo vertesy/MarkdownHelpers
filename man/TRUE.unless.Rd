@@ -4,10 +4,12 @@
 \alias{TRUE.unless}
 \title{TRUE.unless}
 \usage{
-TRUE.unless(NameOfaVariable = "VarName")
+TRUE.unless(NameOfaVariable = "VarName", v = TRUE)
 }
 \arguments{
 \item{NameOfaVariable}{Name of a possibly defined variable to be tested.}
+
+\item{v}{verbose}
 }
 \description{
 Return TRUE unless the variable is defined. If defined, it returns the value of the variable.
@@ -15,6 +17,5 @@ Return TRUE unless the variable is defined. If defined, it returns the value of 
 \examples{
 TRUE.unless("xsadasf32")
 Num <- 22
-TRUE.unless("Num")
-TRUE.unless("c")
+TRUE.unless("Num"); TRUE.unless("cx")
 }
