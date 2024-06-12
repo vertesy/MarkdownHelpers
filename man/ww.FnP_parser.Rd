@@ -4,7 +4,7 @@
 \alias{ww.FnP_parser}
 \title{ww.FnP_parser}
 \usage{
-ww.FnP_parser(fname, ext_wo_dot)
+ww.FnP_parser(fname, ext_wo_dot = NULL)
 }
 \arguments{
 \item{fname}{Name of the file}

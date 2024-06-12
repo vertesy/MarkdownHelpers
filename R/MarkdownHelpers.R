@@ -944,7 +944,7 @@ filter_MidPass <- function(numeric_vector,
 #' @examples ww.FnP_parser(fname = "myplot", ext_wo_dot = "jpg")
 #'
 #' @export
-ww.FnP_parser <- function(fname, ext_wo_dot) {
+ww.FnP_parser <- function(fname, ext_wo_dot = NULL) {
   path <- if (exists("ww.set.OutDir")) {
     ww.set.OutDir()
   } else {
