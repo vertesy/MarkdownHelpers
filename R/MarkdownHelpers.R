@@ -1177,7 +1177,10 @@ ww.autoPlotName <- function(name = NULL) {
 #' @export
 
 ww.assign_to_global <- function(name, value, pos = 1, max_print = 5, verbose = TRUE) {
-  if (verbose) Stringendo::iprint(name, "defined as:", head(value, max_print)) # , "is a new global environment variable"
+  if (verbose) {
+    Stringendo::iprint(name, "defined as:") # , "is a new global environment variable"
+    message(head(value, max_print))
+  }
   assign(name, value, envir = as.environment(pos))
 }
 
