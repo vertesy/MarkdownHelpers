@@ -1,5 +1,5 @@
 # Configuration for the Package
-# file.edit("~/GitHub/Packages/XXXXXXXXXX/Development/config.R")
+# file.edit("~/GitHub/Packages/MarkdownHelpers/Development/config.R")
 
 DESCRIPTION <- list(
   package.name = "MarkdownHelpers",
