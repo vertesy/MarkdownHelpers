@@ -14,5 +14,8 @@ Take a dataframe where every entry is a string containing an html link, parse an
 a properly formatted markdown table.
 }
 \examples{
-tableOfLinkswRownames(tableOfLinkswRownames = df_of_LinksParsedByDatabaseLinkeR)
+x <- data.frame(A = c("http://www.google.com", "http://www.yahoo.com"), B = c("http://www.bing.com", "http://www.duckduckgo.com"))
+rownames(x) <- c("Google", "Yahoo")
+md.LinkTable(x)
+
 }

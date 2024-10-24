@@ -19,6 +19,8 @@ md.write.as.list(
 
 \item{numbered}{TRUE = Numbered list, FALSE = unordered list is written}
 
+\item{path_of_report}{Path to the report file. Default: \code{ww.set.path_of_report()}.}
+
 \item{...}{Additional parameters}
 }
 \description{

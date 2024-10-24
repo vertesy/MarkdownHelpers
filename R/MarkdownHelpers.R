@@ -76,7 +76,8 @@ unless.specified <- function(NameOfaVariable, def = TRUE) {
 #' @export
 #' @examples TRUE.unless("xsadasf32")
 #' Num <- 22
-#' TRUE.unless("Num"); TRUE.unless("cx")
+#' TRUE.unless("Num")
+#' TRUE.unless("cx")
 TRUE.unless <- function(NameOfaVariable = "VarName", v = TRUE) {
   if (exists(substitute(NameOfaVariable))) {
     get(substitute(NameOfaVariable))
@@ -162,6 +163,7 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome p
 #' @param matrix1 A matrix.
 #' @param matrix2 A matrix.
 #' @param k The number of rows to print from the matrices with the most missing values.
+#'
 #' @return A matrix with the rows of `matrix1` and `matrix2` that intersect.
 #' @importFrom CodeAndRoll2 symdiff
 #' @importFrom Stringendo percentage_formatter
@@ -288,6 +290,7 @@ llogit <- function(...) {
 #' @param vector Vecot to be wirtten as a list
 #' @param h Level of header above tl list.
 #' @param numbered TRUE = Numbered list, FALSE = unordered list is written
+#' @param path_of_report Path to the report file. Default: `ww.set.path_of_report()`.
 #' @param ... Additional parameters
 #' @export
 #' @examples md.write.as.list()
@@ -626,16 +629,23 @@ md.tableWriter.VEC.w.names <- function(NamedVector,
 #' @description Take a dataframe where every entry is a string containing an html link, parse and write out.
 #'  a properly formatted markdown table.
 #' @param tableOfLinkswRownames A dataframe where every entry is a string containing an html link.
-#' @export
+#' @examples
+#' x <- data.frame(A = c("http://www.google.com", "http://www.yahoo.com"), B = c("http://www.bing.com", "http://www.duckduckgo.com"))
+#' rownames(x) <- c("Google", "Yahoo")
+#' md.LinkTable(x)
 #'
-#' @examples tableOfLinkswRownames(tableOfLinkswRownames = df_of_LinksParsedByDatabaseLinkeR)
+#' @export
 md.LinkTable <- function(tableOfLinkswRownames) {
   TBL <- tableOfLinkswRownames
   RN <- rownames(tableOfLinkswRownames)
+
   for (i in 1:ncol(tableOfLinkswRownames)) {
     x <- tableOfLinkswRownames[, i]
     TBL[, i] <- paste0("[", RN, "]", "(", x, ")")
   } # for
+
+  print(TBL)
+
   md.tableWriter.DF.w.dimnames(TBL,
     FullPath = paste0(OutDir, substitute(tableOfLinkswRownames), ".tsv.md")
   )
@@ -721,6 +731,7 @@ md.import.table <- function(from.file.table,
 #' )
 #' @importFrom CodeAndRoll2 iround
 #' @importFrom Stringendo percentage_formatter
+# #' @importFrom MarkdownReports whist - Optional import, not declared
 #'
 #' @export
 filter_HP <- function(numeric_vector,
@@ -1043,8 +1054,11 @@ ww.set.OutDir <- function(dir = OutDir) {
   dir <- getwd()
   if (!dir.exists(dir)) message("OutDir defined, but folder does not exist!!! Saving in working directory.")
 
-  NewOutDir <- if (exists("OutDir") & dir.exists(dir))
-    dir else AddTrailingSlashfNonePresent(getwd())
+  NewOutDir <- if (exists("OutDir") & dir.exists(dir)) {
+    dir
+  } else {
+    AddTrailingSlashfNonePresent(getwd())
+  }
 
   return(FixPath(NewOutDir))
 }
@@ -1227,8 +1241,8 @@ jjpegA4 <- function(filename, r = 225, q = 90, w = 8.27, h = 11.69) { # Setup an
 #' @param ... Additional parameters.
 #' @param incrBottMarginBy Increase the blank space at the bottom of the plot.
 #' @param savefile Save plot as pdf in OutDir, TRUE by default.
-#' @examples color_check(1:3)
 #'
+#' @examples color_check(1:3)
 #' @export
 color_check <- function(..., incrBottMarginBy = 0, savefile = FALSE) {
   if (incrBottMarginBy) {
@@ -1275,7 +1289,7 @@ color_check <- function(..., incrBottMarginBy = 0, savefile = FALSE) {
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom colorRamps matlab.like
 #' @importFrom gplots rich.colors
-#' @importFrom CodeAndRoll2 as.factor.numeric
+#' @importFrom CodeAndRoll2 as.numeric.wNames.factor
 #'
 #' @export
 wcolorize <- function(vector = c(1, 1, 1:6),
@@ -1293,12 +1307,12 @@ wcolorize <- function(vector = c(1, 1, 1:6),
                         "rainbow"
                       )[1]) {
   NrCol <- length(unique(vector))
-  COLZ <- CodeAndRoll2::as.factor.numeric(vector) # if basic numbers
+  COLZ <- CodeAndRoll2::as.numeric.wNames.factor(vector) # if basic numbers
   if (randomize) {
     COLZ <- sample(COLZ)
   } # if randomise
   if (RColorBrewerSet != FALSE) {
-    COLZ <- RColorBrewer::brewer.pal(NrCol, name = RColorBrewerSet)[CodeAndRoll2::as.factor.numeric(vector)]
+    COLZ <- RColorBrewer::brewer.pal(NrCol, name = RColorBrewerSet)[CodeAndRoll2::as.numeric.wNames.factor(vector)]
   } else {
     COLZ <- if (set == "rainbow") {
       rainbow(NrCol)[COLZ]
@@ -1313,7 +1327,7 @@ wcolorize <- function(vector = c(1, 1, 1:6),
     } else if (set == "rich") {
       gplots::rich.colors(NrCol)[COLZ]
     } else {
-      CodeAndRoll2::as.factor.numeric(vector)
+      CodeAndRoll2::as.numeric.wNames.factor(vector)
     } # if basic numbers
   } # if
   COLZ <- as.vector(COLZ)

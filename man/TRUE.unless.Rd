@@ -17,5 +17,6 @@ Return TRUE unless the variable is defined. If defined, it returns the value of 
 \examples{
 TRUE.unless("xsadasf32")
 Num <- 22
-TRUE.unless("Num"); TRUE.unless("cx")
+TRUE.unless("Num")
+TRUE.unless("cx")
 }

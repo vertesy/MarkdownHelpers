@@ -2,8 +2,8 @@
 # Create_the_MarkdownHelpers_Package.R
 ######################################################################################################
 # source("~/GitHub/Packages/MarkdownHelpers/Development/Create_the_MarkdownHelpers_Package.R")
-rm(list = ls(all.names = TRUE))
-try(dev.off(), silent = TRUE)
+# rm(list = ls(all.names = TRUE))
+# try(dev.off(), silent = TRUE)
 
 # Functions ------------------------
 devtools::load_all("~/GitHub/Packages/PackageTools/")
