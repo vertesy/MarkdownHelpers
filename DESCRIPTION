@@ -1,6 +1,6 @@
 Package: MarkdownHelpers
 Title: MarkdownHelpers
-Version: 1.1.0
+Version: 1.1.1
 Authors@R: 
     person("Abel", "Vertesy", , "av@imba.oeaw.ac.at", role = c("aut", "cre"))
 Author: Abel Vertesy <av@imba.oeaw.ac.at> [aut, cre]
@@ -9,7 +9,8 @@ Description: MarkdownHelpers is a set of R functions to parse and Markdown
 License: GPL-3 + file LICENSE
 BugReports: https://github.com/vertesy/MarkdownHelpers/issues
 Depends: 
-    Stringendo
+    Stringendo,
+    utils
 Imports: 
     CodeAndRoll2,
     colorRamps,
@@ -19,6 +20,6 @@ Imports:
 Suggests: 
     MarkdownReports
 Encoding: UTF-8
-Packaged: 2024-10-24 16:18:05.783235
+Packaged: 2024-10-25 12:44:28.574114
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1

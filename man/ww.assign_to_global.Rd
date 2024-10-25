@@ -21,3 +21,9 @@ ww.assign_to_global(name, value, pos = 1, max_print = 5, verbose = TRUE)
 A function loading results to the global environment.
 Source: https://stackoverflow.com/questions/28180989/
 }
+\examples{
+ww.assign_to_global("myvar", 1:10) # Assign to the global environment
+ww.assign_to_global("myvar", 1:10, pos = 2) # Assign to the second environment
+ww.assign_to_global("myvar", 1:10, max_print = 5) # Print only 5 elements
+
+}

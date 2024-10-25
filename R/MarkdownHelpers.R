@@ -1186,14 +1186,18 @@ ww.autoPlotName <- function(name = NULL) {
 #' @param verbose Print directory to screen? Default: TRUE
 #' @param max_print Print max this many elements, Default: 10
 #' @param pos defaults to 1 which equals an assingment to global environment
+#'
 #' @importFrom Stringendo iprint
+#' @examples ww.assign_to_global("myvar", 1:10) # Assign to the global environment
+#' ww.assign_to_global("myvar", 1:10, pos = 2) # Assign to the second environment
+#' ww.assign_to_global("myvar", 1:10, max_print = 5) # Print only 5 elements
 #'
 #' @export
 
 ww.assign_to_global <- function(name, value, pos = 1, max_print = 5, verbose = TRUE) {
   if (verbose) {
     Stringendo::iprint(name, "defined as:") # , "is a new global environment variable"
-    message(head(value, max_print))
+    message(utils::head(value, max_print))
   }
   assign(name, value, envir = as.environment(pos))
 }

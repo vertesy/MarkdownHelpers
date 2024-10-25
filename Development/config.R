@@ -3,11 +3,11 @@
 
 DESCRIPTION <- list(
   package.name = "MarkdownHelpers",
-  version = "1.1.0",
+  version = "1.1.1",
   title = "MarkdownHelpers",
   description = "MarkdownHelpers is a set of R functions to parse and Markdown files and other generic helpers.",
 
-  depends = "Stringendo",
+  depends = "Stringendo, utils",
   imports = "ReadWriter, CodeAndRoll2, RColorBrewer, colorRamps, gplots",
   suggests = "MarkdownReports",
 
