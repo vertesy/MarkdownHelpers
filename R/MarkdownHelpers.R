@@ -252,8 +252,8 @@ llprint <- function(...) {
     alt.message = "NOT LOGGED: Log path and filename is not defined in path_of_report."
   )) {
     write(kollapse("\n", LogEntry, print = FALSE),
-      path_of_report,
-      append = TRUE
+          path_of_report,
+          append = TRUE
     )
   }
 }
@@ -277,8 +277,8 @@ llogit <- function(...) {
     alt.message = "NOT LOGGED: Log path and filename is not defined in path_of_report."
   )) {
     write(kollapse("\n", LogEntry, print = FALSE),
-      path_of_report,
-      append = TRUE
+          path_of_report,
+          append = TRUE
     )
   }
 }
@@ -301,9 +301,9 @@ md.write.as.list <- function(vector = 1:3,
                              ...) {
   LogEntry <- kollapse(rep("#", h), " ", substitute(vector), print = FALSE)
   write(kollapse("\n", LogEntry, print = FALSE),
-    path_of_report,
-    ...,
-    append = TRUE
+        path_of_report,
+        ...,
+        append = TRUE
   )
   LV <- length(vector)
   LN <- if (numbered) {
@@ -399,7 +399,7 @@ llwrite_list <- function(yourlist, printName = "self") {
 md.import <- function(from.file, to.file = ww.set.path_of_report()) {
   linez <- readLines(from.file)
   if (ww.variable.and.path.exists(to.file,
-    alt.message = "Log path and filename is not defined in path_of_report"
+                                  alt.message = "Log path and filename is not defined in path_of_report"
   )) {
     Stringendo::iprint(
       length(linez), "lines from", basename(from.file),
@@ -647,7 +647,7 @@ md.LinkTable <- function(tableOfLinkswRownames) {
   print(TBL)
 
   md.tableWriter.DF.w.dimnames(TBL,
-    FullPath = paste0(OutDir, substitute(tableOfLinkswRownames), ".tsv.md")
+                               FullPath = paste0(OutDir, substitute(tableOfLinkswRownames), ".tsv.md")
   )
 }
 
@@ -903,16 +903,16 @@ filter_MidPass <- function(numeric_vector,
 
   if (EdgePass) {
     survivors <- (numeric_vector < HP_threshold |
-      numeric_vector >= LP_threshold)
+                    numeric_vector >= LP_threshold)
     keyword <- "outside"
     relation <- " >= x OR x > "
   }
   pc <- Stringendo::percentage_formatter(sum(survivors, na.rm = na.rm) / length(survivors))
   conclusion <- kollapse(prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ",
-    length(numeric_vector), " entries in ", substitute(numeric_vector),
-    " fall ", keyword, " the thresholds: ", CodeAndRoll2::iround(HP_threshold),
-    relation, CodeAndRoll2::iround(LP_threshold),
-    print = verbose
+                         length(numeric_vector), " entries in ", substitute(numeric_vector),
+                         " fall ", keyword, " the thresholds: ", CodeAndRoll2::iround(HP_threshold),
+                         relation, CodeAndRoll2::iround(LP_threshold),
+                         print = verbose
   )
   if (ww.variable.and.path.exists(path_of_report, alt.message = "NOT LOGGED")) {
     llogit(conclusion)
@@ -963,13 +963,13 @@ ww.FnP_parser <- function(fname, ext_wo_dot = NULL) {
     "install or load vertesy/MarkdownHelpers for saving into OutDir!"
   }
 
+  # In R, the last evaluated expression in a function is returned by default as invisible()!
   FnP <- if (hasArg(ext_wo_dot)) {
-    kollapse(path, fname, ".", ext_wo_dot)
+    kollapse(paste0(path, fname), ext_wo_dot, collapseby = ".", print = 2)
   } else {
-    FnP <- kollapse(path, fname)
+    kollapse(path, fname, print = 2)
   }
 }
-
 
 
 
