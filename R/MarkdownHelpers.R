@@ -1371,8 +1371,6 @@ filter_survival_length <- function(length_new, length_old, prepend = "") { # Par
 
 
 
-
-
 #' @title ww.set.file.extension
 #'
 #' @description Internal function. Sets file extension for ggExpress plotting functions.
