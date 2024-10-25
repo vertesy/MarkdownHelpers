@@ -963,10 +963,11 @@ ww.FnP_parser <- function(fname, ext_wo_dot = NULL) {
     "install or load vertesy/MarkdownHelpers for saving into OutDir!"
   }
 
+  # In R, the last evaluated expression in a function is returned by default as invisible()!
   FnP <- if (hasArg(ext_wo_dot)) {
-    kollapse(path, fname, ".", ext_wo_dot)
+    kollapse(path, fname, collapseby = ".", ext_wo_dot)
   } else {
-    FnP <- kollapse(path, fname)
+    kollapse(path, fname)
   }
 }
 
