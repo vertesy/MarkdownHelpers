@@ -253,7 +253,7 @@ llprint <- function(...) {
   )) {
     write(kollapse("\n", LogEntry, print = FALSE),
           path_of_report,
-          append = TRUE
+          append = TRUE, print = 2
     )
   }
 }
@@ -278,7 +278,7 @@ llogit <- function(...) {
   )) {
     write(kollapse("\n", LogEntry, print = FALSE),
           path_of_report,
-          append = TRUE
+          append = TRUE, print = 2
     )
   }
 }
@@ -303,7 +303,7 @@ md.write.as.list <- function(vector = 1:3,
   write(kollapse("\n", LogEntry, print = FALSE),
         path_of_report,
         ...,
-        append = TRUE
+        append = TRUE, print = 2
   )
   LV <- length(vector)
   LN <- if (numbered) {
