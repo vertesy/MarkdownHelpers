@@ -1249,26 +1249,31 @@ jjpegA4 <- function(filename, r = 225, q = 90, w = 8.27, h = 11.69) { # Setup an
 #' @examples color_check(1:3)
 #' @export
 color_check <- function(..., incrBottMarginBy = 0, savefile = FALSE) {
+  # Save original margin if margin adjustment is requested
   if (incrBottMarginBy) {
     .ParMarDefault <- par("mar")
     par(mar = c(par("mar")[1] + incrBottMarginBy, par("mar")[2:4]))
-  } # Tune the margin
-  Numbers <- c(...)
-  if (length(names(Numbers)) == length(Numbers)) {
-    labelz <- names(Numbers)
-  } else {
-    labelz <- Numbers
-  }
-  barplot(rep(10, length(Numbers)), col = Numbers, names.arg = labelz, las = 2)
-  if (incrBottMarginBy) {
-    par("mar" = .ParMarDefault)
   }
 
+  # Extract and store color arguments
+  color_codes <- c(...)
+
+  # Use names if provided, otherwise use colors themselves as labels
+  labelz <- if (length(names(color_codes)) == length(color_codes)) names(color_codes) else color_codes
+
+  # Plot colors as a barplot
+  barplot(rep(10, length(color_codes)), col = color_codes, names.arg = labelz, las = 2)
+
+  # Reset margin if it was changed
+  if (incrBottMarginBy) par(mar = .ParMarDefault)
+
+  # Derive filename base from expression passed in ...
   fname <- substitute(...)
-  if (savefile) {
-    dev.copy2pdf(file = ww.FnP_parser(fname, "ColorCheck.pdf"))
-  }
+
+  # Save plot as PDF if requested
+  if (savefile) dev.copy2pdf(file = ww.FnP_parser(fname, "ColorCheck.pdf"))
 }
+
 
 
 
