@@ -44,7 +44,7 @@ irequire <- function(package) {
     print("Loading package:")
     require(package = package_, character.only = TRUE)
   }
-} # install package if cannot be loaded
+} # install package if it cannot be loaded
 
 
 # ______________________________________________________________________________________________________________________________
@@ -170,7 +170,7 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome p
 #'
 #' @export
 
-combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # combine matrices by rownames intersect
+combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # combine matrices by row name intersection
   rn1 <- rownames(matrix1)
   rn2 <- rownames(matrix2)
   idx <- intersect(rn1, rn2)
@@ -210,8 +210,8 @@ ww.variable.and.path.exists <- function(path = path_of_report, alt.message = NUL
   Variable.Name <- substitute(path)
   if (exists(as.character(Variable.Name))) {
     dn <- dirname(path)
-    ExisingDir <- (dn != "." & dir.exists(dn))
-    if (ExisingDir) {
+    ExistingDir <- (dn != "." & dir.exists(dn))
+    if (ExistingDir) {
       TRUE
     } else {
       cat("Variable", Variable.Name, " points to a non-existent directory: ", path)
@@ -326,7 +326,7 @@ md.write.as.list <- function(vector = 1:3,
 #' under "Reports"/OutDir/ (Reports is a literal string, OutDir is the last/deepest
 #' directory name in the "OutDir" variable. See create_set_OutDir() function.).
 #' This function is called by the ~wplot functions.
-#' @param fname_wo_ext Name of the image file where markdown links going to point to.
+#' @param fname_wo_ext Name of the image file that markdown links will point to.
 #' @param OutDir_ The output directory (absolute / full path).
 #' @export
 #' @examples md.image.linker(fname_wo_ext = "MyPlot")
@@ -341,7 +341,7 @@ md.image.linker <- function(fname_wo_ext, OutDir_ = ww.set.OutDir()) {
     } else {
       if (exists("b.Subdirname") && !b.Subdirname == FALSE) {
         fname_wo_ext <- paste0(b.Subdirname, "/", fname_wo_ext)
-      } # set only if b.Subdirname is defined, it is not FALSE.
+      } # set only if b.Subdirname is defined and not FALSE.
       llogit(kollapse("![", fn, "]", "(", fname_wo_ext, ".png)", print = FALSE))
     }
   } else {
@@ -657,6 +657,7 @@ md.LinkTable <- function(tableOfLinkswRownames) {
 #' @title md.import.table
 #'
 #' @description Import a table (.csv or tab separated values, .tsv file) and write it
+#' @description Import a table (.csv, or tab separated values, .tsv file) and write it
 #' in markdown format to the report.
 #' @param from.file.table  The *.tsv file to be appended as a table at
 #' the current last line of the report.
@@ -721,6 +722,7 @@ md.import.table <- function(from.file.table,
 #' @param return_survival_ratio Return a number with the survival ratio (TRUE)
 #' or a logical index vector of the survivors (FALSE). return_conclusion must be FALSE
 #' @param plot.hist Plot the histogram of the input data.
+#' @param plot.hist Plot the histogram of the input data
 #' @param saveplot Save the histogram as PDF, FALSE by default
 #' @param na.rm Remove NA-s? Default: TRUE
 #' @param verbose Print output to console? Default: TRUE
@@ -975,6 +977,7 @@ ww.FnP_parser <- function(fname, ext_wo_dot = NULL) {
 
 #' @title ww.variable.and.path.exists
 #'
+
 #' @description Check if a variable name is defined and, if so, does the path (to a file) stored in that
 #'  variable point to an existing directory?
 #' @param path A variable name that might not exist and might point to a non-existent directory.
@@ -986,8 +989,8 @@ ww.variable.and.path.exists <- function(path = path_of_report, alt.message = NUL
   Variable.Name <- substitute(path)
   if (exists(as.character(Variable.Name))) {
     dn <- dirname(path)
-    ExisingDir <- (dn != "." & dir.exists(dn))
-    if (ExisingDir) {
+    ExistingDir <- (dn != "." & dir.exists(dn))
+    if (ExistingDir) {
       TRUE
     } else {
       cat("Variable", Variable.Name, " points to a non-existent directory: ", path)
@@ -1196,7 +1199,7 @@ ww.autoPlotName <- function(name = NULL) {
 
 ww.assign_to_global <- function(name, value, pos = 1, max_print = 5, verbose = TRUE) {
   if (verbose) {
-    Stringendo::iprint(name, "defined as:") # , "is a new global environment variable"
+    Stringendo::iprint(name, "defined as:") # "is a new global environment variable"
     print(utils::head(value, max_print))
   }
   assign(name, value, envir = as.environment(pos))
@@ -1319,7 +1322,7 @@ wcolorize <- function(vector = c(1, 1, 1:6),
   COLZ <- CodeAndRoll2::as.numeric.wNames.factor(vector) # if basic numbers
   if (randomize) {
     COLZ <- sample(COLZ)
-  } # if randomise
+  } # if randomize
   if (RColorBrewerSet != FALSE) {
     COLZ <- RColorBrewer::brewer.pal(NrCol, name = RColorBrewerSet)[CodeAndRoll2::as.numeric.wNames.factor(vector)]
   } else {
