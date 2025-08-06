@@ -49,7 +49,7 @@ if (!dir.exists(RepositoryDir)) {
 }
 
 
-# go and write fun's ------------------------------------------------------------------------
+# go and write functions ------------------------------------------------------------------------
 # file.edit(package.FnP)
 
 # Create Roxygen Skeletons ------------------------

@@ -44,7 +44,7 @@ irequire <- function(package) {
     print("Loading package:")
     require(package = package_, character.only = TRUE)
   }
-} # install package if cannot be loaded
+} # install package if it cannot be loaded
 
 
 # ______________________________________________________________________________________________________________________________
@@ -170,7 +170,7 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome p
 #'
 #' @export
 
-combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # combine matrices by rownames intersect
+combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # combine matrices by row name intersection
   rn1 <- rownames(matrix1)
   rn2 <- rownames(matrix2)
   idx <- intersect(rn1, rn2)
@@ -341,7 +341,7 @@ md.image.linker <- function(fname_wo_ext, OutDir_ = ww.set.OutDir()) {
     } else {
       if (exists("b.Subdirname") && !b.Subdirname == FALSE) {
         fname_wo_ext <- paste0(b.Subdirname, "/", fname_wo_ext)
-      } # set only if b.Subdirname is defined, it is not FALSE.
+      } # set only if b.Subdirname is defined and not FALSE.
       llogit(kollapse("![", fn, "]", "(", fname_wo_ext, ".png)", print = FALSE))
     }
   } else {
@@ -425,7 +425,7 @@ md.import <- function(from.file, to.file = ww.set.path_of_report()) {
 #' @examples md.LogSettingsFromList(parameterlist = list("min" = 4, "method" = "pearson", "max" = 10))
 md.LogSettingsFromList <- function(parameterlist,
                                    maxlen = 20) {
-  LZ <- unlist(lapply(parameterlist, length)) # collapse paramters with multiple entires
+  LZ <- unlist(lapply(parameterlist, length)) # collapse parameters with multiple entries
   LNG <- names(which(LZ > 1))
   for (i in LNG) {
     if (length(parameterlist[[i]]) > maxlen) {
@@ -455,7 +455,7 @@ md.List2Table <- function(parameterlist,
                           title = "List elements",
                           colname2 = "Value",
                           maxlen = 20) {
-  LZ <- unlist(lapply(parameterlist, length)) # collapse paramters with multiple entires
+  LZ <- unlist(lapply(parameterlist, length)) # collapse parameters with multiple entries
   LNG <- names(which(LZ > 1))
   for (i in LNG) {
     if (length(parameterlist[[i]]) > maxlen) {
@@ -1196,7 +1196,7 @@ ww.autoPlotName <- function(name = NULL) {
 
 ww.assign_to_global <- function(name, value, pos = 1, max_print = 5, verbose = TRUE) {
   if (verbose) {
-    Stringendo::iprint(name, "defined as:") # , "is a new global environment variable"
+    Stringendo::iprint(name, "defined as:") # "is a new global environment variable"
     print(utils::head(value, max_print))
   }
   assign(name, value, envir = as.environment(pos))
@@ -1319,7 +1319,7 @@ wcolorize <- function(vector = c(1, 1, 1:6),
   COLZ <- CodeAndRoll2::as.numeric.wNames.factor(vector) # if basic numbers
   if (randomize) {
     COLZ <- sample(COLZ)
-  } # if randomise
+  } # if randomize
   if (RColorBrewerSet != FALSE) {
     COLZ <- RColorBrewer::brewer.pal(NrCol, name = RColorBrewerSet)[CodeAndRoll2::as.numeric.wNames.factor(vector)]
   } else {
