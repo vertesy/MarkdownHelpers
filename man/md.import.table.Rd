@@ -29,7 +29,7 @@ the (current) last line of the report.}
 which is set by the "setup_MarkdownReports" function.}
 }
 \description{
-Import a table (.csv, or tab seprated values, .tsv file) and write it
+Import a table (.csv, or tab separated values, .tsv file) and write it
 in markdown format to the report.
 }
 \examples{

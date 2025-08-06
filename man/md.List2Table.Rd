@@ -12,7 +12,7 @@ md.List2Table(
 )
 }
 \arguments{
-\item{parameterlist}{List of Paramters.}
+\item{parameterlist}{List of Parameters.}
 
 \item{title}{Title of the table.}
 
