@@ -178,7 +178,7 @@ md.tableWriter.VEC.w.names. Take an R vector with names, parse a markdown table 
 md.LinkTable. Take a dataframe where every entry is a string containing an html link, parse and write out.   a properly formatted markdown table.
 
 - #### 19 `md.import.table()`
-md.import.table. Import a table (.csv, or tab seprated values, .tsv file) and write it  in markdown format to the report.
+md.import.table. Import a table (.csv, or tab separated values, .tsv file) and write it  in markdown format to the report.
 
 - #### 20 `filter_HP()`
 filter_HP. Filter values that fall between above high-pass-threshold (X >). 
@@ -232,7 +232,7 @@ jjpegA4. Setup an A4 size jpeg.
 color_check. Display the colors encoded by the numbers / color-ID-s you pass on to this function
 
 - #### 37 `wcolorize()`
-wcolorize. Generate color palettes. Input: a vector with categories, can be numbers or strings.  Handles repeating values. Output: color vector of equal length as input.  Optionally it can ouput a list where an extra element lists the  categories (simply using unique would remove the names). See example.  Some color scale depend on packages "colorRamps", or "gplots". 
+wcolorize. Generate color palettes. Input: a vector with categories, can be numbers or strings.  Handles repeating values. Output: color vector of equal length as input.  Optionally it can output a list where an extra element lists the  categories (simply using unique would remove the names). See example.  Some color scale depend on packages "colorRamps", or "gplots".
 
 - #### 38 `filter_survival_length()`
 filter_survival_length. Parse a sentence reporting the % of filter survival.

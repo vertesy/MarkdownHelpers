@@ -9,7 +9,7 @@ ww.variable.and.path.exists(path = path_of_report, alt.message = NULL)
 ww.variable.and.path.exists(path = path_of_report, alt.message = NULL)
 }
 \arguments{
-\item{path}{A variable name that might not exist and might point to a non-existent direcotry.}
+\item{path}{A variable name that might not exist and might point to a non-existent directory.}
 
 \item{alt.message}{Alternative message if the variable + path does not exist. FALSE or string.}
 }
