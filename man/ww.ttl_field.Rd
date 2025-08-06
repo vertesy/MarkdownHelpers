@@ -12,7 +12,7 @@ ww.ttl_field(plotname, creator = "MarkdownReports")
 \item{creator}{String X in: "plotblabla by X". Defaults: "MarkdownReports".}
 }
 \description{
-Internal function. Creates the string written into the PDF files "Title' (metadata) field.
+Internal function. Creates the string written into the PDF file "Title" (metadata) field.
 }
 \examples{
 ww.ttl_field("/Users/myplot.jpg")

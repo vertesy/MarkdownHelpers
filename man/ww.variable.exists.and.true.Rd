@@ -9,10 +9,10 @@ ww.variable.exists.and.true(var, alt.message = NULL)
 \arguments{
 \item{var}{A variable}
 
-\item{alt.message}{Alternative message if the variable + path does not exist. FALSE or string.}
+\item{alt.message}{Alternative message if the variable does not exist. FALSE or string.}
 }
 \description{
-Check if a variable name is defined, and if so, is it TRUE
+Check if a variable name is defined and, if so, is it TRUE.
 }
 \examples{
 ww.variable.and.path.exists(path = B, alt.message = "Hello, your path/var does not exist.")

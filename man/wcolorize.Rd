@@ -17,9 +17,9 @@ wcolorize(
 \arguments{
 \item{vector}{A vector with categories, can be numbers or strings}
 
-\item{RColorBrewerSet}{Use one of the RColorBrewer color sets? Provide that name}
+\item{RColorBrewerSet}{Use one of the RColorBrewer color sets? Provide that name.}
 
-\item{ReturnCategoriesToo}{Return unique Categories. See example.}
+\item{ReturnCategoriesToo}{Return unique categories. See example.}
 
 \item{show}{Show generated color palette}
 
@@ -27,14 +27,14 @@ wcolorize(
 
 \item{set}{Color palette for base
 ("heat.colors", "terrain.colors", "topo.colors", "rainbow"),
-or "rich" for gplots::rich.colors, or  "matlab" for colorRamps::matlab.like.}
+or "rich" for gplots::rich.colors, or "matlab" for colorRamps::matlab.like.}
 }
 \description{
 Generate color palettes. Input: a vector with categories, can be numbers or strings.
 Handles repeating values. Output: color vector of equal length as input.
 Optionally it can output a list where an extra element lists the
 categories (simply using unique would remove the names). See example.
-Some color scale depend on packages "colorRamps", or "gplots".
+Some color scales depend on packages "colorRamps", or "gplots".
 }
 \examples{
 wcolorize(vector = c(1, 1, 1:6), ReturnCategoriesToo = TRUE, show = TRUE)

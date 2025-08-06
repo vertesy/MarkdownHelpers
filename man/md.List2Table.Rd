@@ -18,7 +18,7 @@ md.List2Table(
 
 \item{colname2}{Name of the 2nd column.}
 
-\item{maxlen}{Maximum length of entries in a parameter list element,.}
+\item{maxlen}{Maximum length of entries in a parameter list element.}
 }
 \description{
 Broader variant of md.LogSettingsFromList(). Log the values (col2) from a

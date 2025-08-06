@@ -13,9 +13,9 @@ md.write.as.list(
 )
 }
 \arguments{
-\item{vector}{Vecot to be wirtten as a list}
+\item{vector}{Vector to be written as a list}
 
-\item{h}{Level of header above tl list.}
+\item{h}{Level of header above the list.}
 
 \item{numbered}{TRUE = Numbered list, FALSE = unordered list is written}
 

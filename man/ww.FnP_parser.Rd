@@ -12,7 +12,7 @@ ww.FnP_parser(fname, ext_wo_dot = NULL)
 \item{ext_wo_dot}{File extension without separating dot.}
 }
 \description{
-Internal Function. Parses the full path from the filename & location of the file.
+Internal function. Parses the full path from the filename and location of the file.
 }
 \examples{
 ww.FnP_parser(fname = "myplot", ext_wo_dot = "jpg")

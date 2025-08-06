@@ -8,7 +8,7 @@ ww.set.path_of_report()
 }
 \description{
 Checks if global variable path_of_report is defined. If not,
-it defines it as Analysis.md in the current working directory
+it defines it as Analysis.md in the current working directory.
 }
 \examples{
 ww.set.path_of_report()

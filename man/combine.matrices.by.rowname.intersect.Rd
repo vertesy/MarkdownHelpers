@@ -17,5 +17,5 @@ combine.matrices.by.rowname.intersect(matrix1, matrix2, k = 2)
 A matrix with the rows of \code{matrix1} and \code{matrix2} that intersect.
 }
 \description{
-Combine two matrices by their rownames intersect.
+Combine two matrices by the intersection of their row names.
 }

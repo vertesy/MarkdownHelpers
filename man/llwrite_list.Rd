@@ -7,12 +7,12 @@
 llwrite_list(yourlist, printName = "self")
 }
 \arguments{
-\item{yourlist}{your list}
+\item{yourlist}{Your list}
 
-\item{printName}{print header level 4: the name of the list or a custom string}
+\item{printName}{Print header level 4: the name of the list or a custom string}
 }
 \description{
-Print a list object from R, one element per line, into your markdown report
+Print a list object from R, one element per line, into your markdown report.
 }
 \examples{
 your_list <- list(letters[1:4], 5:9)
