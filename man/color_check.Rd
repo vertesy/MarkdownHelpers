@@ -11,10 +11,10 @@ color_check(..., incrBottMarginBy = 0, savefile = FALSE)
 
 \item{incrBottMarginBy}{Increase the blank space at the bottom of the plot.}
 
-\item{savefile}{Save plot as pdf in OutDir, TRUE by default.}
+\item{savefile}{Save plot as PDF in OutDir, TRUE by default.}
 }
 \description{
-Display the colors encoded by the numbers / color-ID-s you pass on to this function
+Display the colors encoded by the numbers / color-ID-s you pass on to this function.
 }
 \examples{
 color_check(1:3)

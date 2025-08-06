@@ -7,7 +7,7 @@
 irequire(package)
 }
 \arguments{
-\item{package}{Packagename to load}
+\item{package}{Package name to load}
 }
 \description{
 Load a package. If it does not exist, try to install it from CRAN.

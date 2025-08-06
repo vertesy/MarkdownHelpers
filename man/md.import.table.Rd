@@ -14,22 +14,22 @@ md.import.table(
 )
 }
 \arguments{
-\item{from.file.table}{The *.tsv file to be appended  as table at
-the (current) last line of the report.}
+\item{from.file.table}{The *.tsv file to be appended as a table at
+the current last line of the report.}
 
-\item{title_of_table}{Title above the table (as header 4, in the markdown report).}
+\item{title_of_table}{Title above the table (as header 4 in the markdown report).}
 
-\item{has.rownames}{If the first column contains (unique!) rownames.}
+\item{has.rownames}{If the first column contains (unique) row names.}
 
 \item{has.colnames}{If the first line of the file contains the header, or the column names.}
 
-\item{field.sep}{Field separator in table file. Tab's by default.}
+\item{field.sep}{Field separator in table file. Tabs by default.}
 
 \item{to.file}{The report file. Defined as "path_of_report" by default,
 which is set by the "setup_MarkdownReports" function.}
 }
 \description{
-Import a table (.csv, or tab seprated values, .tsv file) and write it
+Import a table (.csv or tab separated values, .tsv file) and write it
 in markdown format to the report.
 }
 \examples{

@@ -7,10 +7,10 @@
 md.LinkTable(tableOfLinkswRownames)
 }
 \arguments{
-\item{tableOfLinkswRownames}{A dataframe where every entry is a string containing an html link.}
+\item{tableOfLinkswRownames}{A data frame where every entry is a string containing an HTML link.}
 }
 \description{
-Take a dataframe where every entry is a string containing an html link, parse and write out.
+Take a data frame where every entry is a string containing an HTML link, parse it, and write out
 a properly formatted markdown table.
 }
 \examples{

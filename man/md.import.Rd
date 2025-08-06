@@ -7,13 +7,13 @@
 md.import(from.file, to.file = ww.set.path_of_report())
 }
 \arguments{
-\item{from.file}{File to be appended at the (current) last line of the report}
+\item{from.file}{File to be appended at the current last line of the report}
 
 \item{to.file}{The report file. Defined as "path_of_report" by default,
 which is set by the "setup_MarkdownReports" function.}
 }
 \description{
-Import and concatenated an external markdown or text file to the report
+Import and concatenate an external markdown or text file into the report
 }
 \examples{
 path_of_report <- ww.set.path_of_report()

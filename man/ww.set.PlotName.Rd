@@ -7,7 +7,7 @@
 ww.set.PlotName()
 }
 \description{
-Generates a plotname (use if none is specified)
+Generates a plot name (use if none is specified)
 }
 \examples{
 ww.set.PlotName()
