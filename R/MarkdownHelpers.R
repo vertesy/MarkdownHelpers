@@ -30,7 +30,7 @@
 #' @title irequire
 #'
 #' @description Load a package. If it does not exist, try to install it from CRAN.
-#' @param package Packagename to load
+#' @param package Package name to load
 #' @examples irequire(gtools)
 #' @export
 
@@ -210,8 +210,8 @@ ww.variable.and.path.exists <- function(path = path_of_report, alt.message = NUL
   Variable.Name <- substitute(path)
   if (exists(as.character(Variable.Name))) {
     dn <- dirname(path)
-    ExisingDir <- (dn != "." & dir.exists(dn))
-    if (ExisingDir) {
+    ExistingDir <- (dn != "." & dir.exists(dn))
+    if (ExistingDir) {
       TRUE
     } else {
       cat("Variable", Variable.Name, " points to a non-existent directory: ", path)
@@ -240,7 +240,7 @@ ww.variable.and.path.exists <- function(path = path_of_report, alt.message = NUL
 #' @description Collapse by white spaces a sentence from any variable passed on to the function.
 #' Print the sentence to the screen and write it to your markdown report file,
 #' if the "path_of_report" variable is defined.
-#' @param ... Variables (strings, vectors) to be collapsed in consecutively.
+#' @param ... Variables (strings, vectors) to be collapsed consecutively.
 #' @export
 #' @examples MyFriends <- c("Peter", "Bence")
 #' llprint("My friends are: ", MyFriends)
@@ -264,7 +264,7 @@ llprint <- function(...) {
 #' @description Collapse by white spaces a sentence from any variable passed on to the function.
 #' llogit() writes it to your markdown report file, if the "path_of_report" variable is defined.
 #' It does not print the sentence to the screen.
-#' @param ... Variables (strings, vectors) to be collapsed in consecutively.
+#' @param ... Variables (strings, vectors) to be collapsed consecutively.
 #' @export
 #' @examples MyFriends <- c("Peter", "Bence")
 #' llogit("My friends are: ", MyFriends)
@@ -287,8 +287,8 @@ llogit <- function(...) {
 #' @title md.write.as.list
 #'
 #' @description Writes a vector as a (numbered) list into the report file.
-#' @param vector Vecot to be wirtten as a list
-#' @param h Level of header above tl list.
+#' @param vector Vector to be written as a list
+#' @param h Level of header above the list.
 #' @param numbered TRUE = Numbered list, FALSE = unordered list is written
 #' @param path_of_report Path to the report file. Default: `ww.set.path_of_report()`.
 #' @param ... Additional parameters
@@ -319,14 +319,14 @@ md.write.as.list <- function(vector = 1:3,
 # ______________________________________________________________________________________________________________________________
 #' @title md.image.linker
 #'
-#' @description Format a markdown image reference (link) to a .pdf and .png versions of graph,
+#' @description Format a markdown image reference (link) to .pdf and .png versions of a graph,
 #' and insert both links to the markdown report, set by "path_of_report".
 #' If the "b.png4Github" variable is set, the .png-link is set up such,
 #' that you can upload the whole report with the .png image into your GitHub repo's wiki,
 #' under "Reports"/OutDir/ (Reports is a literal string, OutDir is the last/deepest
 #' directory name in the "OutDir" variable. See create_set_OutDir() function.).
 #' This function is called by the ~wplot functions.
-#' @param fname_wo_ext Name of the image file where markdown links going to point to.
+#' @param fname_wo_ext Name of the image file that markdown links will point to.
 #' @param OutDir_ The output directory (absolute / full path).
 #' @export
 #' @examples md.image.linker(fname_wo_ext = "MyPlot")
@@ -386,7 +386,7 @@ llwrite_list <- function(yourlist, printName = "self") {
 # ______________________________________________________________________________________________________________________________
 #' @title md.import
 #'
-#' @description Import and concatenated an external markdown or text file to the report
+#' @description Import and concatenate an external markdown or text file to the report
 #' @param from.file File to be appended at the (current) last line of the report
 #' @param to.file The report file. Defined as "path_of_report" by default,
 #' which is set by the "setup_MarkdownReports" function.
@@ -448,7 +448,7 @@ md.LogSettingsFromList <- function(parameterlist,
 #' @param title Title of the table.
 #' @param colname2 Name of the 2nd column.
 #' @param parameterlist List of Parameters.
-#' @param maxlen Maximum length of entries in a parameter list element,.
+#' @param maxlen Maximum length of entries in a parameter list element.
 #' @export
 #' @examples md.LogSettingsFromList(parameterlist = list("min" = 4, "method" = "pearson", "max" = 10))
 md.List2Table <- function(parameterlist,
@@ -478,7 +478,7 @@ md.List2Table <- function(parameterlist,
 #' @param FullPath Full path to the file.
 #' @param percentify Format numbers between 0-1 to percentages 0-100.
 #' @param title_of_table Title above the table (in the markdown report).
-#' @param print2screen Print the markdown formatted table to the sceen.
+#' @param print2screen Print the markdown formatted table to the screen.
 #' @param WriteOut Write the table into a TSV file.
 #' @examples df <- matrix(1:9, 3)
 #' rownames(df) <- 6:8
@@ -559,7 +559,7 @@ md.tableWriter.DF.w.dimnames <- function(df,
 #' @param FullPath Full path to the file.
 #' @param percentify Format numbers (0, 1) to percentages 0-100.
 #' @param title_of_table Title above the table (in the markdown report).
-#' @param print2screen Print the markdown formatted table to the sceen.
+#' @param print2screen Print the markdown formatted table to the screen.
 #' @param WriteOut Write the table into a TSV file.
 #' @examples x <- -1:2
 #' names(x) <- LETTERS[1:4]
@@ -700,7 +700,7 @@ md.import.table <- function(from.file.table,
     )
   }
   md.tableWriter.DF.w.dimnames(importedtable, title_of_table = TTL)
-  Stringendo::iprint("The follwoing table is included in the markdown report:")
+  Stringendo::iprint("The following table is included in the markdown report:")
   return(importedtable)
 }
 
@@ -721,7 +721,7 @@ md.import.table <- function(from.file.table,
 #' @param return_survival_ratio Return a number with the survival ratio (TRUE).
 #' or a logical index vector of the survivors (FALSE). return_conclusion must be FALSE
 #' @param plot.hist Plot the histogram of the input data
-#' @param saveplot Save the histogram as PDF, FALSE by defeault
+#' @param saveplot Save the histogram as PDF, FALSE by default
 #' @param na.rm Remove NA-s? Default: TRUE
 #' @param verbose print output to console? Default: yes.
 #' @param ... Additional arguments for the histogram
@@ -796,7 +796,7 @@ filter_HP <- function(numeric_vector,
 #' @param return_survival_ratio Return a number with the survival ratio (TRUE).
 #' or a logical index vector of the survivors (FALSE). return_conclusion must be FALSE
 #' @param plot.hist Plot the histogram of the input data
-#' @param saveplot Save the histogram as PDF, FALSE by defeault
+#' @param saveplot Save the histogram as PDF, FALSE by default
 #' @param na.rm Remove NA-s? Default: TRUE
 #' @param verbose print output to console? Default: yes.
 #' @param ... Additional arguments for the histogram
@@ -873,7 +873,7 @@ filter_LP <- function(numeric_vector,
 #' @param EdgePass If TRUE, it reverses the filter:
 #' everything passes except between the two thresholds.
 #' @param plot.hist Plot the histogram of the input data
-#' @param saveplot Save the histogram as PDF, FALSE by defeault
+#' @param saveplot Save the histogram as PDF, FALSE by default
 #' @param na.rm Remove NA-s? Default: TRUE
 #' @param verbose print output to console? Default: yes.
 #' @param ... Additional arguments for the histogram
@@ -986,8 +986,8 @@ ww.variable.and.path.exists <- function(path = path_of_report, alt.message = NUL
   Variable.Name <- substitute(path)
   if (exists(as.character(Variable.Name))) {
     dn <- dirname(path)
-    ExisingDir <- (dn != "." & dir.exists(dn))
-    if (ExisingDir) {
+    ExistingDir <- (dn != "." & dir.exists(dn))
+    if (ExistingDir) {
       TRUE
     } else {
       cat("Variable", Variable.Name, " points to a non-existent directory: ", path)
@@ -1131,7 +1131,7 @@ ww.set.mdlink <- function(NameOfaVariable = "b.mdlink",
 #' @description Format a markdown image reference (link) from the file path to the file.
 #' It can parse the file path, if you pass it in separate variables and strings.
 #' E.g. ww.md.image.link.parser(Directory, "MyImage.png").
-#' @param ... Variables (strings, vectors) to be collapsed in consecutively.
+#' @param ... Variables (strings, vectors) to be collapsed consecutively.
 #' @export
 #' @examples ww.md.image.link.parser("/MyPlot.jpg")
 #' ww.md.image.link.parser(getwd(), "/MyPlot.jpg")
@@ -1370,7 +1370,7 @@ wcolorize <- function(vector = c(1, 1, 1:6),
 #' @export
 filter_survival_length <- function(length_new, length_old, prepend = "") { # Parse a sentence reporting the % of filter survival.
   pc <- Stringendo::percentage_formatter(length_new / length_old)
-  llprint(prepend, pc, " of ", length_old, " entries make through the filter")
+  llprint(prepend, pc, " of ", length_old, " entries make it through the filter")
 }
 
 
