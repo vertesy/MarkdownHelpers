@@ -30,7 +30,7 @@ rprofile()
 devtools::install_local(repository.dir, upgrade = F, force = T)
 
 
-# Test if you can install from github ------------------------------------------------
+# Test if you can install from GitHub ------------------------------------------------
 remote.path <- file.path(DESCRIPTION$'github.user', DESCRIPTION$'package.name')
 pak::pkg_install(remote.path)
 # unload(DESCRIPTION$'package.name')

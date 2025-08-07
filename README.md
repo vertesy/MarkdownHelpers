@@ -66,11 +66,11 @@ MarkdownReports::setup_MarkdownReports()
 
 
 
-##### Most  `MarkdownHelpers` function write into a markdown file.  
+##### Most `MarkdownHelpers` functions write to a markdown file.
 
-##### That file is defined in `path_of_report`, by first calling `MarkdownReports::setup_MarkdownReports()`. 
+##### That file is defined in `path_of_report` by first calling `MarkdownReports::setup_MarkdownReports()`.
 
-#####  `MarkdownReports` and `MarkdownHelpers` works with such _background variables_ defined by `setup_MarkdownReports()` in the global env .
+##### `MarkdownReports` and `MarkdownHelpers` work with such _background variables_ defined by `setup_MarkdownReports()` in the global environment.
 
 
 
@@ -154,13 +154,13 @@ llogit. Collapse by white spaces a sentence from any variable passed on to the f
 md.write.as.list. Writes a vector as a (numbered) list into the report file.
 
 - #### 11 `md.image.linker()`
-md.image.linker. Format a markdown image reference (link) to a .pdf and .png versions of graph,  and insert both links to the markdown report, set by "path_of_report".  If the "b.png4Github" variable is set, the .png-link is set up such,  that you can upload the whole report with the .png image into your GitHub repo's wiki,  under "Reports"/OutDir/ (Reports is a literal string, OutDir is the last/deepest  directory name in the "OutDir" variable. See create_set_OutDir() function.).  This function is called by the ~wplot functions.
+md.image.linker. Format a markdown image reference (link) to a .pdf and .png versions of graph,  and insert both links to the markdown report, set by "path_of_report".  If the "b.png4GitHub" variable is set, the .png-link is set up such,  that you can upload the whole report with the .png image into your GitHub repo's wiki,  under "Reports"/OutDir/ (Reports is a literal string, OutDir is the last/deepest  directory name in the "OutDir" variable. See create_set_OutDir() function.).  This function is called by the ~wplot functions.
 
 - #### 12 `llwrite_list()`
 llwrite_list. Print a list object from R, one element per line, into your markdown report
 
 - #### 13 `md.import()`
-md.import. Import and concatenated an external markdown or text file to the report
+ md.import. Import and concatenate an external markdown or text file to the report
 
 - #### 14 `md.LogSettingsFromList()`
 md.LogSettingsFromList. Log the parameters & settings used in the script and stored in a list, in a table format   in the report.
