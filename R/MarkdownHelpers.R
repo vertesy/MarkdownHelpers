@@ -36,14 +36,12 @@
 
 irequire <- function(package) {
   package_ <- as.character(substitute(package))
-  print(package_) # Load a package. If it does not exist, try to install it from CRAN.
-  if (!require(package = package_, character.only = TRUE)) {
-    print("Not Installed yet.")
+  message("Loading package: ", package_)
+  if (!requireNamespace(package_, quietly = TRUE)) {
+    message("Package not installed. Attempting to install.")
     install.packages(pkgs = package_)
-    Sys.sleep(1)
-    print("Loading package:")
-    require(package = package_, character.only = TRUE)
   }
+  library(package_, character.only = TRUE)
 } # install package if it cannot be loaded
 
 
@@ -71,18 +69,25 @@ unless.specified <- function(NameOfaVariable, def = TRUE) {
 #' @title TRUE.unless
 #'
 #' @description Return TRUE unless the variable is defined. If defined, it returns the value of the variable.
-#' @param NameOfaVariable Name of a possibly defined variable to be tested.
+#' @param NameOfaVariable Variable to test, given as a bare name or a character string. Must not be \code{NULL}.
 #' @param v verbose
 #' @export
-#' @examples TRUE.unless("xsadasf32")
+#' @examples
+#' TRUE.unless(xsadasf32)
+#' TRUE.unless("xsadasf32")
 #' Num <- 22
-#' TRUE.unless("Num")
+#' TRUE.unless(Num)
 #' TRUE.unless("cx")
-TRUE.unless <- function(NameOfaVariable = "VarName", v = TRUE) {
-  if (exists(substitute(NameOfaVariable))) {
-    get(substitute(NameOfaVariable))
+TRUE.unless <- function(NameOfaVariable, v = TRUE) {
+  if (missing(NameOfaVariable) || is.null(NameOfaVariable)) {
+    stop("`NameOfaVariable` must be supplied and cannot be NULL")
+  }
+  var_expr <- substitute(NameOfaVariable)
+  varname <- if (is.character(var_expr)) as.character(var_expr) else deparse(var_expr)
+  if (exists(varname, envir = parent.frame())) {
+    get(varname, envir = parent.frame())
   } else {
-    if (v) message(NameOfaVariable, " is not defined, returning TRUE")
+    if (v) message(varname, " is not defined, returning TRUE")
     TRUE
   }
 }
@@ -92,17 +97,25 @@ TRUE.unless <- function(NameOfaVariable = "VarName", v = TRUE) {
 #' @title FALSE.unless
 #'
 #' @description Return FALSE unless the variable is defined. If defined, it returns the value of the variable.
-#' @param NameOfaVariable Name of a possibly defined variable to be tested.
+#' @param NameOfaVariable Variable to test, given as a bare name or a character string. Must not be \code{NULL}.
+#' @param v verbose
 #' @export
-#' @examples FALSE.unless("xsadasf32")
+#' @examples
+#' FALSE.unless(xsadasf32)
+#' FALSE.unless("xsadasf32")
 #' Num <- 22
-#' FALSE.unless("Num")
+#' FALSE.unless(Num)
 #' FALSE.unless("c")
-FALSE.unless <- function(NameOfaVariable = "VarName") {
-  if (exists(substitute(NameOfaVariable))) {
-    get(substitute(NameOfaVariable))
+FALSE.unless <- function(NameOfaVariable, v = TRUE) {
+  if (missing(NameOfaVariable) || is.null(NameOfaVariable)) {
+    stop("`NameOfaVariable` must be supplied and cannot be NULL")
+  }
+  var_expr <- substitute(NameOfaVariable)
+  varname <- if (is.character(var_expr)) as.character(var_expr) else deparse(var_expr)
+  if (exists(varname, envir = parent.frame())) {
+    get(varname, envir = parent.frame())
   } else {
-    iprint(NameOfaVariable, "is not defined, returning FALSE")
+    if (v) message(varname, " is not defined, returning FALSE")
     FALSE
   }
 }
@@ -126,11 +139,11 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome p
   Findings <- numeric(0)
   ln_needle <- length(needle)
   if (exact) {
-    for (i in 1:ln_needle) {
+    for (i in seq_along(needle)) {
       Findings <- c(Findings, which(haystack == needle[i]))
     } # for
   } else {
-    for (i in 1:ln_needle) {
+    for (i in seq_along(needle)) {
       Findings <- c(Findings, grep(needle[i], haystack, ignore.case = TRUE, perl = FALSE))
     } # for
   } # exact or partial match
@@ -366,14 +379,15 @@ llwrite_list <- function(yourlist, printName = "self") {
   } else {
     llprint("####", printName)
   }
-  for (e in 1:length(yourlist)) {
-    if (is.null(names(yourlist))) {
+  for (e in seq_along(yourlist)) {
+    if (!is.null(names(yourlist))) {
       llprint("#####", names(yourlist)[e])
     } else {
       llprint("#####", e)
     }
-    print(yourlist[e])
-    llogit("`", yourlist[e], "`")
+    element <- yourlist[[e]]
+    print(element)
+    llogit("`", element, "`")
   }
 }
 
@@ -765,7 +779,7 @@ filter_HP <- function(numeric_vector,
     llogit(conclusion)
   }
 
-  if (plot.hist & require("MarkdownReports")) {
+  if (plot.hist && requireNamespace("MarkdownReports", quietly = TRUE)) {
     plotname <- substitute(numeric_vector)
     MarkdownReports::whist(
       variable = numeric_vector,
@@ -838,7 +852,7 @@ filter_LP <- function(numeric_vector,
     llogit(conclusion)
   }
 
-  if (plot.hist & require("MarkdownReports")) {
+  if (plot.hist && requireNamespace("MarkdownReports", quietly = TRUE)) {
     plotname <- substitute(numeric_vector)
     MarkdownReports::whist(
       variable = numeric_vector,
@@ -920,7 +934,7 @@ filter_MidPass <- function(numeric_vector,
     llogit(conclusion)
   }
 
-  if (plot.hist & require("MarkdownReports")) {
+  if (plot.hist && requireNamespace("MarkdownReports", quietly = TRUE)) {
     plotname <- substitute(numeric_vector)
     MarkdownReports::whist(
       variable = numeric_vector,
@@ -1255,6 +1269,7 @@ color_check <- function(..., incrBottMarginBy = 0, savefile = FALSE) {
   # Save original margin if margin adjustment is requested
   if (incrBottMarginBy) {
     .ParMarDefault <- par("mar")
+    on.exit(par(mar = .ParMarDefault), add = TRUE)
     par(mar = c(par("mar")[1] + incrBottMarginBy, par("mar")[2:4]))
   }
 
@@ -1266,9 +1281,6 @@ color_check <- function(..., incrBottMarginBy = 0, savefile = FALSE) {
 
   # Plot colors as a barplot
   barplot(rep(10, length(color_codes)), col = color_codes, names.arg = labelz, las = 2)
-
-  # Reset margin if it was changed
-  if (incrBottMarginBy) par(mar = .ParMarDefault)
 
   # Derive filename base from expression passed in ...
   fname <- substitute(...)
@@ -1373,7 +1385,9 @@ wcolorize <- function(vector = c(1, 1, 1:6),
 #' @export
 filter_survival_length <- function(length_new, length_old, prepend = "") { # Parse a sentence reporting the % of filter survival.
   pc <- Stringendo::percentage_formatter(length_new / length_old)
-  llprint(prepend, pc, " of ", length_old, " entries make it through the filter")
+  sentence <- kollapse(prepend, pc, " of ", length_old, " entries make it through the filter", print = FALSE)
+  llprint(sentence)
+  invisible(sentence)
 }
 
 
