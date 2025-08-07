@@ -367,7 +367,7 @@ llwrite_list <- function(yourlist, printName = "self") {
     llprint("####", printName)
   }
   for (e in 1:length(yourlist)) {
-    if (is.null(names(yourlist))) {
+    if (!is.null(names(yourlist))) {
       llprint("#####", names(yourlist)[e])
     } else {
       llprint("#####", e)
