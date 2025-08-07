@@ -321,7 +321,7 @@ md.write.as.list <- function(vector = 1:3,
 #'
 #' @description Format a markdown image reference (link) to .pdf and .png versions of a graph,
 #' and insert both links into the markdown report set by "path_of_report".
-#' If the "b.png4Github" variable is set, the .png-link is set up such,
+#' If the "b.png4GitHub" variable is set, the .png-link is set up such,
 #' that you can upload the whole report with the .png image into your GitHub repo's wiki,
 #' under "Reports"/OutDir/ (Reports is a literal string, OutDir is the last/deepest
 #' directory name in the "OutDir" variable. See create_set_OutDir() function.).
@@ -334,7 +334,7 @@ md.image.linker <- function(fname_wo_ext, OutDir_ = ww.set.OutDir()) {
   splt <- strsplit(fname_wo_ext, "/")
   fn <- splt[[1]][length(splt[[1]])]
   if (unless.specified("b.usepng")) {
-    if (unless.specified("b.png4Github")) {
+    if (unless.specified("b.png4GitHub")) {
       dirnm <- strsplit(x = OutDir_, split = "/")[[1]]
       dirnm <- dirnm[length(dirnm)]
       llogit(kollapse("![]", "(Reports/", dirnm, "/", fname_wo_ext, ".png)", print = FALSE))
@@ -482,7 +482,7 @@ md.List2Table <- function(parameterlist,
 #' @param WriteOut Write the table into a TSV file.
 #' @examples df <- matrix(1:9, 3)
 #' rownames(df) <- 6:8
-#' rownames(df) <- 9:11
+#' colnames(df) <- 9:11
 #' md.tableWriter.DF.w.dimnames(df, percentify = FALSE, title_of_table = NA)
 #' @importFrom ReadWriter write.simple.tsv
 #' @importFrom CodeAndRoll2 iround

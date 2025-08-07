@@ -1,7 +1,7 @@
 
 #' ww.ttl_field.gg
 #'
-#' Internal function. Creates the string written into the PDF files "Title' (metadata) field.
+#' Internal function. Creates the string written into the PDF file "Title" (metadata) field.
 #' @param plotname Name of the plot
 #' @param creator String X in: "plotblabla by X". Defaults: "ggExpress".
 #' @export
