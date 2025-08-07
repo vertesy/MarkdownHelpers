@@ -119,9 +119,12 @@ FALSE.unless <- function(NameOfaVariable = "VarName") {
 #' @param report Logical. Whether to print a report of the results.
 #' @importFrom Stringendo percentage_formatter
 #' @return A list with the results of the lookup.
-#'
+#' 
 #' @export
 lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome pattern matching for a set of values in another set of values. Returns a list with all kinds of results.
+  stopifnot(is.vector(needle), is.vector(haystack),
+            is.logical(exact), length(exact) == 1,
+            is.logical(report), length(report) == 1)
   ls_out <- as.list(c(ln_needle = length(needle), ln_haystack = length(haystack), ln_hits = "", hit_poz = "", hits = ""))
   Findings <- numeric(0)
   ln_needle <- length(needle)
@@ -167,10 +170,13 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome p
 #' @return A matrix with the rows of `matrix1` and `matrix2` that intersect.
 #' @importFrom CodeAndRoll2 symdiff
 #' @importFrom Stringendo percentage_formatter
-#'
+#' 
 #' @export
 
 combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # combine matrices by row name intersection
+  stopifnot(is.matrix(matrix1), is.matrix(matrix2),
+            is.numeric(k), length(k) == 1,
+            !is.null(rownames(matrix1)), !is.null(rownames(matrix2)))
   rn1 <- rownames(matrix1)
   rn2 <- rownames(matrix2)
   idx <- intersect(rn1, rn2)
@@ -394,9 +400,11 @@ llwrite_list <- function(yourlist, printName = "self") {
 #' llprint("Hello")
 #' # md.import(path_of_report)
 #' @importFrom Stringendo iprint
-#'
+#' 
 #' @export
 md.import <- function(from.file, to.file = ww.set.path_of_report()) {
+  stopifnot(is.character(from.file), length(from.file) == 1, file.exists(from.file),
+            is.character(to.file), length(to.file) == 1)
   linez <- readLines(from.file)
   if (ww.variable.and.path.exists(to.file,
                                   alt.message = "Log path and filename is not defined in path_of_report"
@@ -497,6 +505,11 @@ md.tableWriter.DF.w.dimnames <- function(df,
                                          title_of_table = NA,
                                          print2screen = FALSE,
                                          WriteOut = FALSE) {
+  stopifnot(is.data.frame(df),
+            is.character(FullPath), length(FullPath) == 1,
+            is.logical(percentify), length(percentify) == 1,
+            is.logical(print2screen), length(print2screen) == 1,
+            is.logical(WriteOut), length(WriteOut) == 1)
   if (is.na(title_of_table)) {
     t <- paste0(substitute(df), collapse = " ")
   } else {
@@ -747,6 +760,15 @@ filter_HP <- function(numeric_vector,
                       saveplot = FALSE,
                       verbose = TRUE,
                       ...) {
+  stopifnot(is.numeric(numeric_vector),
+            is.numeric(threshold), length(threshold) == 1,
+            is.logical(passequal),
+            is.logical(return_survival_ratio),
+            is.logical(return_conclusion),
+            is.logical(na.rm),
+            is.logical(plot.hist),
+            is.logical(saveplot),
+            is.logical(verbose))
   survivors <-
     if (passequal) {
       numeric_vector >= threshold
@@ -821,6 +843,15 @@ filter_LP <- function(numeric_vector,
                       saveplot = FALSE,
                       verbose = TRUE,
                       ...) {
+  stopifnot(is.numeric(numeric_vector),
+            is.numeric(threshold), length(threshold) == 1,
+            is.logical(passequal),
+            is.logical(return_survival_ratio),
+            is.logical(return_conclusion),
+            is.logical(na.rm),
+            is.logical(plot.hist),
+            is.logical(saveplot),
+            is.logical(verbose))
   survivors <-
     if (passequal) {
       numeric_vector <= threshold
@@ -899,6 +930,16 @@ filter_MidPass <- function(numeric_vector,
                            saveplot = FALSE,
                            verbose = TRUE,
                            ...) {
+  stopifnot(is.numeric(numeric_vector),
+            is.numeric(HP_threshold), length(HP_threshold) == 1,
+            is.numeric(LP_threshold), length(LP_threshold) == 1,
+            is.logical(return_survival_ratio),
+            is.logical(return_conclusion),
+            is.logical(EdgePass),
+            is.logical(na.rm),
+            is.logical(plot.hist),
+            is.logical(saveplot),
+            is.logical(verbose))
   survivors <- (numeric_vector >= HP_threshold & numeric_vector < LP_threshold)
   keyword <- "between"
   relation <- " <= x < "
@@ -1238,6 +1279,11 @@ try.dev.off <- function() {
 #'
 #' @export
 jjpegA4 <- function(filename, r = 225, q = 90, w = 8.27, h = 11.69) { # Set up an A4 size jpeg
+  stopifnot(is.character(filename), length(filename) == 1,
+            is.numeric(r), length(r) == 1,
+            is.numeric(q), length(q) == 1,
+            is.numeric(w), length(w) == 1,
+            is.numeric(h), length(h) == 1)
   jpeg(file = filename, width = w, height = h, units = "in", quality = q, res = r)
 }
 
