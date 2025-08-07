@@ -366,14 +366,14 @@ llwrite_list <- function(yourlist, printName = "self") {
   } else {
     llprint("####", printName)
   }
-  for (e in 1:length(yourlist)) {
-    if (is.null(names(yourlist))) {
+  for (e in seq_along(yourlist)) {
+    if (!is.null(names(yourlist))) {
       llprint("#####", names(yourlist)[e])
     } else {
       llprint("#####", e)
     }
-    print(yourlist[e])
-    llogit("`", yourlist[e], "`")
+    print(yourlist[[e]])
+    llogit("`", yourlist[[e]], "`")
   }
 }
 
