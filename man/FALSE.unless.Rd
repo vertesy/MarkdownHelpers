@@ -4,17 +4,20 @@
 \alias{FALSE.unless}
 \title{FALSE.unless}
 \usage{
-FALSE.unless(NameOfaVariable = "VarName")
+FALSE.unless(NameOfaVariable, v = TRUE)
 }
 \arguments{
-\item{NameOfaVariable}{Name of a possibly defined variable to be tested.}
+\item{NameOfaVariable}{Variable to test, provided as a bare name or character string. Must not be \code{NULL}.}
+
+\item{v}{verbose}
 }
 \description{
 Return FALSE unless the variable is defined. If defined, it returns the value of the variable.
 }
 \examples{
+FALSE.unless(xsadasf32)
 FALSE.unless("xsadasf32")
 Num <- 22
-FALSE.unless("Num")
+FALSE.unless(Num)
 FALSE.unless("c")
 }
