@@ -24,12 +24,12 @@ You can install all of them directly from **GitHub** via **devtools** with one R
 # install.packages("devtools"); # If you don't have it.
 
 # Install dependencies
-devtools::install_github(repo = "vertesy/Stringendo", upgrade = F)
-devtools::install_github(repo = "vertesy/CodeAndRoll2", upgrade = F)
-devtools::install_github(repo = "vertesy/ReadWriter", upgrade = F)
+devtools::install_github(repo = "vertesy/Stringendo", ref = "main", upgrade = F)
+devtools::install_github(repo = "vertesy/CodeAndRoll2", ref = "main", upgrade = F)
+devtools::install_github(repo = "vertesy/ReadWriter", ref = "main", upgrade = F)
 
 # Install MarkdownHelpers
-devtools::install_github(repo = "vertesy/MarkdownHelpers", upgrade = F)
+devtools::install_github(repo = "vertesy/MarkdownHelpers", ref = "main", upgrade = F)
 
 ```
 
