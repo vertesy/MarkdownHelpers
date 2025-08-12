@@ -749,7 +749,6 @@ md.import.table <- function(from.file.table,
 #' @param return_survival_ratio Return a number with the survival ratio (TRUE)
 #' or a logical index vector of the survivors (FALSE). return_conclusion must be FALSE
 #' @param plot.hist Plot the histogram of the input data.
-#' @param plot.hist Plot the histogram of the input data
 #' @param saveplot Save the histogram as PDF, FALSE by default
 #' @param na.rm Remove NA-s? Default: TRUE
 #' @param verbose Print output to console? Default: TRUE
