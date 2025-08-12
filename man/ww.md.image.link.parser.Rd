@@ -7,11 +7,11 @@
 ww.md.image.link.parser(...)
 }
 \arguments{
-\item{...}{Variables (strings, vectors) to be collapsed in consecutively.}
+\item{...}{Variables (strings, vectors) to be collapsed consecutively.}
 }
 \description{
 Format a markdown image reference (link) from the file path to the file.
-It can parse the file path, if you pass it in separate variables and strings.
+It can parse the file path if you pass it in separate variables and strings.
 E.g. ww.md.image.link.parser(Directory, "MyImage.png").
 }
 \examples{

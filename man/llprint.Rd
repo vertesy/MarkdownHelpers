@@ -7,10 +7,10 @@
 llprint(...)
 }
 \arguments{
-\item{...}{Variables (strings, vectors) to be collapsed in consecutively.}
+\item{...}{Variables (strings, vectors) to be collapsed consecutively.}
 }
 \description{
-Collapse by white spaces a sentence from any variable passed on to the function.
+Collapse a sentence from any variables passed to the function with white spaces.
 Print the sentence to the screen and write it to your markdown report file,
 if the "path_of_report" variable is defined.
 }

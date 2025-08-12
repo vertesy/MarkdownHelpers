@@ -60,7 +60,7 @@ irequire <- function(package) {
     print("Loading package:")
     require(package = package_, character.only = TRUE)
   }
-} # install package if cannot be loaded
+} # install package if it cannot be loaded
 
 
 # ______________________________________________________________________________________________________________________________
@@ -184,7 +184,7 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome p
 #'
 #' @export
 
-combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # combine matrices by rownames intersect
+combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # combine matrices by row name intersection
   rn1 <- rownames(matrix1)
   rn2 <- rownames(matrix2)
   idx <- intersect(rn1, rn2)
@@ -216,7 +216,7 @@ combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # c
 #'
 #' @description Check if a variable name is defined, and if so, does the path (to a file) stored in that
 #'  variable points to an existing directory?
-#' @param path A variable name that might not exist and might point to a non-existent direcotry.
+#' @param path A variable name that might not exist and might point to a non-existent directory.
 #' @param alt.message Alternative message if the variable + path does not exist. FALSE or string.
 #' @export
 #' @examples ww.variable.and.path.exists(path = B, alt.message = "Hello, your path/var does not exist.")
@@ -334,12 +334,12 @@ md.write.as.list <- function(vector = 1:3,
 #'
 #' @description Format a markdown image reference (link) to a .pdf and .png versions of graph,
 #' and insert both links to the markdown report, set by "path_of_report".
-#' If the "b.png4Github" variable is set, the .png-link is set up such,
+#' If the "b.png4GitHub" variable is set, the .png-link is set up such,
 #' that you can upload the whole report with the .png image into your GitHub repo's wiki,
 #' under "Reports"/OutDir/ (Reports is a literal string, OutDir is the last/deepest
 #' directory name in the "OutDir" variable. See create_set_OutDir() function.).
 #' This function is called by the ~wplot functions.
-#' @param fname_wo_ext Name of the image file where markdown links going to point to.
+#' @param fname_wo_ext Name of the image file that markdown links will point to.
 #' @param OutDir_ The output directory (absolute / full path).
 #' @export
 #' @examples md.image.linker(fname_wo_ext = "MyPlot")
@@ -347,14 +347,14 @@ md.image.linker <- function(fname_wo_ext, OutDir_ = ww.set.OutDir()) {
   splt <- strsplit(fname_wo_ext, "/")
   fn <- splt[[1]][length(splt[[1]])]
   if (unless.specified("b.usepng")) {
-    if (unless.specified("b.png4Github")) {
+    if (unless.specified("b.png4GitHub")) {
       dirnm <- strsplit(x = OutDir_, split = "/")[[1]]
       dirnm <- dirnm[length(dirnm)]
       llogit(kollapse("![]", "(Reports/", dirnm, "/", fname_wo_ext, ".png)", print = FALSE))
     } else {
       if (exists("b.Subdirname") && !b.Subdirname == FALSE) {
         fname_wo_ext <- paste0(b.Subdirname, "/", fname_wo_ext)
-      } # set only if b.Subdirname is defined, it is not FALSE.
+      } # set only if b.Subdirname is defined and not FALSE.
       llogit(kollapse("![", fn, "]", "(", fname_wo_ext, ".png)", print = FALSE))
     }
   } else {
@@ -399,7 +399,7 @@ llwrite_list <- function(yourlist, printName = "self") {
 # ______________________________________________________________________________________________________________________________
 #' @title md.import
 #'
-#' @description Import and concatenated an external markdown or text file to the report
+#' @description Import and concatenate an external markdown or text file to the report
 #' @param from.file File to be appended at the (current) last line of the report
 #' @param to.file The report file. Defined as "path_of_report" by default,
 #' which is set by the "setup_MarkdownReports" function.
@@ -432,13 +432,13 @@ md.import <- function(from.file, to.file = ww.set.path_of_report()) {
 #'
 #' @description Log the parameters & settings used in the script and stored in a list, in a table format
 #'  in the report.
-#' @param parameterlist List of Paramters
+#' @param parameterlist List of Parameters
 #' @param maxlen Maximum length of entries in a parameter list element
 #' @export
 #' @examples md.LogSettingsFromList(parameterlist = list("min" = 4, "method" = "pearson", "max" = 10))
 md.LogSettingsFromList <- function(parameterlist,
                                    maxlen = 20) {
-  LZ <- unlist(lapply(parameterlist, length)) # collapse paramters with multiple entires
+  LZ <- unlist(lapply(parameterlist, length)) # collapse parameters with multiple entries
   LNG <- names(which(LZ > 1))
   for (i in LNG) {
     if (length(parameterlist[[i]]) > maxlen) {
@@ -460,7 +460,7 @@ md.LogSettingsFromList <- function(parameterlist,
 #' named (col1) list, in a table format in the report.
 #' @param title Title of the table.
 #' @param colname2 Name of the 2nd column.
-#' @param parameterlist List of Paramters.
+#' @param parameterlist List of Parameters.
 #' @param maxlen Maximum length of entries in a parameter list element,.
 #' @export
 #' @examples md.LogSettingsFromList(parameterlist = list("min" = 4, "method" = "pearson", "max" = 10))
@@ -468,7 +468,7 @@ md.List2Table <- function(parameterlist,
                           title = "List elements",
                           colname2 = "Value",
                           maxlen = 20) {
-  LZ <- unlist(lapply(parameterlist, length)) # collapse paramters with multiple entires
+  LZ <- unlist(lapply(parameterlist, length)) # collapse parameters with multiple entries
   LNG <- names(which(LZ > 1))
   for (i in LNG) {
     if (length(parameterlist[[i]]) > maxlen) {
@@ -491,11 +491,11 @@ md.List2Table <- function(parameterlist,
 #' @param FullPath Full path to the file.
 #' @param percentify Format numbers between 0-1 to percentages 0-100.
 #' @param title_of_table Title above the table (in the markdown report).
-#' @param print2screen Print the markdown formatted table to the sceen.
+#' @param print2screen Print the markdown formatted table to the screen.
 #' @param WriteOut Write the table into a TSV file.
 #' @examples df <- matrix(1:9, 3)
 #' rownames(df) <- 6:8
-#' rownames(df) <- 9:11
+#' colnames(df) <- 9:11
 #' md.tableWriter.DF.w.dimnames(df, percentify = FALSE, title_of_table = NA)
 #' @importFrom ReadWriter write.simple.tsv
 #' @importFrom CodeAndRoll2 iround
@@ -572,7 +572,7 @@ md.tableWriter.DF.w.dimnames <- function(df,
 #' @param FullPath Full path to the file.
 #' @param percentify Format numbers (0, 1) to percentages 0-100.
 #' @param title_of_table Title above the table (in the markdown report).
-#' @param print2screen Print the markdown formatted table to the sceen.
+#' @param print2screen Print the markdown formatted table to the screen.
 #' @param WriteOut Write the table into a TSV file.
 #' @examples x <- -1:2
 #' names(x) <- LETTERS[1:4]
@@ -662,7 +662,7 @@ md.LinkTable <- function(tableOfLinkswRownames) {
 # ______________________________________________________________________________________________________________________________
 #' @title md.import.table
 #'
-#' @description Import a table (.csv, or tab seprated values, .tsv file) and write it
+#' @description Import a table (.csv, or tab separated values, .tsv file) and write it
 #' in markdown format to the report.
 #' @param from.file.table  The *.tsv file to be appended  as table at
 #' the (current) last line of the report.
@@ -982,7 +982,7 @@ ww.FnP_parser <- function(fname, ext_wo_dot) {
 #'
 #' @description Check if a variable name is defined, and if so, does the path (to a file) stored in that
 #'  variable points to an existing directory?
-#' @param path A variable name that might not exist and might point to a non-existent direcotry.
+#' @param path A variable name that might not exist and might point to a non-existent directory.
 #' @param alt.message Alternative message if the variable + path does not exist. FALSE or string.
 #' @importFrom Stringendo iprint
 #' @export
@@ -1185,17 +1185,17 @@ ww.autoPlotName <- function(name = NULL) {
 #'
 #' @description A function loading results to the global environment.
 #' Source: https://stackoverflow.com/questions/28180989/
-#' @param name Name of the global variabe to be assigned
-#' @param value Value of the global variabe to be assigned
+#' @param name Name of the global variable to be assigned
+#' @param value Value of the global variable to be assigned
 #' @param verbose Print directory to screen? Default: TRUE
 #' @param max_print Print max this many elements, Default: 10
-#' @param pos defaults to 1 which equals an assingment to global environment
+#' @param pos defaults to 1 which equals an assignment to global environment
 #' @importFrom Stringendo iprint
 #'
 #' @export
 
 ww.assign_to_global <- function(name, value, pos = 1, max_print = 5, verbose = TRUE) {
-  if (verbose) Stringendo::iprint(name, "defined as:", head(value, max_print)) # , "is a new global environment variable"
+  if (verbose) Stringendo::iprint(name, "defined as:", head(value, max_print)) # "is a new global environment variable"
   assign(name, value, envir = as.environment(pos))
 }
 
@@ -1274,7 +1274,7 @@ color_check <- function(..., incrBottMarginBy = 0, savefile = FALSE) {
 #'
 #' @description Generate color palettes. Input: a vector with categories, can be numbers or strings.
 #' Handles repeating values. Output: color vector of equal length as input.
-#' Optionally it can ouput a list where an extra element lists the
+#' Optionally it can output a list where an extra element lists the
 #' categories (simply using unique would remove the names). See example.
 #' Some color scale depend on packages "colorRamps", or "gplots".
 #'
@@ -1311,7 +1311,7 @@ wcolorize <- function(vector = c(1, 1, 1:6),
   COLZ <- CodeAndRoll2::as.numeric.wNames.factor(vector) # if basic numbers
   if (randomize) {
     COLZ <- sample(COLZ)
-  } # if randomise
+  } # if randomize
   if (RColorBrewerSet != FALSE) {
     COLZ <- RColorBrewer::brewer.pal(NrCol, name = RColorBrewerSet)[CodeAndRoll2::as.numeric.wNames.factor(vector)]
   } else {
@@ -1373,7 +1373,7 @@ filter_survival_length <- function(length_new, length_old, prepend = "") { # Par
 #' @title ww.set.file.extension
 #'
 #' @description Internal function. Sets file extension for ggExpress plotting functions.
-#' @param global_setting global file extension setting stored in a global variable. Detault: 'b.def.ext'
+#' @param global_setting global file extension setting stored in a global variable. Default: 'b.def.ext'
 #' @param default Default file extension: png
 #' @param also_pdf Save plot in both png and pdf formats.
 #' @export

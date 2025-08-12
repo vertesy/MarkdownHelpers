@@ -17,5 +17,5 @@ filter_survival_length(length_new, length_old, prepend = "")
 A string.
 }
 \description{
-Parse a sentence reporting the \% of filter survival.
+Parse a sentence reporting the percentage of filter survival.
 }

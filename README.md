@@ -66,11 +66,11 @@ MarkdownReports::setup_MarkdownReports()
 
 
 
-##### Most  `MarkdownHelpers` function write into a markdown file.  
+##### Most `MarkdownHelpers` functions write to a markdown file.
 
-##### That file is defined in `path_of_report`, by first calling `MarkdownReports::setup_MarkdownReports()`. 
+##### That file is defined in `path_of_report` by first calling `MarkdownReports::setup_MarkdownReports()`.
 
-#####  `MarkdownReports` and `MarkdownHelpers` works with such _background variables_ defined by `setup_MarkdownReports()` in the global env .
+##### `MarkdownReports` and `MarkdownHelpers` work with such _background variables_ defined by `setup_MarkdownReports()` in the global environment.
 
 
 
@@ -154,13 +154,13 @@ llogit. Collapse by white spaces a sentence from any variable passed on to the f
 md.write.as.list. Writes a vector as a (numbered) list into the report file.
 
 - #### 11 `md.image.linker()`
-md.image.linker. Format a markdown image reference (link) to a .pdf and .png versions of graph,  and insert both links to the markdown report, set by "path_of_report".  If the "b.png4Github" variable is set, the .png-link is set up such,  that you can upload the whole report with the .png image into your GitHub repo's wiki,  under "Reports"/OutDir/ (Reports is a literal string, OutDir is the last/deepest  directory name in the "OutDir" variable. See create_set_OutDir() function.).  This function is called by the ~wplot functions.
+md.image.linker. Format a markdown image reference (link) to a .pdf and .png versions of graph,  and insert both links to the markdown report, set by "path_of_report".  If the "b.png4GitHub" variable is set, the .png-link is set up such,  that you can upload the whole report with the .png image into your GitHub repo's wiki,  under "Reports"/OutDir/ (Reports is a literal string, OutDir is the last/deepest  directory name in the "OutDir" variable. See create_set_OutDir() function.).  This function is called by the ~wplot functions.
 
 - #### 12 `llwrite_list()`
 llwrite_list. Print a list object from R, one element per line, into your markdown report
 
 - #### 13 `md.import()`
-md.import. Import and concatenated an external markdown or text file to the report
+ md.import. Import and concatenate an external markdown or text file to the report
 
 - #### 14 `md.LogSettingsFromList()`
 md.LogSettingsFromList. Log the parameters & settings used in the script and stored in a list, in a table format   in the report.
@@ -178,7 +178,7 @@ md.tableWriter.VEC.w.names. Take an R vector with names, parse a markdown table 
 md.LinkTable. Take a dataframe where every entry is a string containing an html link, parse and write out.   a properly formatted markdown table.
 
 - #### 19 `md.import.table()`
-md.import.table. Import a table (.csv, or tab seprated values, .tsv file) and write it  in markdown format to the report.
+md.import.table. Import a table (.csv, or tab separated values, .tsv file) and write it  in markdown format to the report.
 
 - #### 20 `filter_HP()`
 filter_HP. Filter values that fall between above high-pass-threshold (X >). 
@@ -232,7 +232,7 @@ jjpegA4. Setup an A4 size jpeg.
 color_check. Display the colors encoded by the numbers / color-ID-s you pass on to this function
 
 - #### 37 `wcolorize()`
-wcolorize. Generate color palettes. Input: a vector with categories, can be numbers or strings.  Handles repeating values. Output: color vector of equal length as input.  Optionally it can ouput a list where an extra element lists the  categories (simply using unique would remove the names). See example.  Some color scale depend on packages "colorRamps", or "gplots". 
+wcolorize. Generate color palettes. Input: a vector with categories, can be numbers or strings.  Handles repeating values. Output: color vector of equal length as input.  Optionally it can output a list where an extra element lists the  categories (simply using unique would remove the names). See example.  Some color scale depend on packages "colorRamps", or "gplots".
 
 - #### 38 `filter_survival_length()`
 filter_survival_length. Parse a sentence reporting the % of filter survival.

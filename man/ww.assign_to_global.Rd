@@ -7,15 +7,15 @@
 ww.assign_to_global(name, value, pos = 1, max_print = 5, verbose = TRUE)
 }
 \arguments{
-\item{name}{Name of the global variabe to be assigned}
+\item{name}{Name of the global variable to be assigned}
 
-\item{value}{Value of the global variabe to be assigned}
+\item{value}{Value of the global variable to be assigned}
 
-\item{pos}{defaults to 1 which equals an assingment to global environment}
+\item{pos}{Defaults to 1 which equals an assignment to the global environment}
 
-\item{max_print}{Print max this many elements, Default: 10}
+\item{max_print}{Print at most this many elements, Default: 10}
 
-\item{verbose}{Print directory to screen? Default: TRUE}
+\item{verbose}{Print value to screen? Default: TRUE}
 }
 \description{
 A function loading results to the global environment.

@@ -49,7 +49,7 @@ if (!dir.exists(RepositoryDir)) {
 }
 
 
-# go and write fun's ------------------------------------------------------------------------
+# go and write functions ------------------------------------------------------------------------
 # file.edit(package.FnP)
 
 # Create Roxygen Skeletons ------------------------
@@ -83,7 +83,7 @@ warnings()
 # Install your package ------------------------------------------------
 devtools::install(RepositoryDir, upgrade = F)
 
-# Test if you can install from github ------------------------------------------------
+# Test if you can install from GitHub ------------------------------------------------
 pak::pkg_install("vertesy/MarkdownHelpers")
 # unload("MarkdownHelpers")
 # require("MarkdownHelpers")

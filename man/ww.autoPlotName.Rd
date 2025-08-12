@@ -10,7 +10,7 @@ ww.autoPlotName(name = NULL)
 \item{name}{Manually name your plot}
 }
 \description{
-Internal function. Creates automatic plot and file-names.
+Internal function. Creates automatic plot and file names.
 }
 \examples{
 ww.autoPlotName()

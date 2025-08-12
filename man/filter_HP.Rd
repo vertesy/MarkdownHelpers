@@ -23,27 +23,27 @@ filter_HP(
 
 \item{threshold}{A numeric value above which "numeric_vector" passes.}
 
-\item{passequal}{Pass if a value is larger, or equal than the threshold. FALSE by default.}
+\item{passequal}{Pass if a value is larger than or equal to the threshold. FALSE by default.}
 
 \item{prepend}{Text prepended to the results.}
 
-\item{return_survival_ratio}{Return a number with the survival ratio (TRUE).
+\item{return_survival_ratio}{Return a number with the survival ratio (TRUE)
 or a logical index vector of the survivors (FALSE). return_conclusion must be FALSE}
 
-\item{return_conclusion}{Return conclusion sentence that (also printed). return_survival_ratio must be FALSE}
+\item{return_conclusion}{Return conclusion sentence that is also printed. return_survival_ratio must be FALSE}
 
 \item{na.rm}{Remove NA-s? Default: TRUE}
 
-\item{plot.hist}{Plot the histogram of the input data}
+\item{plot.hist}{Plot the histogram of the input data.}
 
-\item{saveplot}{Save the histogram as PDF, FALSE by defeault}
+\item{saveplot}{Save the histogram as PDF, FALSE by default}
 
-\item{verbose}{print output to console? Default: yes.}
+\item{verbose}{Print output to console? Default: TRUE}
 
 \item{...}{Additional arguments for the histogram}
 }
 \description{
-Filter values that fall between above high-pass-threshold (X >).
+Filter values that fall above the high-pass threshold (X >).
 }
 \examples{
 filter_HP(

@@ -30,7 +30,7 @@ rprofile()
 devtools::install_local(repository.dir, upgrade = F, force = T)
 
 
-# Test if you can install from github ------------------------------------------------
+# Test if you can install from GitHub ------------------------------------------------
 remote.path <- file.path(DESCRIPTION$'github.user', DESCRIPTION$'package.name')
 pak::pkg_install(remote.path)
 # unload(DESCRIPTION$'package.name')
@@ -52,7 +52,7 @@ styler::style_pkg(repository.dir)
 PackageTools::extract_package_dependencies(repository.dir)
 # I have a list of functions where some are not properly separated at the bottom. Answer in text, not code.
 # I need the following:
-#   1. Generate a simple,unique, sorted list of function names, one function per line.
+#   1. Generate a simple, unique, sorted list of function names, one function per line.
 # 2. Identify the packages that contain these functions and provide a list of the corresponding packages for each function. Also make an R vector of the package names.
 # 3. Acknowledge that some functions may not have an easily identifiable package.
 

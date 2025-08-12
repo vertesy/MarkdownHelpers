@@ -22,17 +22,17 @@ md.tableWriter.DF.w.dimnames(
 
 \item{title_of_table}{Title above the table (in the markdown report).}
 
-\item{print2screen}{Print the markdown formatted table to the sceen.}
+\item{print2screen}{Print the markdown formatted table to the screen.}
 
 \item{WriteOut}{Write the table into a TSV file.}
 }
 \description{
-Take an R data frame with row- and column- names, parse a markdown table from it,
-and write it to the markdown report, set by "path_of_report".
+Take an R data frame with row and column names, parse a markdown table from it,
+and write it to the markdown report specified by "path_of_report".
 }
 \examples{
 df <- matrix(1:9, 3)
 rownames(df) <- 6:8
-rownames(df) <- 9:11
+colnames(df) <- 9:11
 md.tableWriter.DF.w.dimnames(df, percentify = FALSE, title_of_table = NA)
 }

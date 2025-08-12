@@ -7,18 +7,18 @@
 jjpegA4(filename, r = 225, q = 90, w = 8.27, h = 11.69)
 }
 \arguments{
-\item{filename}{The filename of the jpeg file to create.}
+\item{filename}{The filename of the JPEG file to create.}
 
-\item{r}{The resolution of the jpeg file.}
+\item{r}{The resolution of the JPEG file.}
 
-\item{q}{The quality of the jpeg file.}
+\item{q}{The quality of the JPEG file.}
 
 \item{w}{Width}
 
 \item{h}{Height}
 }
 \description{
-Setup an A4 size jpeg.
+Set up an A4-sized JPEG.
 }
 \examples{
 \dontrun{
