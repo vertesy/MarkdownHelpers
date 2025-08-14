@@ -14,7 +14,7 @@ ww.variable.and.path.exists(path = path_of_report, alt.message = NULL)
 \item{alt.message}{Alternative message if the variable + path does not exist. FALSE or string.}
 }
 \description{
-Check if a variable name is defined and, if so, does the path (to a file) stored in that
+Check if a variable name is defined, and, if so, does the path (to a file) stored in that
 variable point to an existing directory?
 
 Check if a variable name is defined and, if so, does the path (to a file) stored in that
