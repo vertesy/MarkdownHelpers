@@ -33,6 +33,6 @@ and write it to the markdown report specified by "path_of_report".
 \examples{
 df <- matrix(1:9, 3)
 rownames(df) <- 6:8
-colnames(df) <- 9:11
+colnames(df) <- c("Col1", "Col2", "Col3")
 md.tableWriter.DF.w.dimnames(df, percentify = FALSE, title_of_table = NA)
 }
