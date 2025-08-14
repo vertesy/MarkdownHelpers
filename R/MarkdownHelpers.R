@@ -683,7 +683,6 @@ md.LinkTable <- function(tableOfLinkswRownames) {
 # ______________________________________________________________________________________________________________________________
 #' @title md.import.table
 #'
-#' @description Import a table (.csv or tab separated values, .tsv file) and write it
 #' @description Import a table (.csv, or tab separated values, .tsv file) and write it
 #' in markdown format to the report.
 #' @param from.file.table  The *.tsv file to be appended as a table at
