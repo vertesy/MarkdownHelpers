@@ -392,9 +392,8 @@ llwrite_list <- function(yourlist, printName = "self") {
       llprint("#####", e)
     }
     
-    llogit("`", yourlist[e], "`")
-    print(yourlist[e])
-    
+    print(yourlist[[e]])
+    llogit("`", yourlist[[e]], "`")
   }
 }
 
