@@ -132,7 +132,7 @@ FALSE.unless <- function(NameOfaVariable, v = TRUE) {
 #' @param report Logical. Whether to print a report of the results.
 #' @importFrom Stringendo percentage_formatter
 #' @return A list with the results of the lookup.
-#' 
+#'
 #' @export
 lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome pattern matching for a set of values in another set of values. Returns a list with all kinds of results.
   stopifnot(is.vector(needle), is.vector(haystack),
@@ -183,7 +183,7 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome p
 #' @return A matrix with the rows of `matrix1` and `matrix2` that intersect.
 #' @importFrom CodeAndRoll2 symdiff
 #' @importFrom Stringendo percentage_formatter
-#' 
+#'
 #' @export
 
 combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # combine matrices by row name intersection
@@ -391,7 +391,7 @@ llwrite_list <- function(yourlist, printName = "self") {
     } else {
       llprint("#####", e)
     }
-    
+
     print(yourlist[[e]])
     llogit("`", yourlist[[e]], "`")
   }
@@ -414,7 +414,7 @@ llwrite_list <- function(yourlist, printName = "self") {
 #' llprint("Hello")
 #' # md.import(path_of_report)
 #' @importFrom Stringendo iprint
-#' 
+#'
 #' @export
 md.import <- function(from.file, to.file = ww.set.path_of_report()) {
   stopifnot(is.character(from.file), length(from.file) == 1, file.exists(from.file),
@@ -1253,7 +1253,7 @@ ww.autoPlotName <- function(name = NULL) {
 ww.assign_to_global <- function(name, value, pos = 1, max_print = 5, verbose = TRUE) {
   if (verbose) {
     Stringendo::iprint(name, "defined as:") # "is a new global environment variable"
-    print(utils::head(value, max_print))
+    message(utils::head(value, max_print))
   }
   assign(name, value, envir = as.environment(pos))
 }
