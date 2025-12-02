@@ -1321,10 +1321,10 @@ color_check <- function(..., incrBottMarginBy = 0, savefile = FALSE) {
   color_codes <- c(...)
 
   # Use names if provided, otherwise use colors themselves as labels
-  labelz <- if (length(names(color_codes)) == length(color_codes)) names(color_codes) else color_codes
+  color_labels <- if (length(names(color_codes)) == length(color_codes)) names(color_codes) else color_codes
 
   # Plot colors as a barplot
-  barplot(rep(10, length(color_codes)), col = color_codes, names.arg = labelz, las = 2)
+  barplot(rep(10, length(color_codes)), col = color_codes, names.arg = color_labels, las = 2)
 
   # Derive filename base from expression passed in ...
   fname <- substitute(...)
