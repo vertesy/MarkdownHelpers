@@ -714,7 +714,7 @@ md.import.table <- function(from.file.table,
     read.table(
       from.file.table,
       stringsAsFactors = FALSE,
-      sep = "\t",
+      sep = field.sep,
       header = has.colnames,
       row.names = 1
     )
@@ -722,7 +722,7 @@ md.import.table <- function(from.file.table,
     read.table(
       from.file.table,
       stringsAsFactors = FALSE,
-      sep = "\t",
+      sep = field.sep,
       header = has.colnames
     )
   }
