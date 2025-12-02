@@ -525,12 +525,12 @@ md.tableWriter.DF.w.dimnames <- function(df,
             is.logical(print2screen), length(print2screen) == 1,
             is.logical(WriteOut), length(WriteOut) == 1)
   if (is.na(title_of_table)) {
-    t <- paste0(substitute(df), collapse = " ")
+    title_text <- paste0(substitute(df), collapse = " ")
   } else {
-    t <- title_of_table
+    title_text <- title_of_table
   }
 
-  title_of_table <- paste("\n#### ", t)
+  title_of_table <- paste("\n#### ", title_text)
   if (file.exists(FullPath)) {
     write(title_of_table, FullPath, append = TRUE)
 
@@ -603,11 +603,11 @@ md.tableWriter.VEC.w.names <- function(NamedVector,
                                        print2screen = FALSE,
                                        WriteOut = FALSE) {
   if (is.na(title_of_table)) {
-    t <- paste0(substitute(NamedVector), collapse = " ")
+    title_text <- paste0(substitute(NamedVector), collapse = " ")
   } else {
-    t <- title_of_table
+    title_text <- title_of_table
   }
-  title_of_table <- paste("\n#### ", t)
+  title_of_table <- paste("\n#### ", title_text)
   if (file.exists(FullPath)) {
     write(title_of_table, FullPath, append = TRUE)
     if (!is.table(NamedVector)) {
