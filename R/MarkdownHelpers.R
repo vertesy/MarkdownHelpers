@@ -120,6 +120,38 @@ FALSE.unless <- function(NameOfaVariable, v = TRUE) {
   }
 }
 
+# ______________________________________________________________________________________________________________________________
+#' @title try_err2warn
+#'
+#' @description Evaluate an expression and return its value.
+#' If an error occurs, convert the error into an immediate warning and return a fallback value.
+#' Execution is never stopped.
+#'
+#' @param expr Expression to be evaluated.
+#' @param fallback Value to return if \code{expr} errors.
+#' @param warn Optional character string prepended to the warning message.
+#'
+#' @export
+#'
+#' @examples
+#' try_err2warn(stop("fail"), 1)
+#'
+#' x <- 2
+#' try_err2warn(x + 1, x)
+#'
+#' try_err2warn(stop("boom"), 0, "Computation failed")
+try_err2warn <- function(expr, fallback, warn = NULL) {
+  expr <- substitute(expr)
+  rlang::try_fetch(
+    eval(expr, parent.frame()),
+    error = function(cnd) {
+      warning(paste(c(warn,"\n\n  ", cnd$message)), immediate. = TRUE)
+      fallback
+    }
+  )
+}
+
+
 
 
 # ______________________________________________________________________________________________________________________________
