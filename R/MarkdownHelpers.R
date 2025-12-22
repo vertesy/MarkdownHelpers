@@ -174,45 +174,6 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome p
   return(ls_out)
 }
 
-# _________________________________________________________________________________________________
-#' @title combine.matrices.by.rowname.intersect
-#'
-#' @description Combine two matrices by the intersection of their row names.
-#' @param matrix1 A matrix.
-#' @param matrix2 A matrix.
-#' @param k The number of rows to print from the matrices with the most missing values.
-#'
-#' @return A matrix with the rows of `matrix1` and `matrix2` that intersect.
-#' @importFrom CodeAndRoll2 symdiff
-#' @importFrom Stringendo percentage_formatter
-#'
-#' @export
-
-combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # combine matrices by row name intersection
-  stopifnot(
-    is.matrix(matrix1), is.matrix(matrix2),
-    is.numeric(k), length(k) == 1,
-    !is.null(rownames(matrix1)), !is.null(rownames(matrix2))
-  )
-  rn1 <- rownames(matrix1)
-  rn2 <- rownames(matrix2)
-  idx <- intersect(rn1, rn2)
-  llprint(length(idx), "out of", substitute(matrix1), length(rn1), "and", length(rn2), substitute(matrix2), "rownames are merged")
-  merged <- cbind(matrix1[idx, ], matrix2[idx, ])
-  diffz <- CodeAndRoll2::symdiff(rn1, rn2)
-  print("Missing Rows 1, 2")
-  x1 <- rowSums(matrix1[diffz[[1]], ])
-  x2 <- rowSums(matrix2[diffz[[2]], ])
-  print("")
-  iprint("Values lost 1: ", round(sum(x1)), "or", Stringendo::percentage_formatter(sum(x1) / sum(merged)))
-  print(tail(sort(x1), n = 10))
-  print("")
-  iprint("Values lost 2: ", round(sum(x2)), "or", Stringendo::percentage_formatter(sum(x2) / sum(merged)))
-  print(tail(sort(x2), n = 10))
-  iprint("dim:", dim(merged))
-  return(merged)
-}
-
 
 
 # ______________________________________________________________________________________________----
