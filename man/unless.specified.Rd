@@ -18,6 +18,7 @@ If defined, it returns the variable.
 \examples{
 unless.specified("xsadasf32", 2)
 Num <- 22
-unless.specified("Num", 1)
+unless.specified("Num")
+unless.specified("Num22")
 unless.specified("c", 333)
 }

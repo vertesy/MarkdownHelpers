@@ -55,9 +55,11 @@ irequire <- function(package) {
 #' @export
 #' @examples unless.specified("xsadasf32", 2)
 #' Num <- 22
-#' unless.specified("Num", 1)
+#' unless.specified("Num")
+#' unless.specified("Num22")
 #' unless.specified("c", 333)
 unless.specified <- function(NameOfaVariable, def = TRUE) {
+  message("MarkdownHelpers::unless.specified() will be retired. Use base::get0()")
   if (exists(NameOfaVariable)) {
     get(NameOfaVariable)
   } else {
@@ -79,6 +81,7 @@ unless.specified <- function(NameOfaVariable, def = TRUE) {
 #' TRUE.unless(Num)
 #' TRUE.unless("cx")
 TRUE.unless <- function(NameOfaVariable, v = TRUE) {
+  message("MarkdownHelpers::TRUE.unless() will be retired. Use base::get0()")
   if (missing(NameOfaVariable) || is.null(NameOfaVariable)) {
     stop("`NameOfaVariable` must be supplied and cannot be NULL")
   }
@@ -107,6 +110,7 @@ TRUE.unless <- function(NameOfaVariable, v = TRUE) {
 #' FALSE.unless(Num)
 #' FALSE.unless("c")
 FALSE.unless <- function(NameOfaVariable, v = TRUE) {
+  message("MarkdownHelpers::FALSE.unless() will be retired. Use base::get0()")
   if (missing(NameOfaVariable) || is.null(NameOfaVariable)) {
     stop("`NameOfaVariable` must be supplied and cannot be NULL")
   }
@@ -1455,7 +1459,8 @@ filter_survival_length <- function(length_new, length_old, prepend = "") { # Par
 #' @export
 
 ww.set.file.extension <- function(global_setting = "b.def.ext", default = "png", also_pdf) {
-  ext <- unless.specified(NameOfaVariable = global_setting, def = default)
+  # ext <- unless.specified(NameOfaVariable = global_setting, def = default)
+  ext <- get0(global_setting, ifnotfound = default)
   if (isTRUE(also_pdf)) {
     ext <- "png"
   }
