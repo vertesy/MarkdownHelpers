@@ -35,14 +35,16 @@
 #' @export
 
 irequire <- function(package) {
+  # Stays in MarkdownHelpers, bc CodeAndRoll2 should only contains dependency functions
   package_ <- as.character(substitute(package))
   message("Loading package: ", package_)
   if (!requireNamespace(package_, quietly = TRUE)) {
     message("Package not installed. Attempting to install.")
-    install.packages(pkgs = package_)
+    install.packages(package_)
+    if (!requireNamespace(package_, quietly = TRUE)) stop("Failed to install package: ", package_)
   }
-  library(package_, character.only = TRUE)
-} # install package if it cannot be loaded
+  suppressPackageStartupMessages( library(package_, character.only = TRUE))
+}
 
 
 # ______________________________________________________________________________________________________________________________
