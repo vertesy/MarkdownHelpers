@@ -1126,7 +1126,7 @@ ww.set.OutDir <- function(dir = OutDir) {
   NewOutDir <- if (exists("OutDir") & dir.exists(dir)) {
     dir
   } else {
-    AddTrailingSlashfNonePresent(getwd())
+    AddTrailingSlashIfMissing(getwd())
   }
 
   return(FixPath(NewOutDir))
