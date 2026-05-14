@@ -532,12 +532,12 @@ md.tableWriter.DF.w.dimnames <- function(df,
     is.logical(WriteOut), length(WriteOut) == 1
   )
   if (is.na(title_of_table)) {
-    t <- paste0(substitute(df), collapse = " ")
+    title_text <- paste0(substitute(df), collapse = " ")
   } else {
-    t <- title_of_table
+    title_text <- title_of_table
   }
 
-  title_of_table <- paste("\n#### ", t)
+  title_of_table <- paste("\n#### ", title_text)
   if (file.exists(FullPath)) {
     write(title_of_table, FullPath, append = TRUE)
 
@@ -610,11 +610,11 @@ md.tableWriter.VEC.w.names <- function(NamedVector,
                                        print2screen = FALSE,
                                        WriteOut = FALSE) {
   if (is.na(title_of_table)) {
-    t <- paste0(substitute(NamedVector), collapse = " ")
+    title_text <- paste0(substitute(NamedVector), collapse = " ")
   } else {
-    t <- title_of_table
+    title_text <- title_of_table
   }
-  title_of_table <- paste("\n#### ", t)
+  title_of_table <- paste("\n#### ", title_text)
   if (file.exists(FullPath)) {
     write(title_of_table, FullPath, append = TRUE)
     if (!is.table(NamedVector)) {
@@ -1336,10 +1336,10 @@ color_check <- function(..., incrBottMarginBy = 0, savefile = FALSE) {
   color_codes <- c(...)
 
   # Use names if provided, otherwise use colors themselves as labels
-  labelz <- if (length(names(color_codes)) == length(color_codes)) names(color_codes) else color_codes
+  color_labels <- if (length(names(color_codes)) == length(color_codes)) names(color_codes) else color_codes
 
   # Plot colors as a barplot
-  barplot(rep(10, length(color_codes)), col = color_codes, names.arg = labelz, las = 2)
+  barplot(rep(10, length(color_codes)), col = color_codes, names.arg = color_labels, las = 2)
 
   # Derive filename base from expression passed in ...
   fname <- substitute(...)
