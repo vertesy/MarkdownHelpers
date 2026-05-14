@@ -7,7 +7,7 @@
 FALSE.unless(NameOfaVariable, v = TRUE)
 }
 \arguments{
-\item{NameOfaVariable}{Variable to test, provided as a bare name or character string. Must not be \code{NULL}.}
+\item{NameOfaVariable}{Variable to test, given as a bare name or a character string. Must not be \code{NULL}.}
 
 \item{v}{verbose}
 }

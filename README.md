@@ -120,8 +120,8 @@ MarkdownReports::setup_MarkdownReports()
 
 ----------------------------------------------------------------------------------------------------
 
-## List of Functions in MarkdownHelpers (38) 
-Updated: 2024/10/24 16:04
+## List of Functions in MarkdownHelpers.R (38) 
+Updated: 2025/12/03 13:18
 
 - #### 1 `irequire()`
 irequire. Load a package. If it does not exist, try to install it from CRAN.
@@ -139,28 +139,28 @@ FALSE.unless. Return FALSE unless the variable is defined. If defined, it return
 lookup. Awesome pattern matching for a set of values in another set of values. Returns a list with all kinds of results.
 
 - #### 6 `combine.matrices.by.rowname.intersect()`
-combine.matrices.by.rowname.intersect. Combine two matrices by their rownames intersect.
+combine.matrices.by.rowname.intersect. Combine two matrices by the intersection of their row names.
 
 - #### 7 `ww.variable.and.path.exists()`
-ww.variable.and.path.exists. Check if a variable name is defined, and if so, does the path (to a file) stored in that   variable points to an existing directory?
+ww.variable.and.path.exists. Check if a variable name is defined, and, if so, does the path (to a file) stored in that   variable point to an existing directory?
 
 - #### 8 `llprint()`
-llprint. Collapse by white spaces a sentence from any variable passed on to the function.  Print the sentence to the screen and write it to your markdown report file,  if the "path_of_report" variable is defined.
+llprint. Collapse a sentence from any variables passed to the function with white spaces.  Print the sentence to the screen and write it to your markdown report file,  if the "path_of_report" variable is defined.
 
 - #### 9 `llogit()`
-llogit. Collapse by white spaces a sentence from any variable passed on to the function.  llogit() writes it to your markdown report file, if the "path_of_report" variable is defined.  It does not print the sentence to the screen.
+llogit. Collapse a sentence from any variables passed to the function with white spaces.  llogit() writes it to your markdown report file, if the "path_of_report" variable is defined.  It does not print the sentence to the screen.
 
 - #### 10 `md.write.as.list()`
 md.write.as.list. Writes a vector as a (numbered) list into the report file.
 
 - #### 11 `md.image.linker()`
-md.image.linker. Format a markdown image reference (link) to a .pdf and .png versions of graph,  and insert both links to the markdown report, set by "path_of_report".  If the "b.png4GitHub" variable is set, the .png-link is set up such,  that you can upload the whole report with the .png image into your GitHub repo's wiki,  under "Reports"/OutDir/ (Reports is a literal string, OutDir is the last/deepest  directory name in the "OutDir" variable. See create_set_OutDir() function.).  This function is called by the ~wplot functions.
+md.image.linker. Format a markdown image reference (link) to .pdf and .png versions of a graph,  and insert both links into the markdown report set by "path_of_report".  If the "b.png4GitHub" variable is set, the .png-link is set up such,  that you can upload the whole report with the .png image into your GitHub repo's wiki,  under "Reports"/OutDir/ (Reports is a literal string, OutDir is the last/deepest  directory name in the "OutDir" variable. See create_set_OutDir() function.).  This function is called by the ~wplot functions.
 
 - #### 12 `llwrite_list()`
-llwrite_list. Print a list object from R, one element per line, into your markdown report
+llwrite_list. Print a list object from R, one element per line, into your markdown report.
 
 - #### 13 `md.import()`
- md.import. Import and concatenate an external markdown or text file to the report
+md.import. Import and concatenate an external markdown or text file into the report
 
 - #### 14 `md.LogSettingsFromList()`
 md.LogSettingsFromList. Log the parameters & settings used in the script and stored in a list, in a table format   in the report.
@@ -169,55 +169,55 @@ md.LogSettingsFromList. Log the parameters & settings used in the script and sto
 md.List2Table. Broader variant of md.LogSettingsFromList(). Log the values (col2) from a  named (col1) list, in a table format in the report.
 
 - #### 16 `md.tableWriter.DF.w.dimnames()`
-md.tableWriter.DF.w.dimnames. Take an R data frame with row- and column- names, parse a markdown table from it,  and write it to the markdown report, set by "path_of_report".
+md.tableWriter.DF.w.dimnames. Take an R data frame with row and column names, parse a markdown table from it,  and write it to the markdown report specified by "path_of_report".
 
 - #### 17 `md.tableWriter.VEC.w.names()`
-md.tableWriter.VEC.w.names. Take an R vector with names, parse a markdown table from it, and write it to the markdown report,   set by "path_of_report".
+md.tableWriter.VEC.w.names. Take an R vector with names, parse a markdown table from it, and write it to the markdown report   set by "path_of_report".
 
 - #### 18 `md.LinkTable()`
-md.LinkTable. Take a dataframe where every entry is a string containing an html link, parse and write out.   a properly formatted markdown table.
+md.LinkTable. Take a data frame where every entry is a string containing an HTML link, parse it, and write out   a properly formatted markdown table.
 
 - #### 19 `md.import.table()`
 md.import.table. Import a table (.csv, or tab separated values, .tsv file) and write it  in markdown format to the report.
 
 - #### 20 `filter_HP()`
-filter_HP. Filter values that fall between above high-pass-threshold (X >). 
+filter_HP. Filter values that fall above the high-pass threshold (X >). 
 
 - #### 21 `filter_LP()`
 filter_LP. Filter values that fall below the low-pass threshold (X <).
 
 - #### 22 `filter_MidPass()`
-filter_MidPass. Filter values that fall above high-pass-threshold !(X >= )! and below  the low-pass threshold (X <).
+filter_MidPass. Filter values that fall above the high-pass threshold (X >=) and below  the low-pass threshold (X <).
 
 - #### 23 `ww.FnP_parser()`
-ww.FnP_parser. Internal Function. Parses the full path from the filename & location of the file.
+ww.FnP_parser. Internal function. Parses the full path from the filename and location of the file.
 
 - #### 24 `ww.variable.and.path.exists()`
-ww.variable.and.path.exists. Check if a variable name is defined, and if so, does the path (to a file) stored in that   variable points to an existing directory?
+ww.variable.and.path.exists. Check if a variable name is defined and, if so, does the path (to a file) stored in that   variable point to an existing directory?
 
 - #### 25 `ww.variable.exists.and.true()`
-ww.variable.exists.and.true. Check if a variable name is defined, and if so, is it TRUE
+ww.variable.exists.and.true. Check if a variable name is defined and, if so, is it TRUE.
 
 - #### 26 `ww.set.OutDir()`
-ww.set.OutDir. Checks if global variable OutDir is defined. If not, it returns the current  working directory
+ww.set.OutDir. Checks if global variable OutDir is defined. If not, it returns the current  working directory.
 
 - #### 27 `ww.set.path_of_report()`
-ww.set.path_of_report. Checks if global variable path_of_report is defined. If not,  it defines it as Analysis.md in the current working directory  @importFrom Stringendo iprint  @examples ww.set.path_of_report() 
+ww.set.path_of_report. Checks if global variable path_of_report is defined. If not,  it defines it as Analysis.md in the current working directory.  @importFrom Stringendo iprint  @examples ww.set.path_of_report() 
 
 - #### 28 `ww.set.PlotName()`
-ww.set.PlotName. Generates a plotname (use if none is specified)  @importFrom Stringendo iprint  @examples ww.set.PlotName() 
+ww.set.PlotName. Generates a plot name (use if none is specified)  @importFrom Stringendo iprint  @examples ww.set.PlotName() 
 
 - #### 29 `ww.set.mdlink()`
-ww.set.mdlink. Internal function. Sets inserting a markdown link to the image  (created by the wplot* function that calls this function) only if 'path_of_report' is defined   and 'b.mdlink' is defined as TRUE.
+ww.set.mdlink. Internal function. Inserts a markdown link to the image  (created by the wplot* function that calls this function) only if 'path_of_report' is defined   and 'b.mdlink' is TRUE.
 
 - #### 30 `ww.md.image.link.parser()`
-ww.md.image.link.parser. Format a markdown image reference (link) from the file path to the file.  It can parse the file path, if you pass it in separate variables and strings.  E.g. ww.md.image.link.parser(Directory, "MyImage.png").
+ww.md.image.link.parser. Format a markdown image reference (link) from the file path to the file.  It can parse the file path if you pass it in separate variables and strings.  E.g. ww.md.image.link.parser(Directory, "MyImage.png").
 
 - #### 31 `ww.ttl_field()`
-ww.ttl_field. Internal function. Creates the string written into the PDF files "Title' (metadata) field.
+ww.ttl_field. Internal function. Creates the string written into the PDF file "Title" (metadata) field.
 
 - #### 32 `ww.autoPlotName()`
-ww.autoPlotName. Internal function. Creates automatic plot and file-names.
+ww.autoPlotName. Internal function. Creates automatic plot and file names.
 
 - #### 33 `ww.assign_to_global()`
 ww.assign_to_global. A function loading results to the global environment.  Source: https://stackoverflow.com/questions/28180989/
@@ -226,16 +226,16 @@ ww.assign_to_global. A function loading results to the global environment.  Sour
 try.dev.off. Tries to close R graphical devices without raising an error.
 
 - #### 35 `jjpegA4()`
-jjpegA4. Setup an A4 size jpeg.
+jjpegA4. Set up an A4-sized JPEG.
 
 - #### 36 `color_check()`
-color_check. Display the colors encoded by the numbers / color-ID-s you pass on to this function
+color_check. Display the colors encoded by the numbers / color-ID-s you pass on to this function.
 
 - #### 37 `wcolorize()`
-wcolorize. Generate color palettes. Input: a vector with categories, can be numbers or strings.  Handles repeating values. Output: color vector of equal length as input.  Optionally it can output a list where an extra element lists the  categories (simply using unique would remove the names). See example.  Some color scale depend on packages "colorRamps", or "gplots".
+wcolorize. Generate color palettes. Input: a vector with categories, can be numbers or strings.  Handles repeating values. Output: color vector of equal length as input.  Optionally it can output a list where an extra element lists the  categories (simply using unique would remove the names). See example.  Some color scales depend on packages "colorRamps", or "gplots". 
 
 - #### 38 `filter_survival_length()`
-filter_survival_length. Parse a sentence reporting the % of filter survival.
+filter_survival_length. Parse a sentence reporting the percentage of filter survival.
 
 
 

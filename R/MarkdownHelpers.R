@@ -35,14 +35,16 @@
 #' @export
 
 irequire <- function(package) {
+  # Stays in MarkdownHelpers, bc CodeAndRoll2 should only contains dependency functions
   package_ <- as.character(substitute(package))
   message("Loading package: ", package_)
   if (!requireNamespace(package_, quietly = TRUE)) {
     message("Package not installed. Attempting to install.")
-    install.packages(pkgs = package_)
+    install.packages(package_)
+    if (!requireNamespace(package_, quietly = TRUE)) stop("Failed to install package: ", package_)
   }
-  library(package_, character.only = TRUE)
-} # install package if it cannot be loaded
+  suppressPackageStartupMessages( library(package_, character.only = TRUE))
+}
 
 
 # ______________________________________________________________________________________________________________________________
@@ -55,9 +57,11 @@ irequire <- function(package) {
 #' @export
 #' @examples unless.specified("xsadasf32", 2)
 #' Num <- 22
-#' unless.specified("Num", 1)
+#' unless.specified("Num")
+#' unless.specified("Num22")
 #' unless.specified("c", 333)
 unless.specified <- function(NameOfaVariable, def = TRUE) {
+  message("MarkdownHelpers::unless.specified() will be retired. Use base::get0()")
   if (exists(NameOfaVariable)) {
     get(NameOfaVariable)
   } else {
@@ -79,6 +83,7 @@ unless.specified <- function(NameOfaVariable, def = TRUE) {
 #' TRUE.unless(Num)
 #' TRUE.unless("cx")
 TRUE.unless <- function(NameOfaVariable, v = TRUE) {
+  message("MarkdownHelpers::TRUE.unless() will be retired. Use base::get0()")
   if (missing(NameOfaVariable) || is.null(NameOfaVariable)) {
     stop("`NameOfaVariable` must be supplied and cannot be NULL")
   }
@@ -107,6 +112,7 @@ TRUE.unless <- function(NameOfaVariable, v = TRUE) {
 #' FALSE.unless(Num)
 #' FALSE.unless("c")
 FALSE.unless <- function(NameOfaVariable, v = TRUE) {
+  message("MarkdownHelpers::FALSE.unless() will be retired. Use base::get0()")
   if (missing(NameOfaVariable) || is.null(NameOfaVariable)) {
     stop("`NameOfaVariable` must be supplied and cannot be NULL")
   }
@@ -120,6 +126,38 @@ FALSE.unless <- function(NameOfaVariable, v = TRUE) {
   }
 }
 
+# ______________________________________________________________________________________________________________________________
+#' @title try_err2warn
+#'
+#' @description Evaluate an expression and return its value.
+#' If an error occurs, convert the error into an immediate warning and return a fallback value.
+#' Execution is never stopped.
+#'
+#' @param expr Expression to be evaluated.
+#' @param fallback Value to return if \code{expr} errors.
+#' @param warn Optional character string prepended to the warning message.
+#'
+#' @export
+#'
+#' @examples
+#' try_err2warn(stop("fail"), 1)
+#'
+#' x <- 2
+#' try_err2warn(x + 1, x)
+#'
+#' try_err2warn(stop("boom"), 0, "Computation failed")
+try_err2warn <- function(expr, fallback, warn = NULL) {
+  expr <- substitute(expr)
+  rlang::try_fetch(
+    eval(expr, parent.frame()),
+    error = function(cnd) {
+      warning(paste(c(warn,"\n\n  ", cnd$message)), immediate. = TRUE)
+      fallback
+    }
+  )
+}
+
+
 
 
 # ______________________________________________________________________________________________________________________________
@@ -132,12 +170,14 @@ FALSE.unless <- function(NameOfaVariable, v = TRUE) {
 #' @param report Logical. Whether to print a report of the results.
 #' @importFrom Stringendo percentage_formatter
 #' @return A list with the results of the lookup.
-#' 
+#'
 #' @export
 lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome pattern matching for a set of values in another set of values. Returns a list with all kinds of results.
-  stopifnot(is.vector(needle), is.vector(haystack),
-            is.logical(exact), length(exact) == 1,
-            is.logical(report), length(report) == 1)
+  stopifnot(
+    is.vector(needle), is.vector(haystack),
+    is.logical(exact), length(exact) == 1,
+    is.logical(report), length(report) == 1
+  )
   ls_out <- as.list(c(ln_needle = length(needle), ln_haystack = length(haystack), ln_hits = "", hit_poz = "", hits = ""))
   Findings <- numeric(0)
   ln_needle <- length(needle)
@@ -170,43 +210,6 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome p
     iprint(length(Findings), "Hits:", haystack[Findings])
   } # if (report)
   return(ls_out)
-}
-
-# _________________________________________________________________________________________________
-#' @title combine.matrices.by.rowname.intersect
-#'
-#' @description Combine two matrices by the intersection of their row names.
-#' @param matrix1 A matrix.
-#' @param matrix2 A matrix.
-#' @param k The number of rows to print from the matrices with the most missing values.
-#'
-#' @return A matrix with the rows of `matrix1` and `matrix2` that intersect.
-#' @importFrom CodeAndRoll2 symdiff
-#' @importFrom Stringendo percentage_formatter
-#' 
-#' @export
-
-combine.matrices.by.rowname.intersect <- function(matrix1, matrix2, k = 2) { # combine matrices by row name intersection
-  stopifnot(is.matrix(matrix1), is.matrix(matrix2),
-            is.numeric(k), length(k) == 1,
-            !is.null(rownames(matrix1)), !is.null(rownames(matrix2)))
-  rn1 <- rownames(matrix1)
-  rn2 <- rownames(matrix2)
-  idx <- intersect(rn1, rn2)
-  llprint(length(idx), "out of", substitute(matrix1), length(rn1), "and", length(rn2), substitute(matrix2), "rownames are merged")
-  merged <- cbind(matrix1[idx, ], matrix2[idx, ])
-  diffz <- CodeAndRoll2::symdiff(rn1, rn2)
-  print("Missing Rows 1, 2")
-  x1 <- rowSums(matrix1[diffz[[1]], ])
-  x2 <- rowSums(matrix2[diffz[[2]], ])
-  print("")
-  iprint("Values lost 1: ", round(sum(x1)), "or", Stringendo::percentage_formatter(sum(x1) / sum(merged)))
-  print(tail(sort(x1), n = 10))
-  print("")
-  iprint("Values lost 2: ", round(sum(x2)), "or", Stringendo::percentage_formatter(sum(x2) / sum(merged)))
-  print(tail(sort(x2), n = 10))
-  iprint("dim:", dim(merged))
-  return(merged)
 }
 
 
@@ -271,8 +274,8 @@ llprint <- function(...) {
     alt.message = "NOT LOGGED: Log path and filename is not defined in path_of_report."
   )) {
     write(kollapse("\n", LogEntry, print = FALSE),
-          path_of_report,
-          append = TRUE
+      path_of_report,
+      append = TRUE
     )
   }
 }
@@ -296,8 +299,8 @@ llogit <- function(...) {
     alt.message = "NOT LOGGED: Log path and filename is not defined in path_of_report."
   )) {
     write(kollapse("\n", LogEntry, print = FALSE),
-          path_of_report,
-          append = TRUE
+      path_of_report,
+      append = TRUE
     )
   }
 }
@@ -320,9 +323,9 @@ md.write.as.list <- function(vector = 1:3,
                              ...) {
   LogEntry <- kollapse(rep("#", h), " ", substitute(vector), print = FALSE)
   write(kollapse("\n", LogEntry, print = FALSE),
-        path_of_report,
-        ...,
-        append = TRUE
+    path_of_report,
+    ...,
+    append = TRUE
   )
   LV <- length(vector)
   LN <- if (numbered) {
@@ -391,7 +394,7 @@ llwrite_list <- function(yourlist, printName = "self") {
     } else {
       llprint("#####", e)
     }
-    
+
     print(yourlist[[e]])
     llogit("`", yourlist[[e]], "`")
   }
@@ -414,14 +417,16 @@ llwrite_list <- function(yourlist, printName = "self") {
 #' llprint("Hello")
 #' # md.import(path_of_report)
 #' @importFrom Stringendo iprint
-#' 
+#'
 #' @export
 md.import <- function(from.file, to.file = ww.set.path_of_report()) {
-  stopifnot(is.character(from.file), length(from.file) == 1, file.exists(from.file),
-            is.character(to.file), length(to.file) == 1)
+  stopifnot(
+    is.character(from.file), length(from.file) == 1, file.exists(from.file),
+    is.character(to.file), length(to.file) == 1
+  )
   linez <- readLines(from.file)
   if (ww.variable.and.path.exists(to.file,
-                                  alt.message = "Log path and filename is not defined in path_of_report"
+    alt.message = "Log path and filename is not defined in path_of_report"
   )) {
     Stringendo::iprint(
       length(linez), "lines from", basename(from.file),
@@ -519,11 +524,13 @@ md.tableWriter.DF.w.dimnames <- function(df,
                                          title_of_table = NA,
                                          print2screen = FALSE,
                                          WriteOut = FALSE) {
-  stopifnot(is.data.frame(df),
-            is.character(FullPath), length(FullPath) == 1,
-            is.logical(percentify), length(percentify) == 1,
-            is.logical(print2screen), length(print2screen) == 1,
-            is.logical(WriteOut), length(WriteOut) == 1)
+  stopifnot(
+    is.data.frame(df),
+    is.character(FullPath), length(FullPath) == 1,
+    is.logical(percentify), length(percentify) == 1,
+    is.logical(print2screen), length(print2screen) == 1,
+    is.logical(WriteOut), length(WriteOut) == 1
+  )
   if (is.na(title_of_table)) {
     title_text <- paste0(substitute(df), collapse = " ")
   } else {
@@ -674,7 +681,7 @@ md.LinkTable <- function(tableOfLinkswRownames) {
   print(TBL)
 
   md.tableWriter.DF.w.dimnames(TBL,
-                               FullPath = paste0(OutDir, substitute(tableOfLinkswRownames), ".tsv.md")
+    FullPath = paste0(OutDir, substitute(tableOfLinkswRownames), ".tsv.md")
   )
 }
 
@@ -714,7 +721,7 @@ md.import.table <- function(from.file.table,
     read.table(
       from.file.table,
       stringsAsFactors = FALSE,
-      sep = "\t",
+      sep = field.sep,
       header = has.colnames,
       row.names = 1
     )
@@ -722,7 +729,7 @@ md.import.table <- function(from.file.table,
     read.table(
       from.file.table,
       stringsAsFactors = FALSE,
-      sep = "\t",
+      sep = field.sep,
       header = has.colnames
     )
   }
@@ -772,15 +779,17 @@ filter_HP <- function(numeric_vector,
                       saveplot = FALSE,
                       verbose = TRUE,
                       ...) {
-  stopifnot(is.numeric(numeric_vector),
-            is.numeric(threshold), length(threshold) == 1,
-            is.logical(passequal),
-            is.logical(return_survival_ratio),
-            is.logical(return_conclusion),
-            is.logical(na.rm),
-            is.logical(plot.hist),
-            is.logical(saveplot),
-            is.logical(verbose))
+  stopifnot(
+    is.numeric(numeric_vector),
+    is.numeric(threshold), length(threshold) == 1,
+    is.logical(passequal),
+    is.logical(return_survival_ratio),
+    is.logical(return_conclusion),
+    is.logical(na.rm),
+    is.logical(plot.hist),
+    is.logical(saveplot),
+    is.logical(verbose)
+  )
   survivors <-
     if (passequal) {
       numeric_vector >= threshold
@@ -855,15 +864,17 @@ filter_LP <- function(numeric_vector,
                       saveplot = FALSE,
                       verbose = TRUE,
                       ...) {
-  stopifnot(is.numeric(numeric_vector),
-            is.numeric(threshold), length(threshold) == 1,
-            is.logical(passequal),
-            is.logical(return_survival_ratio),
-            is.logical(return_conclusion),
-            is.logical(na.rm),
-            is.logical(plot.hist),
-            is.logical(saveplot),
-            is.logical(verbose))
+  stopifnot(
+    is.numeric(numeric_vector),
+    is.numeric(threshold), length(threshold) == 1,
+    is.logical(passequal),
+    is.logical(return_survival_ratio),
+    is.logical(return_conclusion),
+    is.logical(na.rm),
+    is.logical(plot.hist),
+    is.logical(saveplot),
+    is.logical(verbose)
+  )
   survivors <-
     if (passequal) {
       numeric_vector <= threshold
@@ -942,32 +953,34 @@ filter_MidPass <- function(numeric_vector,
                            saveplot = FALSE,
                            verbose = TRUE,
                            ...) {
-  stopifnot(is.numeric(numeric_vector),
-            is.numeric(HP_threshold), length(HP_threshold) == 1,
-            is.numeric(LP_threshold), length(LP_threshold) == 1,
-            is.logical(return_survival_ratio),
-            is.logical(return_conclusion),
-            is.logical(EdgePass),
-            is.logical(na.rm),
-            is.logical(plot.hist),
-            is.logical(saveplot),
-            is.logical(verbose))
+  stopifnot(
+    is.numeric(numeric_vector),
+    is.numeric(HP_threshold), length(HP_threshold) == 1,
+    is.numeric(LP_threshold), length(LP_threshold) == 1,
+    is.logical(return_survival_ratio),
+    is.logical(return_conclusion),
+    is.logical(EdgePass),
+    is.logical(na.rm),
+    is.logical(plot.hist),
+    is.logical(saveplot),
+    is.logical(verbose)
+  )
   survivors <- (numeric_vector >= HP_threshold & numeric_vector < LP_threshold)
   keyword <- "between"
   relation <- " <= x < "
 
   if (EdgePass) {
     survivors <- (numeric_vector < HP_threshold |
-                    numeric_vector >= LP_threshold)
+      numeric_vector >= LP_threshold)
     keyword <- "outside"
     relation <- " >= x OR x > "
   }
   pc <- Stringendo::percentage_formatter(sum(survivors, na.rm = na.rm) / length(survivors))
   conclusion <- kollapse(prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ",
-                         length(numeric_vector), " entries in ", substitute(numeric_vector),
-                         " fall ", keyword, " the thresholds: ", CodeAndRoll2::iround(HP_threshold),
-                         relation, CodeAndRoll2::iround(LP_threshold),
-                         print = verbose
+    length(numeric_vector), " entries in ", substitute(numeric_vector),
+    " fall ", keyword, " the thresholds: ", CodeAndRoll2::iround(HP_threshold),
+    relation, CodeAndRoll2::iround(LP_threshold),
+    print = verbose
   )
   if (ww.variable.and.path.exists(path_of_report, alt.message = "NOT LOGGED")) {
     llogit(conclusion)
@@ -1113,7 +1126,7 @@ ww.set.OutDir <- function(dir = OutDir) {
   NewOutDir <- if (exists("OutDir") & dir.exists(dir)) {
     dir
   } else {
-    AddTrailingSlashfNonePresent(getwd())
+    AddTrailingSlashIfMissing(getwd())
   }
 
   return(FixPath(NewOutDir))
@@ -1253,7 +1266,7 @@ ww.autoPlotName <- function(name = NULL) {
 ww.assign_to_global <- function(name, value, pos = 1, max_print = 5, verbose = TRUE) {
   if (verbose) {
     Stringendo::iprint(name, "defined as:") # "is a new global environment variable"
-    print(utils::head(value, max_print))
+    message(utils::head(value, max_print))
   }
   assign(name, value, envir = as.environment(pos))
 }
@@ -1291,11 +1304,13 @@ try.dev.off <- function() {
 #'
 #' @export
 jjpegA4 <- function(filename, r = 225, q = 90, w = 8.27, h = 11.69) { # Set up an A4 size jpeg
-  stopifnot(is.character(filename), length(filename) == 1,
-            is.numeric(r), length(r) == 1,
-            is.numeric(q), length(q) == 1,
-            is.numeric(w), length(w) == 1,
-            is.numeric(h), length(h) == 1)
+  stopifnot(
+    is.character(filename), length(filename) == 1,
+    is.numeric(r), length(r) == 1,
+    is.numeric(q), length(q) == 1,
+    is.numeric(w), length(w) == 1,
+    is.numeric(h), length(h) == 1
+  )
   jpeg(file = filename, width = w, height = h, units = "in", quality = q, res = r)
 }
 
@@ -1446,7 +1461,8 @@ filter_survival_length <- function(length_new, length_old, prepend = "") { # Par
 #' @export
 
 ww.set.file.extension <- function(global_setting = "b.def.ext", default = "png", also_pdf) {
-  ext <- unless.specified(NameOfaVariable = global_setting, def = default)
+  # ext <- unless.specified(NameOfaVariable = global_setting, def = default)
+  ext <- get0(global_setting, ifnotfound = default)
   if (isTRUE(also_pdf)) {
     ext <- "png"
   }
