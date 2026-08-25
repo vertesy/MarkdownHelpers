@@ -3,7 +3,7 @@
 
 DESCRIPTION <- list(
   package.name = "MarkdownHelpers",
-  version = "1.2.1",
+  version = "1.2.5",
   title = "MarkdownHelpers",
   description = "MarkdownHelpers is a set of R functions to parse and Markdown files and other generic helpers.",
 

@@ -1,6 +1,6 @@
 Package: MarkdownHelpers
 Title: MarkdownHelpers
-Version: 1.2.1
+Version: 1.2.5
 Authors@R: 
     person("Abel", "Vertesy", , "av@imba.oeaw.ac.at", role = c("aut", "cre"))
 Description: MarkdownHelpers is a set of R functions to parse and Markdown
@@ -12,13 +12,13 @@ Depends:
     utils
 Imports: 
     CodeAndRoll2,
-    RColorBrewer,
-    ReadWriter,
     colorRamps,
-    gplots
+    gplots,
+    RColorBrewer,
+    ReadWriter
 Suggests: 
     MarkdownReports
 Encoding: UTF-8
-Packaged: 2025-12-03 13:19:31.670773
+Packaged: 2026-08-25 16:31:18.422416
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2

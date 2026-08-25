@@ -1,114 +1,87 @@
-Dependency file generated on Thu Oct 24 16:16:49 2024 
+Dependency file generated on Tue Aug 25 16:31:46 2026 
 
 #################################################################################################### 
 MarkdownHelpers.R
 #################################################################################################### 
-$`c("package:lubridate", "package:base")`
-[1] "date"
-
-$`c("package:lubridate", "package:dplyr", "package:SeuratObject", "package:base")`
-[1] "intersect"
-
-$`c("package:MarkdownHelpers", "package:CodeAndRoll2", "package:dplyr")`
-[1] "symdiff"
-
 $`c("package:MarkdownHelpers", "package:CodeAndRoll2")`
-[1] "iround"
-
-$`c("package:MarkdownHelpers", "package:Connectome.tools", "package:ReadWriter")`
-[1] "write.simple.tsv"
+[1] "as.numeric.wNames.factor" "iround"                  
 
 $`c("package:MarkdownHelpers", "package:Connectome.tools")`
-[1] "unless.specified"
+[1] "unless.specified" "write.simple.tsv"
 
-$`c("package:MarkdownHelpers", "package:ggExpress", "package:Seurat.utils")`
-[1] "llogit"
-
-$`c("package:MarkdownHelpers", "package:MarkdownReports", "package:Seurat.utils")`
-[1] "rich.colors"
-
-$`c("package:MarkdownHelpers", "package:Seurat.utils")`
-[1] "brewer.pal" "llprint"   
-
-$`c("package:MarkdownHelpers", "package:Stringendo", "package:MarkdownReports", "package:Seurat.utils")`
-[1] "iprint"
-
-$`c("package:MarkdownHelpers", "package:Stringendo", "package:Seurat.utils")`
-[1] "percentage_formatter"
-
-$`c("package:MarkdownReports", "package:graphics")`
-[1] "barplot"
-
-$`c("package:MarkdownReports", "package:grDevices")`
-[1] "dev.copy2pdf"   "dev.off"        "heat.colors"    "jpeg"           "rainbow"       
-[6] "terrain.colors" "topo.colors"   
-
-$`c("package:MarkdownReports", "package:Seurat.utils", "package:graphics")`
-[1] "par"
-
-$`c("package:MarkdownReports", "package:Seurat.utils")`
-[1] "whist"
-
-$`c("package:Seurat.utils", "package:SeuratObject", "package:base")`
-[1] "rowSums"
-
-$`c("package:SeuratObject", "package:base")`
-[1] "t"
-
-$`c("package:Stringendo", "package:Seurat.utils")`
-[1] "kollapse"
+$`character(0)`
+[1] "try_fetch" "whist"    
 
 $`package:base`
- [1] "any"            "as.character"   "as.data.frame"  "as.environment" "as.list"       
- [6] "as.vector"      "assign"         "basename"       "c"              "cat"           
-[11] "cbind"          "colnames"       "dim"            "dir.exists"     "dirname"       
-[16] "duplicated"     "exists"         "file.exists"    "get"            "getwd"         
-[21] "grep"           "gsub"           "is.list"        "is.na"          "is.null"       
-[26] "is.numeric"     "is.table"       "isTRUE"         "lapply"         "length"        
-[31] "list"           "make.names"     "message"        "missing"        "names"         
-[36] "ncol"           "numeric"        "paste"          "paste0"         "print"         
-[41] "readLines"      "rep"            "require"        "return"         "round"         
-[46] "rownames"       "sample"         "sort"           "strsplit"       "substitute"    
-[51] "sum"            "Sys.sleep"      "try"            "unique"         "unlist"        
-[56] "which"          "write"         
+ [1] "any"                            "as.character"                  
+ [3] "as.data.frame"                  "as.environment"                
+ [5] "as.list"                        "as.vector"                     
+ [7] "assign"                         "basename"                      
+ [9] "c"                              "cat"                           
+[11] "colnames"                       "date"                          
+[13] "deparse"                        "dim"                           
+[15] "dir.exists"                     "dirname"                       
+[17] "duplicated"                     "eval"                          
+[19] "exists"                         "file.exists"                   
+[21] "get"                            "get0"                          
+[23] "getwd"                          "grep"                          
+[25] "gsub"                           "invisible"                     
+[27] "is.character"                   "is.data.frame"                 
+[29] "is.list"                        "is.logical"                    
+[31] "is.na"                          "is.null"                       
+[33] "is.numeric"                     "is.table"                      
+[35] "is.vector"                      "isTRUE"                        
+[37] "lapply"                         "length"                        
+[39] "library"                        "list"                          
+[41] "make.names"                     "message"                       
+[43] "missing"                        "names"                         
+[45] "ncol"                           "numeric"                       
+[47] "on.exit"                        "parent.frame"                  
+[49] "paste"                          "paste0"                        
+[51] "print"                          "readLines"                     
+[53] "rep"                            "requireNamespace"              
+[55] "return"                         "rownames"                      
+[57] "sample"                         "seq_along"                     
+[59] "stop"                           "stopifnot"                     
+[61] "strsplit"                       "substitute"                    
+[63] "sum"                            "suppressPackageStartupMessages"
+[65] "t"                              "try"                           
+[67] "unique"                         "unlist"                        
+[69] "warning"                        "which"                         
+[71] "write"                         
 
-$`package:CodeAndRoll2`
-[1] "as.numeric.wNames.factor"
+$`package:graphics`
+[1] "barplot" "par"    
+
+$`package:grDevices`
+[1] "dev.copy2pdf"   "dev.off"        "heat.colors"    "jpeg"          
+[5] "rainbow"        "terrain.colors" "topo.colors"   
 
 $`package:MarkdownHelpers`
-[1] "color_check"                  "matlab.like"                  "md.tableWriter.DF.w.dimnames"
-[4] "ww.autoPlotName"              "ww.FnP_parser"                "ww.set.OutDir"               
-[7] "ww.set.path_of_report"        "ww.variable.and.path.exists" 
+ [1] "brewer.pal"                   "color_check"                 
+ [3] "llogit"                       "llprint"                     
+ [5] "matlab.like"                  "md.tableWriter.DF.w.dimnames"
+ [7] "rich.colors"                  "ww.autoPlotName"             
+ [9] "ww.FnP_parser"                "ww.set.OutDir"               
+[11] "ww.set.path_of_report"        "ww.variable.and.path.exists" 
 
 $`package:methods`
 [1] "hasArg"
 
 $`package:Stringendo`
-[1] "AddTrailingSlashfNonePresent" "FixPath"                     
+[1] "AddTrailingSlashIfMissing" "FixPath"                  
+[3] "iprint"                    "kollapse"                 
+[5] "percentage_formatter"     
 
 $`package:utils`
-[1] "head"             "install.packages" "read.table"       "tail"            
+[1] "head"             "install.packages" "read.table"      
 
-c("lubridate", "base")
-c("lubridate", "dplyr", "SeuratObject", "base")
-c("MarkdownHelpers", "CodeAndRoll2", "dplyr")
 c("MarkdownHelpers", "CodeAndRoll2")
-c("MarkdownHelpers", "Connectome.tools", "ReadWriter")
 c("MarkdownHelpers", "Connectome.tools")
-c("MarkdownHelpers", "ggExpress", "Seurat.utils")
-c("MarkdownHelpers", "MarkdownReports", "Seurat.utils")
-c("MarkdownHelpers", "Seurat.utils")
-c("MarkdownHelpers", "Stringendo", "MarkdownReports", "Seurat.utils")
-c("MarkdownHelpers", "Stringendo", "Seurat.utils")
-c("MarkdownReports", "graphics")
-c("MarkdownReports", "grDevices")
-c("MarkdownReports", "Seurat.utils", "graphics")
-c("MarkdownReports", "Seurat.utils")
-c("Seurat.utils", "SeuratObject", "base")
-c("SeuratObject", "base")
-c("Stringendo", "Seurat.utils")
+character(0)
 base
-CodeAndRoll2
+graphics
+grDevices
 MarkdownHelpers
 methods
 Stringendo

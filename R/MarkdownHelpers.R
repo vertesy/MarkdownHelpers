@@ -6,7 +6,6 @@
 # rm(list = ls(all.names = TRUE)); try(dev.off(), silent = TRUE)
 
 
-
 # Functions
 # require(Stringendo); require(ReadWriter); require(CodeAndRoll2); require(ggExpress); require(MarkdownReports); require(Seurat.utils)
 
@@ -43,7 +42,7 @@ irequire <- function(package) {
     install.packages(package_)
     if (!requireNamespace(package_, quietly = TRUE)) stop("Failed to install package: ", package_)
   }
-  suppressPackageStartupMessages( library(package_, character.only = TRUE))
+  suppressPackageStartupMessages(library(package_, character.only = TRUE))
 }
 
 
@@ -151,13 +150,11 @@ try_err2warn <- function(expr, fallback, warn = NULL) {
   rlang::try_fetch(
     eval(expr, parent.frame()),
     error = function(cnd) {
-      warning(paste(c(warn,"\n\n  ", cnd$message)), immediate. = TRUE)
+      warning(paste(c(warn, "\n\n  ", cnd$message)), immediate. = TRUE)
       fallback
     }
   )
 }
-
-
 
 
 # ______________________________________________________________________________________________________________________________
@@ -213,7 +210,6 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome p
 }
 
 
-
 # ______________________________________________________________________________________________----
 # Helper functions to parse markdown syntax ----
 # _________________________________________________________________________________________________
@@ -248,7 +244,6 @@ ww.variable.and.path.exists <- function(path = path_of_report, alt.message = NUL
     FALSE
   }
 }
-
 
 
 # ______________________________________________________________________________________________----
@@ -656,7 +651,6 @@ md.tableWriter.VEC.w.names <- function(NamedVector,
 }
 
 
-
 # ______________________________________________________________________________________________________________________________
 #' @title md.LinkTable
 #'
@@ -684,7 +678,6 @@ md.LinkTable <- function(tableOfLinkswRownames) {
     FullPath = paste0(OutDir, substitute(tableOfLinkswRownames), ".tsv.md")
   )
 }
-
 
 
 # ______________________________________________________________________________________________________________________________
@@ -913,7 +906,6 @@ filter_LP <- function(numeric_vector,
 }
 
 
-
 # ______________________________________________________________________________________________________________________________
 #' @title filter_MidPass
 #'
@@ -1007,12 +999,9 @@ filter_MidPass <- function(numeric_vector,
 }
 
 
-
-
 # ______________________________________________________________________________________________----
 # Internal functions (for Markdown parsing) ----
 # _________________________________________________________________________________________________
-
 
 
 #' @title ww.FnP_parser
@@ -1038,7 +1027,6 @@ ww.FnP_parser <- function(fname, ext_wo_dot = NULL) {
     kollapse(path, fname, print = 2)
   }
 }
-
 
 
 #' @title ww.variable.and.path.exists
@@ -1105,7 +1093,6 @@ ww.variable.exists.and.true <- function(var, alt.message = NULL) {
 # ww.variable.exists.and.true(al2)
 # ww.variable.exists.and.true(al3)
 # ww.variable.exists.and.true(al4)
-
 
 
 #' @title ww.set.OutDir
@@ -1272,7 +1259,6 @@ ww.assign_to_global <- function(name, value, pos = 1, max_print = 5, verbose = T
 }
 
 
-
 # ______________________________________________________________________________________________----
 # Graphics and colors ----
 # _________________________________________________________________________________________________
@@ -1349,9 +1335,6 @@ color_check <- function(..., incrBottMarginBy = 0, savefile = FALSE) {
 }
 
 
-
-
-
 #' @title wcolorize
 #'
 #' @description Generate color palettes. Input: a vector with categories, can be numbers or strings.
@@ -1426,8 +1409,6 @@ wcolorize <- function(vector = c(1, 1, 1:6),
 }
 
 
-
-
 # ______________________________________________________________________________________________----
 # Less used functions ----
 # _________________________________________________________________________________________________
@@ -1448,8 +1429,6 @@ filter_survival_length <- function(length_new, length_old, prepend = "") { # Par
   llprint(sentence)
   invisible(sentence)
 }
-
-
 
 
 #' @title ww.set.file.extension
