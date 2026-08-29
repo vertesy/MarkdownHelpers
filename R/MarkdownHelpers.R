@@ -204,7 +204,7 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome p
       llprint(substitute(needle), "findings: ", paste(haystack[Findings], sep = " "))
     }
   } else {
-    iprint(length(Findings), "Hits:", haystack[Findings])
+    Stringendo::iprint(length(Findings), "Hits:", haystack[Findings])
   } # if (report)
   return(ls_out)
 }
@@ -237,7 +237,7 @@ ww.variable.and.path.exists <- function(path = path_of_report, alt.message = NUL
     }
   } else {
     if (is.null(alt.message)) {
-      iprint("Variable", Variable.Name, "does not exist.")
+      Stringendo::iprint("Variable", Variable.Name, "does not exist.")
     } else {
       cat(alt.message)
     }
@@ -268,7 +268,7 @@ llprint <- function(...) {
     path = path_of_report,
     alt.message = "NOT LOGGED: Log path and filename is not defined in path_of_report."
   )) {
-    write(kollapse("\n", LogEntry, print = FALSE),
+    write(Stringendo::kollapse("\n", LogEntry, print = FALSE),
       path_of_report,
       append = TRUE
     )
@@ -293,7 +293,7 @@ llogit <- function(...) {
     path = path_of_report,
     alt.message = "NOT LOGGED: Log path and filename is not defined in path_of_report."
   )) {
-    write(kollapse("\n", LogEntry, print = FALSE),
+    write(Stringendo::kollapse("\n", LogEntry, print = FALSE),
       path_of_report,
       append = TRUE
     )
@@ -316,8 +316,8 @@ md.write.as.list <- function(vector = 1:3,
                              numbered = FALSE,
                              path_of_report = ww.set.path_of_report(),
                              ...) {
-  LogEntry <- kollapse(rep("#", h), " ", substitute(vector), print = FALSE)
-  write(kollapse("\n", LogEntry, print = FALSE),
+  LogEntry <- Stringendo::kollapse(rep("#", h), " ", substitute(vector), print = FALSE)
+  write(Stringendo::kollapse("\n", LogEntry, print = FALSE),
     path_of_report,
     ...,
     append = TRUE
@@ -354,15 +354,15 @@ md.image.linker <- function(fname_wo_ext, OutDir_ = ww.set.OutDir()) {
     if (unless.specified("b.png4GitHub")) {
       dirnm <- strsplit(x = OutDir_, split = "/")[[1]]
       dirnm <- dirnm[length(dirnm)]
-      llogit(kollapse("![]", "(Reports/", dirnm, "/", fname_wo_ext, ".png)", print = FALSE))
+      llogit(Stringendo::kollapse("![]", "(Reports/", dirnm, "/", fname_wo_ext, ".png)", print = FALSE))
     } else {
       if (exists("b.Subdirname") && !b.Subdirname == FALSE) {
         fname_wo_ext <- paste0(b.Subdirname, "/", fname_wo_ext)
       } # set only if b.Subdirname is defined and not FALSE.
-      llogit(kollapse("![", fn, "]", "(", fname_wo_ext, ".png)", print = FALSE))
+      llogit(Stringendo::kollapse("![", fn, "]", "(", fname_wo_ext, ".png)", print = FALSE))
     }
   } else {
-    llogit(kollapse("![", fn, "]", "(", fname_wo_ext, ".pdf)", print = FALSE))
+    llogit(Stringendo::kollapse("![", fn, "]", "(", fname_wo_ext, ".pdf)", print = FALSE))
   } # if b.usepng
 }
 
@@ -541,7 +541,7 @@ md.tableWriter.DF.w.dimnames <- function(df,
     ncolz <- dim(df)[2] + 1
     nrows <- dim(df)[1]
     rn <- rownames(df)
-    sep <- kollapse(rep("| ---", ncolz), " |", print = FALSE)
+    sep <- Stringendo::kollapse(rep("| ---", ncolz), " |", print = FALSE)
 
     write(h, FullPath, append = TRUE)
     if (print2screen) {
@@ -623,7 +623,7 @@ md.tableWriter.VEC.w.names <- function(NamedVector,
     h <- paste(names(NamedVector), collapse = " \t| ")
     h <- paste("\n| ", h, " |", collapse = "")
     ncolz <- length(NamedVector)
-    sep <- kollapse(rep("| ---", ncolz), " |", print = FALSE)
+    sep <- Stringendo::kollapse(rep("| ---", ncolz), " |", print = FALSE)
     write(h, FullPath, append = TRUE)
     if (print2screen) {
       cat(h, "\n")
@@ -790,7 +790,7 @@ filter_HP <- function(numeric_vector,
       numeric_vector > threshold
     }
   pc <- Stringendo::percentage_formatter(sum(survivors, na.rm = na.rm) / length(survivors))
-  conclusion <- kollapse(
+  conclusion <- Stringendo::kollapse(
     prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ", length(numeric_vector),
     " entries in ", substitute(numeric_vector), " fall above a threshold value of: ",
     CodeAndRoll2::iround(threshold),
@@ -875,7 +875,7 @@ filter_LP <- function(numeric_vector,
       numeric_vector < threshold
     }
   pc <- Stringendo::percentage_formatter(sum(survivors, na.rm = na.rm) / length(survivors))
-  conclusion <- kollapse(
+  conclusion <- Stringendo::kollapse(
     prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ",
     length(numeric_vector), " entries in ", substitute(numeric_vector),
     " fall below a threshold value of: ", CodeAndRoll2::iround(threshold),
@@ -968,7 +968,7 @@ filter_MidPass <- function(numeric_vector,
     relation <- " >= x OR x > "
   }
   pc <- Stringendo::percentage_formatter(sum(survivors, na.rm = na.rm) / length(survivors))
-  conclusion <- kollapse(prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ",
+  conclusion <- Stringendo::kollapse(prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ",
     length(numeric_vector), " entries in ", substitute(numeric_vector),
     " fall ", keyword, " the thresholds: ", CodeAndRoll2::iround(HP_threshold),
     relation, CodeAndRoll2::iround(LP_threshold),
@@ -1022,9 +1022,9 @@ ww.FnP_parser <- function(fname, ext_wo_dot = NULL) {
 
   # In R, the last evaluated expression in a function is returned by default as invisible()!
   FnP <- if (hasArg(ext_wo_dot)) {
-    kollapse(paste0(path, fname), ext_wo_dot, collapseby = ".", print = 2)
+    Stringendo::kollapse(paste0(path, fname), ext_wo_dot, collapseby = ".", print = 2)
   } else {
-    kollapse(path, fname, print = 2)
+    Stringendo::kollapse(path, fname, print = 2)
   }
 }
 
@@ -1113,10 +1113,10 @@ ww.set.OutDir <- function(dir = OutDir) {
   NewOutDir <- if (exists("OutDir") & dir.exists(dir)) {
     dir
   } else {
-    AddTrailingSlashIfMissing(getwd())
+    Stringendo::AddTrailingSlashIfMissing(getwd())
   }
 
-  return(FixPath(NewOutDir))
+  return(Stringendo::FixPath(NewOutDir))
 }
 
 
@@ -1192,10 +1192,10 @@ ww.set.mdlink <- function(NameOfaVariable = "b.mdlink",
 #' @examples ww.md.image.link.parser("/MyPlot.jpg")
 #' ww.md.image.link.parser(getwd(), "/MyPlot.jpg")
 ww.md.image.link.parser <- function(...) {
-  FullPath <- kollapse(..., print = FALSE)
+  FullPath <- Stringendo::kollapse(..., print = FALSE)
   splt <- strsplit(FullPath, "/")
   fn <- splt[[1]][length(splt[[1]])]
-  kollapse("![", fn, "]", "(", FullPath, ")", print = FALSE)
+  Stringendo::kollapse("![", fn, "]", "(", FullPath, ")", print = FALSE)
 }
 
 #' @title ww.ttl_field
@@ -1425,7 +1425,7 @@ wcolorize <- function(vector = c(1, 1, 1:6),
 #' @export
 filter_survival_length <- function(length_new, length_old, prepend = "") { # Parse a sentence reporting the % of filter survival.
   pc <- Stringendo::percentage_formatter(length_new / length_old)
-  sentence <- kollapse(prepend, pc, " of ", length_old, " entries make it through the filter", print = FALSE)
+  sentence <- Stringendo::kollapse(prepend, pc, " of ", length_old, " entries make it through the filter", print = FALSE)
   llprint(sentence)
   invisible(sentence)
 }
