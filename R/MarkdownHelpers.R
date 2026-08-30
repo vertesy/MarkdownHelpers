@@ -350,6 +350,8 @@ md.write.as.list <- function(vector = 1:3,
 md.image.linker <- function(fname_wo_ext, OutDir_ = ww.set.OutDir()) {
   splt <- strsplit(fname_wo_ext, "/")
   fn <- splt[[1]][length(splt[[1]])]
+  # Picks the link format based on global flags set elsewhere in the calling script:
+  # b.usepng ? (link a GitHub-wiki-relative .png path if b.png4GitHub, else a local .png) : link the .pdf.
   if (unless.specified("b.usepng")) {
     if (unless.specified("b.png4GitHub")) {
       dirnm <- strsplit(x = OutDir_, split = "/")[[1]]
@@ -571,6 +573,9 @@ md.tableWriter.DF.w.dimnames <- function(df,
     print("NOT LOGGED: Log path and filename is not defined in FullPath")
   }
   if (WriteOut) {
+    # NOTE: 'ManualName' is not a real parameter of write.simple.tsv() (it's
+    # 'manual_file_name') -- silently absorbed by `...`, so this custom name
+    # is never actually used; the file gets the default name instead.
     ReadWriter::write.simple.tsv(df, ManualName = paste0(substitute(df), ".tsv"))
   }
 }
@@ -643,6 +648,8 @@ md.tableWriter.VEC.w.names <- function(NamedVector,
     print("NOT LOGGED: Log path and filename is not defined in FullPath")
   }
   if (WriteOut) {
+    # NOTE: same 'ManualName' vs. 'manual_file_name' mismatch as in
+    # md.tableWriter.DF.w.dimnames() above -- this custom name is never applied.
     ReadWriter::write.simple.tsv(NamedVector, ManualName = paste0(substitute(NamedVector), ".tsv"))
   }
   if (print2screen) {
@@ -1013,6 +1020,10 @@ filter_MidPass <- function(numeric_vector,
 #'
 #' @export
 ww.FnP_parser <- function(fname, ext_wo_dot = NULL) {
+  # NOTE: BUG -- in the fallback branch, `(getwd())` is computed but discarded;
+  # the block's last expression is the message string, so 'path' would become
+  # that literal string, not a real path. Harmless in practice since
+  # ww.set.OutDir() is always defined alongside this function in this package.
   path <- if (exists("ww.set.OutDir")) {
     ww.set.OutDir()
   } else {
@@ -1106,6 +1117,11 @@ ww.variable.exists.and.true <- function(var, alt.message = NULL) {
 #' @export
 
 ww.set.OutDir <- function(dir = OutDir) {
+  # NOTE: BUG -- 'dir' (the OutDir default) is immediately overwritten by
+  # getwd() below, so it's never actually used. Consequences: dir.exists(dir)
+  # is always TRUE (the working directory always exists), so the "folder does
+  # not exist" warning can never fire; and when a global OutDir does exist,
+  # this returns getwd() instead of OutDir's actual value.
   if (!exists("OutDir")) message("OutDir not defined !!! Saving in working directory.")
   dir <- getwd()
   if (!dir.exists(dir)) message("OutDir defined, but folder does not exist!!! Saving in working directory.")
