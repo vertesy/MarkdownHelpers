@@ -576,7 +576,7 @@ md.tableWriter.DF.w.dimnames <- function(df,
     print("NOT LOGGED: Log path and filename is not defined in FullPath")
   }
   if (WriteOut) {
-    ReadWriter::write.simple.tsv(df, ManualName = paste0(substitute(df), ".tsv"))
+    ReadWriter::write.simple.tsv(df, manual_file_name = paste0(substitute(df), ".tsv"))
   }
 }
 # md.tableWriter.DF.w.dimnames(GeneCounts.per.sex, print2screen = TRUE)
@@ -648,7 +648,7 @@ md.tableWriter.VEC.w.names <- function(NamedVector,
     print("NOT LOGGED: Log path and filename is not defined in FullPath")
   }
   if (WriteOut) {
-    ReadWriter::write.simple.tsv(NamedVector, ManualName = paste0(substitute(NamedVector), ".tsv"))
+    ReadWriter::write.simple.tsv(NamedVector, manual_file_name = paste0(substitute(NamedVector), ".tsv"))
   }
   if (print2screen) {
     cat(b, "\n")
@@ -1027,8 +1027,8 @@ ww.FnP_parser <- function(fname, ext_wo_dot = NULL) {
   path <- if (exists("ww.set.OutDir")) {
     ww.set.OutDir()
   } else {
-    (getwd())
-    "install or load vertesy/MarkdownHelpers for saving into OutDir!"
+    message("install or load vertesy/MarkdownHelpers for saving into OutDir!")
+    getwd()
   }
 
   # In R, the last evaluated expression in a function is returned by default as invisible()!
@@ -1118,9 +1118,8 @@ ww.variable.exists.and.true <- function(var, alt.message = NULL) {
 #'
 #' @export
 
-ww.set.OutDir <- function(dir = OutDir) {
+ww.set.OutDir <- function(dir = if (exists("OutDir")) OutDir else getwd()) {
   if (!exists("OutDir")) message("OutDir not defined !!! Saving in working directory.")
-  dir <- getwd()
   if (!dir.exists(dir)) message("OutDir defined, but folder does not exist!!! Saving in working directory.")
 
   NewOutDir <- if (exists("OutDir") & dir.exists(dir)) {
