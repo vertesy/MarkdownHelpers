@@ -4,7 +4,7 @@
 \alias{ww.set.OutDir}
 \title{ww.set.OutDir}
 \usage{
-ww.set.OutDir(dir = OutDir)
+ww.set.OutDir(dir = if (exists("OutDir")) OutDir else getwd())
 }
 \arguments{
 \item{dir}{OutDir to check and set.}

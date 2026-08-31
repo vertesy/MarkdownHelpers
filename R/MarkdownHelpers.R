@@ -349,6 +349,8 @@ md.write.as.list <- function(vector = 1:3,
 md.image.linker <- function(fname_wo_ext, OutDir_ = ww.set.OutDir()) {
   splt <- strsplit(fname_wo_ext, "/")
   fn <- splt[[1]][length(splt[[1]])]
+  # Picks the link format based on global flags set elsewhere in the calling script:
+  # b.usepng ? (link a GitHub-wiki-relative .png path if b.png4GitHub, else a local .png) : link the .pdf.
   if (unless.specified("b.usepng")) {
     if (unless.specified("b.png4GitHub")) {
       dirnm <- strsplit(x = OutDir_, split = "/")[[1]]
@@ -568,7 +570,7 @@ md.tableWriter.DF.w.dimnames <- function(df,
     print("NOT LOGGED: Log path and filename is not defined in FullPath")
   }
   if (WriteOut) {
-    ReadWriter::write.simple.tsv(df, ManualName = paste0(substitute(df), ".tsv"))
+    ReadWriter::write.simple.tsv(df, manual_file_name = paste0(substitute(df), ".tsv"))
   }
 }
 # md.tableWriter.DF.w.dimnames(GeneCounts.per.sex, print2screen = TRUE)
@@ -639,7 +641,7 @@ md.tableWriter.VEC.w.names <- function(NamedVector,
     print("NOT LOGGED: Log path and filename is not defined in FullPath")
   }
   if (WriteOut) {
-    ReadWriter::write.simple.tsv(NamedVector, ManualName = paste0(substitute(NamedVector), ".tsv"))
+    ReadWriter::write.simple.tsv(NamedVector, manual_file_name = paste0(substitute(NamedVector), ".tsv"))
   }
   if (print2screen) {
     cat(b, "\n")
@@ -1005,11 +1007,14 @@ filter_MidPass <- function(numeric_vector,
 #'
 #' @export
 ww.FnP_parser <- function(fname, ext_wo_dot = NULL) {
+  # In the fallback branch, a function's last expression is what it returns, so
+  # simply calling getwd() without using its result would leave 'path' set to the
+  # warning string below, not a real path. Warn AND fall back to the working directory.
   path <- if (exists("ww.set.OutDir")) {
     ww.set.OutDir()
   } else {
-    (getwd())
-    "install or load vertesy/MarkdownHelpers for saving into OutDir!"
+    message("install or load vertesy/MarkdownHelpers for saving into OutDir!")
+    getwd()
   }
 
   # In R, the last evaluated expression in a function is returned by default as invisible()!
@@ -1094,9 +1099,8 @@ ww.variable.exists.and.true <- function(var, alt.message = NULL) {
 #'
 #' @export
 
-ww.set.OutDir <- function(dir = OutDir) {
+ww.set.OutDir <- function(dir = if (exists("OutDir")) OutDir else getwd()) {
   if (!exists("OutDir")) message("OutDir not defined !!! Saving in working directory.")
-  dir <- getwd()
   if (!dir.exists(dir)) message("OutDir defined, but folder does not exist!!! Saving in working directory.")
 
   NewOutDir <- if (exists("OutDir") & dir.exists(dir)) {
@@ -1105,7 +1109,7 @@ ww.set.OutDir <- function(dir = OutDir) {
     Stringendo::AddTrailingSlashIfMissing(getwd())
   }
 
-  return(Stringendo::FixPath(NewOutDir))
+  return(Stringendo::FixPath(Stringendo::AddTrailingSlashIfMissing(dir)))
 }
 
 
