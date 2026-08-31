@@ -573,10 +573,9 @@ md.tableWriter.DF.w.dimnames <- function(df,
     print("NOT LOGGED: Log path and filename is not defined in FullPath")
   }
   if (WriteOut) {
-    # NOTE: 'ManualName' is not a real parameter of write.simple.tsv() (it's
-    # 'manual_file_name') -- silently absorbed by `...`, so this custom name
-    # is never actually used; the file gets the default name instead.
-    ReadWriter::write.simple.tsv(df, ManualName = paste0(substitute(df), ".tsv"))
+    # write.simple.tsv()'s custom-filename parameter is called 'manual_file_name',
+    # not 'ManualName' -- using the wrong name silently discards it via `...`.
+    ReadWriter::write.simple.tsv(df, manual_file_name = paste0(substitute(df), ".tsv"))
   }
 }
 # md.tableWriter.DF.w.dimnames(GeneCounts.per.sex, print2screen = TRUE)
@@ -648,9 +647,8 @@ md.tableWriter.VEC.w.names <- function(NamedVector,
     print("NOT LOGGED: Log path and filename is not defined in FullPath")
   }
   if (WriteOut) {
-    # NOTE: same 'ManualName' vs. 'manual_file_name' mismatch as in
-    # md.tableWriter.DF.w.dimnames() above -- this custom name is never applied.
-    ReadWriter::write.simple.tsv(NamedVector, ManualName = paste0(substitute(NamedVector), ".tsv"))
+    # Same fix as in md.tableWriter.DF.w.dimnames(): the parameter is 'manual_file_name'.
+    ReadWriter::write.simple.tsv(NamedVector, manual_file_name = paste0(substitute(NamedVector), ".tsv"))
   }
   if (print2screen) {
     cat(b, "\n")
@@ -1020,15 +1018,14 @@ filter_MidPass <- function(numeric_vector,
 #'
 #' @export
 ww.FnP_parser <- function(fname, ext_wo_dot = NULL) {
-  # NOTE: BUG -- in the fallback branch, `(getwd())` is computed but discarded;
-  # the block's last expression is the message string, so 'path' would become
-  # that literal string, not a real path. Harmless in practice since
-  # ww.set.OutDir() is always defined alongside this function in this package.
+  # In the fallback branch, a function's last expression is what it returns, so
+  # simply calling getwd() without using its result would leave 'path' set to the
+  # warning string below, not a real path. Warn AND fall back to the working directory.
   path <- if (exists("ww.set.OutDir")) {
     ww.set.OutDir()
   } else {
-    (getwd())
-    "install or load vertesy/MarkdownHelpers for saving into OutDir!"
+    message("install or load vertesy/MarkdownHelpers for saving into OutDir!")
+    getwd()
   }
 
   # In R, the last evaluated expression in a function is returned by default as invisible()!
@@ -1117,22 +1114,19 @@ ww.variable.exists.and.true <- function(var, alt.message = NULL) {
 #' @export
 
 ww.set.OutDir <- function(dir = OutDir) {
-  # NOTE: BUG -- 'dir' (the OutDir default) is immediately overwritten by
-  # getwd() below, so it's never actually used. Consequences: dir.exists(dir)
-  # is always TRUE (the working directory always exists), so the "folder does
-  # not exist" warning can never fire; and when a global OutDir does exist,
-  # this returns getwd() instead of OutDir's actual value.
-  if (!exists("OutDir")) message("OutDir not defined !!! Saving in working directory.")
-  dir <- getwd()
-  if (!dir.exists(dir)) message("OutDir defined, but folder does not exist!!! Saving in working directory.")
-
-  NewOutDir <- if (exists("OutDir") & dir.exists(dir)) {
-    dir
-  } else {
-    Stringendo::AddTrailingSlashIfMissing(getwd())
+  # `dir` defaults to the global `OutDir` variable. That default is only evaluated
+  # (and can only error with "object 'OutDir' not found") the first time `dir` is
+  # actually used below -- so we check existence of the global first, without
+  # touching `dir`, to avoid that error when no OutDir was ever set.
+  if (missing(dir) && !exists("OutDir")) {
+    message("OutDir not defined !!! Saving in working directory.")
+    dir <- getwd()
+  } else if (!dir.exists(dir)) {
+    message("OutDir defined, but folder does not exist!!! Saving in working directory.")
+    dir <- getwd()
   }
 
-  return(Stringendo::FixPath(NewOutDir))
+  return(Stringendo::FixPath(Stringendo::AddTrailingSlashIfMissing(dir)))
 }
 
 
