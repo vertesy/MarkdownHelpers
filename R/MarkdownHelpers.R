@@ -165,7 +165,6 @@ try_err2warn <- function(expr, fallback, warn = NULL) {
 #' @param haystack A vector of values to search in.
 #' @param exact Logical. Whether to do an exact match or a partial match.
 #' @param report Logical. Whether to print a report of the results.
-#' @importFrom Stringendo percentage_formatter
 #' @return A list with the results of the lookup.
 #'
 #' @export
@@ -411,7 +410,6 @@ llwrite_list <- function(yourlist, printName = "self") {
 #' @examples path_of_report <- ww.set.path_of_report()
 #' llprint("Hello")
 #' # md.import(path_of_report)
-#' @importFrom Stringendo iprint
 #'
 #' @export
 md.import <- function(from.file, to.file = ww.set.path_of_report()) {
@@ -508,7 +506,6 @@ md.List2Table <- function(parameterlist,
 #' md.tableWriter.DF.w.dimnames(df, percentify = FALSE, title_of_table = NA)
 #' @importFrom ReadWriter write.simple.tsv
 #' @importFrom CodeAndRoll2 iround
-#' @importFrom Stringendo percentage_formatter
 #'
 #' @export
 
@@ -595,7 +592,6 @@ md.tableWriter.DF.w.dimnames <- function(df,
 #' md.tableWriter.VEC.w.names(NamedVector = x, percentify = FALSE, title_of_table = NA)
 #' @importFrom ReadWriter write.simple.tsv
 #' @importFrom CodeAndRoll2 iround
-#' @importFrom Stringendo percentage_formatter
 #'
 #' @export
 md.tableWriter.VEC.w.names <- function(NamedVector,
@@ -693,7 +689,6 @@ md.LinkTable <- function(tableOfLinkswRownames) {
 #' @param field.sep Field separator in table file. Tabs by default.
 #' @param to.file The report file. Defined as "path_of_report" by default,
 #'  which is set by the "setup_MarkdownReports" function.
-#' @importFrom Stringendo iprint
 #' @examples x <- matrix(1:9, 3)
 #' write.table(x, sep = "\t", file = "~/x.tsv")
 #' md.import.table("~/x.tsv")
@@ -757,7 +752,6 @@ md.import.table <- function(from.file.table,
 #'   prepend = "From all values ", return_survival_ratio = FALSE
 #' )
 #' @importFrom CodeAndRoll2 iround
-#' @importFrom Stringendo percentage_formatter
 # #' @importFrom MarkdownReports whist - Optional import, not declared
 #'
 #' @export
@@ -843,7 +837,6 @@ filter_HP <- function(numeric_vector,
 #'   prepend = "From all values ", return_survival_ratio = FALSE
 #' )
 #' @importFrom CodeAndRoll2 iround
-#' @importFrom Stringendo percentage_formatter
 #'
 #' @export
 filter_LP <- function(numeric_vector,
@@ -929,7 +922,6 @@ filter_LP <- function(numeric_vector,
 #'   numeric_vector = rnorm(1000, 6), HP_threshold = 4,
 #'   LP_threshold = 8, prepend = "From all values ", return_survival_ratio = FALSE, EdgePass = TRUE
 #' )
-#' @importFrom Stringendo percentage_formatter
 #' @importFrom CodeAndRoll2 iround
 #'
 #' @export
@@ -1036,7 +1028,6 @@ ww.FnP_parser <- function(fname, ext_wo_dot = NULL) {
 #'  variable point to an existing directory?
 #' @param path A variable name that might not exist and might point to a non-existent directory.
 #' @param alt.message Alternative message if the variable + path does not exist. FALSE or string.
-#' @importFrom Stringendo iprint
 #' @export
 #' @examples ww.variable.and.path.exists(path = B, alt.message = "Hello, your path/var does not exist.")
 ww.variable.and.path.exists <- function(path = path_of_report, alt.message = NULL) {
@@ -1066,7 +1057,6 @@ ww.variable.and.path.exists <- function(path = path_of_report, alt.message = NUL
 #' @description Check if a variable name is defined and, if so, is it TRUE.
 #' @param var A variable
 #' @param alt.message Alternative message if the variable does not exist. FALSE or string.
-#' @importFrom Stringendo iprint
 #' @export
 #' @examples ww.variable.and.path.exists(path = B, alt.message = "Hello, your path/var does not exist.")
 ww.variable.exists.and.true <- function(var, alt.message = NULL) {
@@ -1100,7 +1090,6 @@ ww.variable.exists.and.true <- function(var, alt.message = NULL) {
 #' @description Checks if global variable OutDir is defined. If not, it returns the current
 #' working directory.
 #' @param dir OutDir to check and set.
-#' @importFrom Stringendo iprint
 #' @examples ww.set.OutDir()
 #'
 #' @export
@@ -1124,7 +1113,6 @@ ww.set.OutDir <- function(dir = OutDir) {
 #'
 #' @description Checks if global variable path_of_report is defined. If not,
 #' it defines it as Analysis.md in the current working directory.
-#' @importFrom Stringendo iprint
 #' @examples ww.set.path_of_report()
 #'
 #' @export
@@ -1146,7 +1134,6 @@ ww.set.path_of_report <- function() {
 #' @title ww.set.PlotName
 #'
 #' @description Generates a plot name (use if none is specified)
-#' @importFrom Stringendo iprint
 #' @examples ww.set.PlotName()
 #'
 #' @export
@@ -1243,7 +1230,6 @@ ww.autoPlotName <- function(name = NULL) {
 #' @param max_print Print at most this many elements, Default: 10
 #' @param pos Defaults to 1 which equals an assignment to the global environment
 #'
-#' @importFrom Stringendo iprint
 #' @examples ww.assign_to_global("myvar", 1:10) # Assign to the global environment
 #' ww.assign_to_global("myvar", 1:10, pos = 2) # Assign to the second environment
 #' ww.assign_to_global("myvar", 1:10, max_print = 5) # Print only 5 elements
@@ -1419,7 +1405,6 @@ wcolorize <- function(vector = c(1, 1, 1:6),
 #' @param length_new The number of elements that survived the filter.
 #' @param length_old The total number of elements.
 #' @param prepend A string to prepend to the sentence.
-#' @importFrom Stringendo percentage_formatter
 #' @return A string.
 #'
 #' @export
