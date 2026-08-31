@@ -349,6 +349,8 @@ md.write.as.list <- function(vector = 1:3,
 md.image.linker <- function(fname_wo_ext, OutDir_ = ww.set.OutDir()) {
   splt <- strsplit(fname_wo_ext, "/")
   fn <- splt[[1]][length(splt[[1]])]
+  # Picks the link format based on global flags set elsewhere in the calling script:
+  # b.usepng ? (link a GitHub-wiki-relative .png path if b.png4GitHub, else a local .png) : link the .pdf.
   if (unless.specified("b.usepng")) {
     if (unless.specified("b.png4GitHub")) {
       dirnm <- strsplit(x = OutDir_, split = "/")[[1]]
@@ -1005,6 +1007,9 @@ filter_MidPass <- function(numeric_vector,
 #'
 #' @export
 ww.FnP_parser <- function(fname, ext_wo_dot = NULL) {
+  # In the fallback branch, a function's last expression is what it returns, so
+  # simply calling getwd() without using its result would leave 'path' set to the
+  # warning string below, not a real path. Warn AND fall back to the working directory.
   path <- if (exists("ww.set.OutDir")) {
     ww.set.OutDir()
   } else {
@@ -1104,7 +1109,7 @@ ww.set.OutDir <- function(dir = if (exists("OutDir")) OutDir else getwd()) {
     Stringendo::AddTrailingSlashIfMissing(getwd())
   }
 
-  return(Stringendo::FixPath(NewOutDir))
+  return(Stringendo::FixPath(Stringendo::AddTrailingSlashIfMissing(dir)))
 }
 
 
