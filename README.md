@@ -121,8 +121,7 @@ MarkdownReports::setup_MarkdownReports()
 ----------------------------------------------------------------------------------------------------
 
 ## List of Functions in MarkdownHelpers.R (38) 
-Updated: 2025/12/03 13:18
-
+Updated: 2026/08/25 16:32
 - #### 1 `irequire()`
 irequire. Load a package. If it does not exist, try to install it from CRAN.
 
@@ -135,11 +134,11 @@ TRUE.unless. Return TRUE unless the variable is defined. If defined, it returns 
 - #### 4 `FALSE.unless()`
 FALSE.unless. Return FALSE unless the variable is defined. If defined, it returns the value of the variable.
 
-- #### 5 `lookup()`
-lookup. Awesome pattern matching for a set of values in another set of values. Returns a list with all kinds of results.
+- #### 5 `try_err2warn()`
+try_err2warn. Evaluate an expression and return its value.  If an error occurs, convert the error into an immediate warning and return a fallback value.  Execution is never stopped. 
 
-- #### 6 `combine.matrices.by.rowname.intersect()`
-combine.matrices.by.rowname.intersect. Combine two matrices by the intersection of their row names.
+- #### 6 `lookup()`
+lookup. Awesome pattern matching for a set of values in another set of values. Returns a list with all kinds of results.
 
 - #### 7 `ww.variable.and.path.exists()`
 ww.variable.and.path.exists. Check if a variable name is defined, and, if so, does the path (to a file) stored in that   variable point to an existing directory?
@@ -239,6 +238,46 @@ filter_survival_length. Parse a sentence reporting the percentage of filter surv
 
 
 
+
+
+
+## Function relationships
+> (of connected functions)
+
+```mermaid
+ flowchart LR 
+
+  ww.ttl_field(ww.ttl_field) --> unless.specified(unless.specified)
+  ww.set.path_of_report(ww.set.path_of_report) --> ww.variable.and.path.exists(ww.variable.and.path.exists)
+  ww.set.mdlink(ww.set.mdlink) --> ww.variable.and.path.exists(ww.variable.and.path.exists)
+  ww.set.PlotName(ww.set.PlotName) --> ww.autoPlotName(ww.autoPlotName)
+  wcolorize(wcolorize) --> color_check(color_check)
+  md.import.table(md.import.table) --> md.tableWriter.DF.w.dimnames(md.tableWriter.DF.w.dimnames)
+  md.import(md.import) --> ww.variable.and.path.exists(ww.variable.and.path.exists)
+  md.image.linker(md.image.linker) --> unless.specified(unless.specified)
+  md.image.linker(md.image.linker) --> llogit(llogit)
+  md.LogSettingsFromList(md.LogSettingsFromList) --> md.tableWriter.DF.w.dimnames(md.tableWriter.DF.w.dimnames)
+  md.List2Table(md.List2Table) --> md.tableWriter.DF.w.dimnames(md.tableWriter.DF.w.dimnames)
+  md.LinkTable(md.LinkTable) --> md.tableWriter.DF.w.dimnames(md.tableWriter.DF.w.dimnames)
+  lookup(lookup) --> llprint(llprint)
+  llwrite_list(llwrite_list) --> llprint(llprint)
+  llwrite_list(llwrite_list) --> llogit(llogit)
+  llprint(llprint) --> ww.variable.and.path.exists(ww.variable.and.path.exists)
+  filter_survival_length(filter_survival_length) --> llprint(llprint)
+  filter_MidPass(filter_MidPass) --> ww.variable.and.path.exists(ww.variable.and.path.exists)
+  filter_MidPass(filter_MidPass) --> llogit(llogit)
+  filter_LP(filter_LP) --> ww.variable.and.path.exists(ww.variable.and.path.exists)
+  filter_LP(filter_LP) --> llogit(llogit)
+  llogit(llogit) --> ww.variable.and.path.exists(ww.variable.and.path.exists)
+  filter_HP(filter_HP) --> ww.variable.and.path.exists(ww.variable.and.path.exists)
+  filter_HP(filter_HP) --> llogit(llogit)
+  ww.FnP_parser(ww.FnP_parser) --> ww.set.OutDir(ww.set.OutDir)
+  color_check(color_check) --> ww.FnP_parser(ww.FnP_parser)
+subgraph SubGraphOne
+
+end
+```
+*created by `convert_igraph_to_mermaid()`*
 
 ------
 

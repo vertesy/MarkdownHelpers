@@ -6,7 +6,6 @@
 # rm(list = ls(all.names = TRUE)); try(dev.off(), silent = TRUE)
 
 
-
 # Functions
 # require(Stringendo); require(ReadWriter); require(CodeAndRoll2); require(ggExpress); require(MarkdownReports); require(Seurat.utils)
 
@@ -43,7 +42,7 @@ irequire <- function(package) {
     install.packages(package_)
     if (!requireNamespace(package_, quietly = TRUE)) stop("Failed to install package: ", package_)
   }
-  suppressPackageStartupMessages( library(package_, character.only = TRUE))
+  suppressPackageStartupMessages(library(package_, character.only = TRUE))
 }
 
 
@@ -151,13 +150,11 @@ try_err2warn <- function(expr, fallback, warn = NULL) {
   rlang::try_fetch(
     eval(expr, parent.frame()),
     error = function(cnd) {
-      warning(paste(c(warn,"\n\n  ", cnd$message)), immediate. = TRUE)
+      warning(paste(c(warn, "\n\n  ", cnd$message)), immediate. = TRUE)
       fallback
     }
   )
 }
-
-
 
 
 # ______________________________________________________________________________________________________________________________
@@ -168,7 +165,6 @@ try_err2warn <- function(expr, fallback, warn = NULL) {
 #' @param haystack A vector of values to search in.
 #' @param exact Logical. Whether to do an exact match or a partial match.
 #' @param report Logical. Whether to print a report of the results.
-#' @importFrom Stringendo percentage_formatter
 #' @return A list with the results of the lookup.
 #'
 #' @export
@@ -207,11 +203,10 @@ lookup <- function(needle, haystack, exact = TRUE, report = FALSE) { # Awesome p
       llprint(substitute(needle), "findings: ", paste(haystack[Findings], sep = " "))
     }
   } else {
-    iprint(length(Findings), "Hits:", haystack[Findings])
+    Stringendo::iprint(length(Findings), "Hits:", haystack[Findings])
   } # if (report)
   return(ls_out)
 }
-
 
 
 # ______________________________________________________________________________________________----
@@ -241,14 +236,13 @@ ww.variable.and.path.exists <- function(path = path_of_report, alt.message = NUL
     }
   } else {
     if (is.null(alt.message)) {
-      iprint("Variable", Variable.Name, "does not exist.")
+      Stringendo::iprint("Variable", Variable.Name, "does not exist.")
     } else {
       cat(alt.message)
     }
     FALSE
   }
 }
-
 
 
 # ______________________________________________________________________________________________----
@@ -273,7 +267,7 @@ llprint <- function(...) {
     path = path_of_report,
     alt.message = "NOT LOGGED: Log path and filename is not defined in path_of_report."
   )) {
-    write(kollapse("\n", LogEntry, print = FALSE),
+    write(Stringendo::kollapse("\n", LogEntry, print = FALSE),
       path_of_report,
       append = TRUE
     )
@@ -298,7 +292,7 @@ llogit <- function(...) {
     path = path_of_report,
     alt.message = "NOT LOGGED: Log path and filename is not defined in path_of_report."
   )) {
-    write(kollapse("\n", LogEntry, print = FALSE),
+    write(Stringendo::kollapse("\n", LogEntry, print = FALSE),
       path_of_report,
       append = TRUE
     )
@@ -321,8 +315,8 @@ md.write.as.list <- function(vector = 1:3,
                              numbered = FALSE,
                              path_of_report = ww.set.path_of_report(),
                              ...) {
-  LogEntry <- kollapse(rep("#", h), " ", substitute(vector), print = FALSE)
-  write(kollapse("\n", LogEntry, print = FALSE),
+  LogEntry <- Stringendo::kollapse(rep("#", h), " ", substitute(vector), print = FALSE)
+  write(Stringendo::kollapse("\n", LogEntry, print = FALSE),
     path_of_report,
     ...,
     append = TRUE
@@ -359,15 +353,15 @@ md.image.linker <- function(fname_wo_ext, OutDir_ = ww.set.OutDir()) {
     if (unless.specified("b.png4GitHub")) {
       dirnm <- strsplit(x = OutDir_, split = "/")[[1]]
       dirnm <- dirnm[length(dirnm)]
-      llogit(kollapse("![]", "(Reports/", dirnm, "/", fname_wo_ext, ".png)", print = FALSE))
+      llogit(Stringendo::kollapse("![]", "(Reports/", dirnm, "/", fname_wo_ext, ".png)", print = FALSE))
     } else {
       if (exists("b.Subdirname") && !b.Subdirname == FALSE) {
         fname_wo_ext <- paste0(b.Subdirname, "/", fname_wo_ext)
       } # set only if b.Subdirname is defined and not FALSE.
-      llogit(kollapse("![", fn, "]", "(", fname_wo_ext, ".png)", print = FALSE))
+      llogit(Stringendo::kollapse("![", fn, "]", "(", fname_wo_ext, ".png)", print = FALSE))
     }
   } else {
-    llogit(kollapse("![", fn, "]", "(", fname_wo_ext, ".pdf)", print = FALSE))
+    llogit(Stringendo::kollapse("![", fn, "]", "(", fname_wo_ext, ".pdf)", print = FALSE))
   } # if b.usepng
 }
 
@@ -416,7 +410,6 @@ llwrite_list <- function(yourlist, printName = "self") {
 #' @examples path_of_report <- ww.set.path_of_report()
 #' llprint("Hello")
 #' # md.import(path_of_report)
-#' @importFrom Stringendo iprint
 #'
 #' @export
 md.import <- function(from.file, to.file = ww.set.path_of_report()) {
@@ -513,7 +506,6 @@ md.List2Table <- function(parameterlist,
 #' md.tableWriter.DF.w.dimnames(df, percentify = FALSE, title_of_table = NA)
 #' @importFrom ReadWriter write.simple.tsv
 #' @importFrom CodeAndRoll2 iround
-#' @importFrom Stringendo percentage_formatter
 #'
 #' @export
 
@@ -546,7 +538,7 @@ md.tableWriter.DF.w.dimnames <- function(df,
     ncolz <- dim(df)[2] + 1
     nrows <- dim(df)[1]
     rn <- rownames(df)
-    sep <- kollapse(rep("| ---", ncolz), " |", print = FALSE)
+    sep <- Stringendo::kollapse(rep("| ---", ncolz), " |", print = FALSE)
 
     write(h, FullPath, append = TRUE)
     if (print2screen) {
@@ -600,7 +592,6 @@ md.tableWriter.DF.w.dimnames <- function(df,
 #' md.tableWriter.VEC.w.names(NamedVector = x, percentify = FALSE, title_of_table = NA)
 #' @importFrom ReadWriter write.simple.tsv
 #' @importFrom CodeAndRoll2 iround
-#' @importFrom Stringendo percentage_formatter
 #'
 #' @export
 md.tableWriter.VEC.w.names <- function(NamedVector,
@@ -628,7 +619,7 @@ md.tableWriter.VEC.w.names <- function(NamedVector,
     h <- paste(names(NamedVector), collapse = " \t| ")
     h <- paste("\n| ", h, " |", collapse = "")
     ncolz <- length(NamedVector)
-    sep <- kollapse(rep("| ---", ncolz), " |", print = FALSE)
+    sep <- Stringendo::kollapse(rep("| ---", ncolz), " |", print = FALSE)
     write(h, FullPath, append = TRUE)
     if (print2screen) {
       cat(h, "\n")
@@ -654,7 +645,6 @@ md.tableWriter.VEC.w.names <- function(NamedVector,
     cat(b, "\n")
   }
 }
-
 
 
 # ______________________________________________________________________________________________________________________________
@@ -686,7 +676,6 @@ md.LinkTable <- function(tableOfLinkswRownames) {
 }
 
 
-
 # ______________________________________________________________________________________________________________________________
 #' @title md.import.table
 #'
@@ -700,7 +689,6 @@ md.LinkTable <- function(tableOfLinkswRownames) {
 #' @param field.sep Field separator in table file. Tabs by default.
 #' @param to.file The report file. Defined as "path_of_report" by default,
 #'  which is set by the "setup_MarkdownReports" function.
-#' @importFrom Stringendo iprint
 #' @examples x <- matrix(1:9, 3)
 #' write.table(x, sep = "\t", file = "~/x.tsv")
 #' md.import.table("~/x.tsv")
@@ -764,7 +752,6 @@ md.import.table <- function(from.file.table,
 #'   prepend = "From all values ", return_survival_ratio = FALSE
 #' )
 #' @importFrom CodeAndRoll2 iround
-#' @importFrom Stringendo percentage_formatter
 # #' @importFrom MarkdownReports whist - Optional import, not declared
 #'
 #' @export
@@ -797,7 +784,7 @@ filter_HP <- function(numeric_vector,
       numeric_vector > threshold
     }
   pc <- Stringendo::percentage_formatter(sum(survivors, na.rm = na.rm) / length(survivors))
-  conclusion <- kollapse(
+  conclusion <- Stringendo::kollapse(
     prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ", length(numeric_vector),
     " entries in ", substitute(numeric_vector), " fall above a threshold value of: ",
     CodeAndRoll2::iround(threshold),
@@ -850,7 +837,6 @@ filter_HP <- function(numeric_vector,
 #'   prepend = "From all values ", return_survival_ratio = FALSE
 #' )
 #' @importFrom CodeAndRoll2 iround
-#' @importFrom Stringendo percentage_formatter
 #'
 #' @export
 filter_LP <- function(numeric_vector,
@@ -882,7 +868,7 @@ filter_LP <- function(numeric_vector,
       numeric_vector < threshold
     }
   pc <- Stringendo::percentage_formatter(sum(survivors, na.rm = na.rm) / length(survivors))
-  conclusion <- kollapse(
+  conclusion <- Stringendo::kollapse(
     prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ",
     length(numeric_vector), " entries in ", substitute(numeric_vector),
     " fall below a threshold value of: ", CodeAndRoll2::iround(threshold),
@@ -913,7 +899,6 @@ filter_LP <- function(numeric_vector,
 }
 
 
-
 # ______________________________________________________________________________________________________________________________
 #' @title filter_MidPass
 #'
@@ -937,7 +922,6 @@ filter_LP <- function(numeric_vector,
 #'   numeric_vector = rnorm(1000, 6), HP_threshold = 4,
 #'   LP_threshold = 8, prepend = "From all values ", return_survival_ratio = FALSE, EdgePass = TRUE
 #' )
-#' @importFrom Stringendo percentage_formatter
 #' @importFrom CodeAndRoll2 iround
 #'
 #' @export
@@ -976,7 +960,7 @@ filter_MidPass <- function(numeric_vector,
     relation <- " >= x OR x > "
   }
   pc <- Stringendo::percentage_formatter(sum(survivors, na.rm = na.rm) / length(survivors))
-  conclusion <- kollapse(prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ",
+  conclusion <- Stringendo::kollapse(prepend, pc, " or ", sum(survivors, na.rm = na.rm), " of ",
     length(numeric_vector), " entries in ", substitute(numeric_vector),
     " fall ", keyword, " the thresholds: ", CodeAndRoll2::iround(HP_threshold),
     relation, CodeAndRoll2::iround(LP_threshold),
@@ -1007,12 +991,9 @@ filter_MidPass <- function(numeric_vector,
 }
 
 
-
-
 # ______________________________________________________________________________________________----
 # Internal functions (for Markdown parsing) ----
 # _________________________________________________________________________________________________
-
 
 
 #' @title ww.FnP_parser
@@ -1033,12 +1014,11 @@ ww.FnP_parser <- function(fname, ext_wo_dot = NULL) {
 
   # In R, the last evaluated expression in a function is returned by default as invisible()!
   FnP <- if (hasArg(ext_wo_dot)) {
-    kollapse(paste0(path, fname), ext_wo_dot, collapseby = ".", print = 2)
+    Stringendo::kollapse(paste0(path, fname), ext_wo_dot, collapseby = ".", print = 2)
   } else {
-    kollapse(path, fname, print = 2)
+    Stringendo::kollapse(path, fname, print = 2)
   }
 }
-
 
 
 #' @title ww.variable.and.path.exists
@@ -1048,7 +1028,6 @@ ww.FnP_parser <- function(fname, ext_wo_dot = NULL) {
 #'  variable point to an existing directory?
 #' @param path A variable name that might not exist and might point to a non-existent directory.
 #' @param alt.message Alternative message if the variable + path does not exist. FALSE or string.
-#' @importFrom Stringendo iprint
 #' @export
 #' @examples ww.variable.and.path.exists(path = B, alt.message = "Hello, your path/var does not exist.")
 ww.variable.and.path.exists <- function(path = path_of_report, alt.message = NULL) {
@@ -1078,7 +1057,6 @@ ww.variable.and.path.exists <- function(path = path_of_report, alt.message = NUL
 #' @description Check if a variable name is defined and, if so, is it TRUE.
 #' @param var A variable
 #' @param alt.message Alternative message if the variable does not exist. FALSE or string.
-#' @importFrom Stringendo iprint
 #' @export
 #' @examples ww.variable.and.path.exists(path = B, alt.message = "Hello, your path/var does not exist.")
 ww.variable.exists.and.true <- function(var, alt.message = NULL) {
@@ -1107,13 +1085,11 @@ ww.variable.exists.and.true <- function(var, alt.message = NULL) {
 # ww.variable.exists.and.true(al4)
 
 
-
 #' @title ww.set.OutDir
 #'
 #' @description Checks if global variable OutDir is defined. If not, it returns the current
 #' working directory.
 #' @param dir OutDir to check and set.
-#' @importFrom Stringendo iprint
 #' @examples ww.set.OutDir()
 #'
 #' @export
@@ -1125,10 +1101,10 @@ ww.set.OutDir <- function(dir = if (exists("OutDir")) OutDir else getwd()) {
   NewOutDir <- if (exists("OutDir") & dir.exists(dir)) {
     dir
   } else {
-    AddTrailingSlashIfMissing(getwd())
+    Stringendo::AddTrailingSlashIfMissing(getwd())
   }
 
-  return(FixPath(NewOutDir))
+  return(Stringendo::FixPath(NewOutDir))
 }
 
 
@@ -1136,7 +1112,6 @@ ww.set.OutDir <- function(dir = if (exists("OutDir")) OutDir else getwd()) {
 #'
 #' @description Checks if global variable path_of_report is defined. If not,
 #' it defines it as Analysis.md in the current working directory.
-#' @importFrom Stringendo iprint
 #' @examples ww.set.path_of_report()
 #'
 #' @export
@@ -1158,7 +1133,6 @@ ww.set.path_of_report <- function() {
 #' @title ww.set.PlotName
 #'
 #' @description Generates a plot name (use if none is specified)
-#' @importFrom Stringendo iprint
 #' @examples ww.set.PlotName()
 #'
 #' @export
@@ -1204,10 +1178,10 @@ ww.set.mdlink <- function(NameOfaVariable = "b.mdlink",
 #' @examples ww.md.image.link.parser("/MyPlot.jpg")
 #' ww.md.image.link.parser(getwd(), "/MyPlot.jpg")
 ww.md.image.link.parser <- function(...) {
-  FullPath <- kollapse(..., print = FALSE)
+  FullPath <- Stringendo::kollapse(..., print = FALSE)
   splt <- strsplit(FullPath, "/")
   fn <- splt[[1]][length(splt[[1]])]
-  kollapse("![", fn, "]", "(", FullPath, ")", print = FALSE)
+  Stringendo::kollapse("![", fn, "]", "(", FullPath, ")", print = FALSE)
 }
 
 #' @title ww.ttl_field
@@ -1255,7 +1229,6 @@ ww.autoPlotName <- function(name = NULL) {
 #' @param max_print Print at most this many elements, Default: 10
 #' @param pos Defaults to 1 which equals an assignment to the global environment
 #'
-#' @importFrom Stringendo iprint
 #' @examples ww.assign_to_global("myvar", 1:10) # Assign to the global environment
 #' ww.assign_to_global("myvar", 1:10, pos = 2) # Assign to the second environment
 #' ww.assign_to_global("myvar", 1:10, max_print = 5) # Print only 5 elements
@@ -1269,7 +1242,6 @@ ww.assign_to_global <- function(name, value, pos = 1, max_print = 5, verbose = T
   }
   assign(name, value, envir = as.environment(pos))
 }
-
 
 
 # ______________________________________________________________________________________________----
@@ -1348,9 +1320,6 @@ color_check <- function(..., incrBottMarginBy = 0, savefile = FALSE) {
 }
 
 
-
-
-
 #' @title wcolorize
 #'
 #' @description Generate color palettes. Input: a vector with categories, can be numbers or strings.
@@ -1425,8 +1394,6 @@ wcolorize <- function(vector = c(1, 1, 1:6),
 }
 
 
-
-
 # ______________________________________________________________________________________________----
 # Less used functions ----
 # _________________________________________________________________________________________________
@@ -1437,18 +1404,15 @@ wcolorize <- function(vector = c(1, 1, 1:6),
 #' @param length_new The number of elements that survived the filter.
 #' @param length_old The total number of elements.
 #' @param prepend A string to prepend to the sentence.
-#' @importFrom Stringendo percentage_formatter
 #' @return A string.
 #'
 #' @export
 filter_survival_length <- function(length_new, length_old, prepend = "") { # Parse a sentence reporting the % of filter survival.
   pc <- Stringendo::percentage_formatter(length_new / length_old)
-  sentence <- kollapse(prepend, pc, " of ", length_old, " entries make it through the filter", print = FALSE)
+  sentence <- Stringendo::kollapse(prepend, pc, " of ", length_old, " entries make it through the filter", print = FALSE)
   llprint(sentence)
   invisible(sentence)
 }
-
-
 
 
 #' @title ww.set.file.extension
