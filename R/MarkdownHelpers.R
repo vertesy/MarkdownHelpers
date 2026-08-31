@@ -1113,14 +1113,13 @@ ww.variable.exists.and.true <- function(var, alt.message = NULL) {
 #'
 #' @export
 
-ww.set.OutDir <- function(dir = OutDir) {
-  # `dir` defaults to the global `OutDir` variable. That default is only evaluated
-  # (and can only error with "object 'OutDir' not found") the first time `dir` is
-  # actually used below -- so we check existence of the global first, without
-  # touching `dir`, to avoid that error when no OutDir was ever set.
+ww.set.OutDir <- function(dir = if (exists("OutDir")) OutDir else getwd()) {
+  # The default resolves to the real `OutDir` when it exists, or getwd() otherwise, so
+  # `dir` already holds a real path below -- no need to touch the `OutDir` global again.
+  # We still use missing(dir) to tell "defaulted" apart from "explicitly passed", so an
+  # explicit `dir` argument is validated on its own and never silently overridden.
   if (missing(dir) && !exists("OutDir")) {
     message("OutDir not defined !!! Saving in working directory.")
-    dir <- getwd()
   } else if (!dir.exists(dir)) {
     message("OutDir defined, but folder does not exist!!! Saving in working directory.")
     dir <- getwd()
