@@ -510,8 +510,6 @@ md.List2Table <- function(parameterlist,
 #' @importFrom CodeAndRoll2 iround
 #'
 #' @export
-
-
 md.tableWriter.DF.w.dimnames <- function(df,
                                          FullPath = ww.set.path_of_report(),
                                          percentify = FALSE,
