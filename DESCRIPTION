@@ -12,13 +12,13 @@ Depends:
     utils
 Imports: 
     CodeAndRoll2,
-    colorRamps,
-    gplots,
     RColorBrewer,
-    ReadWriter
+    ReadWriter,
+    colorRamps,
+    gplots
 Suggests: 
     MarkdownReports
 Encoding: UTF-8
 Packaged: 2026-09-01 13:40:50.28846
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.1

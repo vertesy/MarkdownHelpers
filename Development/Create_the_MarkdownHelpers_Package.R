@@ -18,11 +18,10 @@ config.path <- file.path(repository.dir, "Development/config.R")
 file.edit(config.path)
 source(config.path)
 
-
-# Check and Document your package ------------------------------------------------
+# Check your package ------------------------------------------------
 devtools::check_man(repository.dir)
-PackageTools::document_and_create_package(repository.dir, config_file = 'config.R')
 
+PackageTools::document_and_create_package(repository.dir, config_file = 'config.R')
 
 # Automated Codebase linting to tidyverse style & custom corrections ------------------------------------------------
 styler::style_pkg(repository.dir)
@@ -37,13 +36,9 @@ for (scriptX in ls.scripts.full.path) {
 
 
 # Install your package ------------------------------------------------
-PackageTools::document_and_create_package(repository.dir, config_file = 'config.R')
-
-
-# Install your package ------------------------------------------------
 "disable rprofile by"
 rprofile()
-devtools::install_local(repository.dir, upgrade = F, force = T)
+devtools::install_local(repository.dir, upgrade = F); ", force = T"
 
 
 # Test if you can install from GitHub ------------------------------------------------
@@ -59,8 +54,6 @@ checkres <- devtools::check(repository.dir, cran = FALSE)
 
 
 
-# Automated Codebase linting to tidyverse style ------------------------------------------------
-styler::style_pkg(repository.dir)
 
 
 # Extract package dependencies ------------------------------------------------
