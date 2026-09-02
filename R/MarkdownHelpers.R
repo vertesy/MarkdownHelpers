@@ -433,7 +433,6 @@ md.import <- function(from.file, to.file = ww.set.path_of_report()) {
   }
 }
 
-
 # Writing markdown tables --------------------------------------------------------------------------
 
 # ______________________________________________________________________________________________________________________________
@@ -442,7 +441,7 @@ md.import <- function(from.file, to.file = ww.set.path_of_report()) {
 #' @description Log the parameters & settings used in the script and stored in a list, in a table format
 #'  in the report.
 #' @param parameterlist List of Parameters
-#' @param maxlen Maximum length of entries in a parameter list element
+#' @param maxlen Maximum length of entries in a parameter list element. Default: 20
 #' @export
 #' @examples md.LogSettingsFromList(parameterlist = list("min" = 4, "method" = "pearson", "max" = 10))
 md.LogSettingsFromList <- function(parameterlist,
@@ -510,8 +509,6 @@ md.List2Table <- function(parameterlist,
 #' @importFrom CodeAndRoll2 iround
 #'
 #' @export
-
-
 md.tableWriter.DF.w.dimnames <- function(df,
                                          FullPath = ww.set.path_of_report(),
                                          percentify = FALSE,
