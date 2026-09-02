@@ -455,7 +455,7 @@ md.LogSettingsFromList <- function(parameterlist,
     }
     parameterlist[[i]] <- paste(parameterlist[[i]], collapse = ", ")
   } # for
-  DF <- t(as.data.frame(parameterlist))
+  DF <- as.data.frame(t(as.data.frame(parameterlist)))
   colnames(DF) <- "Value"
   md.tableWriter.DF.w.dimnames(DF, title_of_table = "Script Parameters and Settings")
 }
@@ -485,7 +485,7 @@ md.List2Table <- function(parameterlist,
     }
     parameterlist[[i]] <- paste(parameterlist[[i]], collapse = ", ")
   } # for
-  DF <- t(as.data.frame(parameterlist))
+  DF <- as.data.frame(t(as.data.frame(parameterlist)))
   colnames(DF) <- colname2
   md.tableWriter.DF.w.dimnames(DF, title_of_table = title)
 }
