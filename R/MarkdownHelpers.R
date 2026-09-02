@@ -505,7 +505,6 @@ md.List2Table <- function(parameterlist,
 #' rownames(df) <- 6:8
 #' colnames(df) <- 9:11
 #' md.tableWriter.DF.w.dimnames(df, percentify = FALSE, title_of_table = NA)
-#' @importFrom ReadWriter write.simple.tsv
 #' @importFrom CodeAndRoll2 iround
 #'
 #' @export
@@ -589,7 +588,6 @@ md.tableWriter.DF.w.dimnames <- function(df,
 #' @examples x <- -1:2
 #' names(x) <- LETTERS[1:4]
 #' md.tableWriter.VEC.w.names(NamedVector = x, percentify = FALSE, title_of_table = NA)
-#' @importFrom ReadWriter write.simple.tsv
 #' @importFrom CodeAndRoll2 iround
 #'
 #' @export
