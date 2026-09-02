@@ -12,16 +12,15 @@ and mostly aimed at supporting other tools such as `MarkdownReports` and `ggExpr
 - `DESCRIPTION`, `NAMESPACE`, `CITATION.cff` – standard package metadata.
 - `Development/` – scripts used by the author for building and experimenting; not
   required for normal use.
+- In `/Development/MYPACKAGE/Development/Create_the_MYPACKAGE_Package.R")`, `PackageTools::document_and_create_package()` recreates an R package’s metadata and documentation from a configuration file. It runs `devtools::document()` to regenerate package documentation, including the DESCRIPTION and NAMESPACE, from roxygen annotation and `config.R`. 
 
-## Dependencies
-This package depends on several other @vertesy projects:
-- [Stringendo](https://github.com/vertesy/Stringendo)
-- [CodeAndRoll2](https://github.com/vertesy/CodeAndRoll2)
-- [ReadWriter](https://github.com/vertesy/ReadWriter)
 
-Many examples in `README.md` also make use of `MarkdownReports`, `ggExpress`,
-`Seurat.utils`, and `Seurat.pipeline`.
-Install the dependencies first when working with this package.
+
+### Update the Source, Not Just the Documentation
+
+Documentations rebuilt and overwritten from upstream sources: `.Rd` files from roxygen annotations and DESCRIPTION and NAMESPACE from  `config.R` by `PackageTools::document_and_create_package()` relying on  `devtools::document()`  when I manually, regularly run `/Development/MYPACKAGE/Development/Create_the_MYPACKAGE_Package.R")`. Thus  always update the upstream sources first, then fix the downstream documentations correspondingly.
+
+
 
 ## Working with the Code
 - Keep all R functions in `R/MarkdownHelpers.R` and use roxygen comments for
